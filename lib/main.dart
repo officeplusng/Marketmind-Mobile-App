@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(390, 844),
         child: MaterialApp(
-            title: 'Sainte',
+            title: '',
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.light,
             theme: AppTheme.light,

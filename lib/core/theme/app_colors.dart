@@ -4,7 +4,7 @@ class AppColors{
 
   static Color black =Color(0xFF242424);
   static Color white = Colors.white;
-  static Color primary = Color(0xFF292A29);
+  static Color primary = const Color(0xFF315BF3);
   static Color red = Color(0xFFD32F2F); //#D32F2F
   static Color greenLight = Color(0xFFD4FFF0);
   static Color green = Color(0xFF08D88D); //#34C240
