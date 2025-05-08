@@ -38,7 +38,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        InputField(
+        InputField.outline(
           hint: widget.hint,
           controller: widget.controller,
           useFocusBorder: widget.confirmed,

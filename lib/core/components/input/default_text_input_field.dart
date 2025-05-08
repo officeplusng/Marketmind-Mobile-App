@@ -2,37 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import '../../dimen/dimens.dart';
-import '../../theme/app_colors.dart';
 
 class InputField extends StatelessWidget {
-  const InputField(
-      {super.key,
-      this.prefixIcon,
-      this.readOnly = false,
-      this.surfixIcon,
-      this.hint,
-      this.maxLines,
-      this.validator,
-      this.onTap,
-      this.enabled = true,
-      this.initialValue,
-      this.inputFormatters = const [],
-      this.textColor,
-      this.fontWeight,
-      this.keyboardType,
-      this.obscureText = false,
-      this.controller,
-      this.useErrorBorder = false,
-      this.letterSpacing,
-        this.borderRadius,
-      this.useFocusBorder = false,
-        this.height,
-        this.minLines,
-      this.onChange});
-
   final String? hint;
   final String? initialValue;
   final int? maxLines;
+  final String? label;
   final int? minLines;
   final double? height;
   final TextInputType? keyboardType;
@@ -49,60 +24,241 @@ class InputField extends StatelessWidget {
   final double? borderRadius;
   final bool readOnly;
   final VoidCallback? onTap;
+  final Color? fillColor;
   final FontWeight? fontWeight;
   final String? Function(String?)? validator;
-
   final bool enabled;
+
+  // Private constructor
+  const InputField._({
+    super.key,
+    this.prefixIcon,
+    this.readOnly = false,
+    this.surfixIcon,
+    this.hint,
+    this.maxLines,
+    this.validator,
+    this.onTap,
+    this.enabled = true,
+    this.initialValue,
+    this.inputFormatters = const [],
+    this.textColor,
+    this.fontWeight,
+    this.keyboardType,
+    this.obscureText = false,
+    this.controller,
+    this.useErrorBorder = false,
+    this.letterSpacing,
+    this.borderRadius,
+    this.useFocusBorder = false,
+    this.height,
+    this.minLines,
+    this.label,
+    this.fillColor,
+    this.onChange,
+  });
+
+  /// Filled variant
+  factory InputField.filled({
+    Key? key,
+    String? hint,
+    String? label,
+    TextEditingController? controller,
+    Widget? prefixIcon,
+    Widget? surfixIcon,
+    String? Function(String?)? validator,
+    bool readOnly = false,
+    VoidCallback? onTap,
+    bool enabled = true,
+    String? initialValue,
+    TextInputType? keyboardType,
+    FontWeight? fontWeight,
+    double? letterSpacing,
+    Color? textColor,
+    double? borderRadius,
+    int? minLines,
+    int? maxLines,
+    double? height,
+    Color? fillColor = AppColors.white,
+    bool useFocusBorder = false,
+    bool useErrorBorder = false,
+    bool obscureText = false,
+    List<TextInputFormatter> inputFormatters = const [],
+    void Function(String)? onChange,
+  }) {
+    return InputField._(
+      key: key,
+      hint: hint,
+      label: label,
+      controller: controller,
+      prefixIcon: prefixIcon,
+      surfixIcon: surfixIcon,
+      validator: validator,
+      readOnly: readOnly,
+      onTap: onTap,
+      enabled: enabled,
+      initialValue: initialValue,
+      keyboardType: keyboardType,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+      textColor: textColor,
+      borderRadius: borderRadius,
+      minLines: minLines,
+      maxLines: maxLines,
+      height: height,
+      fillColor: fillColor,
+      useFocusBorder: useFocusBorder,
+      useErrorBorder: useErrorBorder,
+      obscureText: obscureText,
+      inputFormatters: inputFormatters,
+      onChange: onChange,
+    );
+  }
+
+  /// Outline variant
+  factory InputField.outline({
+    Key? key,
+    // Same parameters, but no fillColor
+    // fillColor will be null, border shows
+    String? hint,
+    String? label,
+    TextEditingController? controller,
+    Widget? prefixIcon,
+    Widget? surfixIcon,
+    String? Function(String?)? validator,
+    bool readOnly = false,
+    VoidCallback? onTap,
+    bool enabled = true,
+    String? initialValue,
+    TextInputType? keyboardType,
+    FontWeight? fontWeight,
+    double? letterSpacing,
+    Color? textColor,
+    double? borderRadius,
+    int? minLines,
+    int? maxLines,
+    double? height,
+    bool useFocusBorder = true,
+    bool useErrorBorder = false,
+    bool obscureText = false,
+    List<TextInputFormatter> inputFormatters = const [],
+    void Function(String)? onChange,
+  }) {
+    return InputField._(
+      key: key,
+      hint: hint,
+      label: label,
+      controller: controller,
+      prefixIcon: prefixIcon,
+      surfixIcon: surfixIcon,
+      validator: validator,
+      readOnly: readOnly,
+      onTap: onTap,
+      enabled: enabled,
+      initialValue: initialValue,
+      keyboardType: keyboardType,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+      textColor: textColor,
+      borderRadius: borderRadius,
+      minLines: minLines,
+      maxLines: maxLines,
+      height: height,
+      fillColor: null,
+      useFocusBorder: useFocusBorder,
+      useErrorBorder: useErrorBorder,
+      obscureText: obscureText,
+      inputFormatters: inputFormatters,
+      onChange: onChange,
+    );
+  }
+
+  /// Search variant
+  factory InputField.search({
+    Key? key,
+    String? hint = "Search...",
+    TextEditingController? controller,
+    void Function(String)? onChange,
+  }) {
+    return InputField.filled(
+      key: key,
+      hint: hint,
+      controller: controller,
+      prefixIcon: const Icon(Icons.search),
+      fillColor: const Color(0xFFF5F5F5),
+      borderRadius: 12,
+      onChange: onChange,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      style: context.textTheme.bodyMedium?.copyWith(
-          letterSpacing: letterSpacing,
-          color: textColor,
-          fontWeight: fontWeight),
-      maxLines: maxLines,
-      enabled: enabled,
-      minLines: minLines,
-      controller: controller,
-      initialValue: initialValue,
-      validator: validator,
-      readOnly: readOnly,
-      onTap: enabled ? onTap : null,
-      onChanged: onChange,
-      obscureText: obscureText,
-      obscuringCharacter: '❋',
-      inputFormatters: inputFormatters,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        prefixIcon: prefixIcon,
-        suffixIcon: surfixIcon,
-        errorStyle: context.textTheme.bodySmall?.copyWith(color: AppColors.red),
-        hintStyle:
-            context.textTheme.bodyMedium?.copyWith(color: AppColors.textGray),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius??Dimens.defaultBorderRadius),
-          borderSide: BorderSide(
-              color: useErrorBorder ? AppColors.red : AppColors.blue, width: 1),
-        ),
-        constraints:  BoxConstraints(minHeight:height?? 44),
-        contentPadding:
-            const EdgeInsets.only(top: 12, bottom: 12, left: 20, right: 12),
-        hintText: hint,
-        disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius??Dimens.defaultBorderRadius),
-            borderSide: BorderSide(color: AppColors.textGray, width: 1)),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius??Dimens.defaultBorderRadius),
-            borderSide: BorderSide(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (label != null) ...[
+          Text(label!,style: context.textTheme.bodyMedium?.copyWith(color: AppColors.white),),
+          const SizedBox(height: 5),
+        ],
+        TextFormField(
+          style: context.textTheme.bodyMedium?.copyWith(
+            letterSpacing: letterSpacing,
+            color: textColor,
+            fontWeight: fontWeight,
+          ),
+          maxLines: maxLines,
+          enabled: enabled,
+          minLines: minLines,
+          controller: controller,
+          initialValue: initialValue,
+          validator: validator,
+          readOnly: readOnly,
+          onTap: enabled ? onTap : null,
+          onChanged: onChange,
+          obscureText: obscureText,
+          obscuringCharacter: '❋',
+          inputFormatters: inputFormatters,
+          keyboardType: keyboardType,
+          decoration: InputDecoration(
+            prefixIcon: prefixIcon,
+            suffixIcon: surfixIcon,
+            hintText: hint,
+            fillColor: fillColor,
+            filled: fillColor != null,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            constraints: BoxConstraints(minHeight: height ?? 42),
+            hintStyle: context.textTheme.bodyMedium?.copyWith(
+              color: Colors.grey,
+            ),
+            errorStyle:context
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: Colors.red),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: BorderSide(
                 color: useErrorBorder
-                    ? AppColors.red
-                    : (useFocusBorder ? AppColors.blue : AppColors.textGray),
-                width: 1)),
-      ),
+                    ? Colors.red
+                    : (useFocusBorder ? Colors.blue : Colors.grey),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: BorderSide(
+                  color: useErrorBorder ? Colors.red : Colors.blue, width: 1),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 8),
+              borderSide: const BorderSide(color: Colors.grey),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
+
 
 class ClickableInputField extends StatelessWidget {
   final String? hint;
@@ -123,7 +279,7 @@ class ClickableInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return InputField(
+    return InputField.outline(
       hint: hint,
       controller: TextEditingController(text: value),
       onTap: onClick,

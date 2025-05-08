@@ -8,15 +8,11 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        backgroundColor: AppColors.coolGray,
+        backgroundColor: AppColors.black,
         verticalPadding: 0,
-        horizontalPadding: 0,
+        horizontalPadding: 20,
         child: Stack(
           children: [
-            Image.asset(
-              Assets.splashGraphics,
-              fit: BoxFit.fill,
-            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -26,7 +22,8 @@ class SplashScreen extends StatelessWidget {
                 20.verticalSpace,
                 PrimaryButton.outlined(text: 'Back',iconStart: Icon(Icons.keyboard_arrow_left,)),
                 20.verticalSpace,
-                InputField(
+                InputField.filled(
+                  label: 'Full name',
                   hint: 'Enter full name',
                 )
               ],
