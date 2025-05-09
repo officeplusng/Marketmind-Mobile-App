@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors{
 
   static Color black =Color(0xFF242424);
+  static Color socialGray =Color(0xFF30374F);
   static const Color white = Color(0xFFFFFFFF);
   static Color primary = const Color(0xFF315BF3);
   static Color red = Color(0xFFD32F2F); //#D32F2F
@@ -13,6 +14,7 @@ class AppColors{
   static Color coolGray = Color(0xFF0E101B);
   static Color grayDark = Color(0xFFD9D9D9);
   static Color blue = Color(0xFF1752D9);
+  static Color disabledButtonColor = Color(0xFFA0B5F9);
   static Color filledGray = Color(0xFFDBDBDB);
   static Color borderGray = Color(0xFFDBDBDB);
   static Color textGray = Color(0xFF808080); //#DBDBDB
@@ -22,7 +24,8 @@ class AppColors{
   static Color containerColor12 = Color(0xFFF4F6FB);
   static Color textBlack = Color(0xFF0E0E0E);
   static Color bluntGray = Color(0xFF296197);
-  static Color dividerColor = Color(0xFFEBEBEB);
+  static Color secondaryTextColor = Color(0xFFB9C0D4);
+  static Color dividerColor = Color(0xFF4A5578);
 
   static var transparent = Colors.transparent;
 

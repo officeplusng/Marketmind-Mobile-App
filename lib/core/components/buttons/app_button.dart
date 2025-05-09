@@ -87,9 +87,10 @@ class PrimaryButton extends StatelessWidget {
     Widget? iconEnd,
     double? height,
     VoidCallback? onPressed,
+    bool enabled=true,
   }) =>
       PrimaryButton(
-        color: AppColors.blue,
+        color: enabled?AppColors.blue:AppColors.disabledButtonColor,
         textColor: AppColors.white,
         height: height,
         iconStart: icon,
@@ -168,9 +169,8 @@ class PrimaryButton extends StatelessWidget {
               Text(
                 text ?? '',
                 style: textStyle ??
-                    context.textTheme.titleMedium?.copyWith(
-                        color: textColor ?? Colors.black,
-                        fontWeight: FontWeight.w500),
+                    context.textTheme.titleSmall?.copyWith(
+                        color: textColor ?? Colors.black),
               ),
               if (iconEnd != null) ...[10.horizontalSpace, iconEnd!]
             ],
