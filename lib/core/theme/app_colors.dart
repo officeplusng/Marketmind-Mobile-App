@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class AppColors{
 
   static Color black =Color(0xFF242424);
+  static Color containerBackground1 =Color(0xFFBFCDFB);
   static Color socialGray =Color(0xFF30374F);
   static const Color white = Color(0xFFFFFFFF);
   static Color primary = const Color(0xFF315BF3);
+  static const primaryLight =  Color(0xFF233FAD);
   static Color red = Color(0xFFD32F2F); //#D32F2F
   static Color greenLight = Color(0xFFD4FFF0);
   static Color green = Color(0xFF08D88D); //#34C240
