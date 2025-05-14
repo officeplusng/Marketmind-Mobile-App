@@ -13,8 +13,11 @@ class Assets{
   static final search = 'search'.svg;
   static final google = 'google'.svg;
   static final apple = 'apple'.svg;
+  static final face = 'face'.svg;
+  static final doubleArrow = 'double_arrow'.svg;
   static final checkBoxCheck = 'check_box_check'.svg;
   static final radioCheck = 'radio_checked'.svg;
+  static final appLogo = 'Logomark'.svg;
   static final radioUnChecked = 'radio_unchecked'.svg;
   static final checkBoxUncheck = 'check_box_unchecked'.svg;
   static final eyeSlash = 'eye_slash'.svg;
@@ -30,5 +33,6 @@ class Assets{
 
 
   static final splashGraphics =  'background-graphics'.png;
+  static final onboardingBackground1 =  'onboarding_background1'.png;
   static final splashGraphics1 = 'background-graphics1'.png;
 }

@@ -62,9 +62,9 @@ class _SplashScreenState extends State<SplashScreen> {
                    mainAxisAlignment: MainAxisAlignment.center,
                    crossAxisAlignment: CrossAxisAlignment.center,
                    children: [
-                     SocialButton.google(onPress: () {}),
+                     SignInOption.google(onPress: () {}),
                      10.horizontalSpace,
-                     SocialButton.apple(onPress: () {}),
+                     SignInOption.apple(onPress: () {}),
                    ],
                  ),
                  10.verticalSpace,

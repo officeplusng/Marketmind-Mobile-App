@@ -28,6 +28,10 @@ class AppColors{
   static Color bluntGray = Color(0xFF296197);
   static Color secondaryTextColor = Color(0xFFB9C0D4);
   static Color dividerColor = Color(0xFF4A5578);
+  static const gray = Color(0xFFDCDFEA);
+  static const textGray1 = Color(0xFF667085);
+  static const coolBlack = Color(0xFF0E101B);
+  //#667085
 
   static var transparent = Colors.transparent;
 

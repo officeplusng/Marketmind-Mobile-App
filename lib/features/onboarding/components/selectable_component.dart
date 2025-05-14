@@ -84,13 +84,15 @@ class SelectableComponent extends StatelessWidget {
 class SelectableOptionComponent extends StatefulWidget {
   const SelectableOptionComponent(
       {super.key,
-      required this.title,
+       this.title,
       this.limit,
       required this.options,
       this.onSelect,
+        this.subtitle,
       this.radio = false});
 
-  final String title;
+  final String? title;
+  final String? subtitle;
   final bool radio;
   final int? limit;
   final List<SelectionEntity> options;
@@ -110,12 +112,23 @@ class _SelectableOptionComponentState extends State<SelectableOptionComponent> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        if(widget.title!=null)
+          ...[
         Text(
-          widget.title,
+          widget.title!,
           style: context.textTheme.headlineSmall
               ?.copyWith(fontWeight: FontWeight.w600),
         ),
-        20.verticalSpace,
+        20.verticalSpace],
+        if(widget.subtitle!=null)
+          ...[
+            Text(
+              widget.subtitle!,
+              style: context.textTheme.bodyMedium
+                  ?.copyWith(color: AppColors.textGray1),
+            ),
+            15.verticalSpace
+          ],
         ...List.generate(widget.options.length, (index) {
           final option = widget.options[index];
           return Padding(

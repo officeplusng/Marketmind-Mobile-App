@@ -1,19 +1,24 @@
 import 'package:marketmind/core/export/export.core.dart';
 
-class SocialButton extends StatelessWidget {
-  const SocialButton._({super.key, this.onPress, required this.asset});
+class SignInOption extends StatelessWidget {
+  const SignInOption._({super.key, this.onPress, required this.asset});
 
   final VoidCallback? onPress;
 
   final String asset;
 
-  factory SocialButton.apple({required VoidCallback onPress}) => SocialButton._(
+  factory SignInOption.apple({required VoidCallback onPress}) => SignInOption._(
         asset: Assets.apple,
         onPress: onPress,
       );
 
-  factory SocialButton.google({required VoidCallback onPress}) =>
-      SocialButton._(
+  factory SignInOption.face({required VoidCallback onPress}) => SignInOption._(
+        asset: Assets.face,
+        onPress: onPress,
+      );
+
+  factory SignInOption.google({required VoidCallback onPress}) =>
+      SignInOption._(
         asset: Assets.google,
         onPress: onPress,
       );
