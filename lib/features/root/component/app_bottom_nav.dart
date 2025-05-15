@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
 
@@ -19,7 +17,7 @@ class AppBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      margin: EdgeInsets.symmetric(vertical: 40,horizontal: 60),
+      margin: const EdgeInsets.symmetric(vertical: 40,horizontal: 60),
       decoration: ShapeDecoration(
         color: AppColors.bottomNavColor,
           shape:
@@ -59,7 +57,7 @@ class AppBottomNavItemComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!selected) {
-      return Padding(padding: EdgeInsets.all(10),child: child,);
+      return Padding(padding: const EdgeInsets.all(10),child: child,);
     }
     return Container(
       width: 44,

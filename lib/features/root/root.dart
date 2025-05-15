@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:marketmind/core/assets/assets.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/app_bottom_nav.dart';
+import 'package:marketmind/features/root/home/home.root.dart';
+import 'package:marketmind/features/root/learning/learning.root.dart';
+import 'package:marketmind/features/root/marketAnalysis/market_analysis.root.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -30,8 +31,13 @@ class _RootScreenState extends State<RootScreen> {
                   _currentIndex = value;
                 })),
         backgroundAsset: Assets.homeGradient,
-        child: const Column(
-          children: [],
+        child: IndexedStack(
+          index: _currentIndex,
+          children: [
+            HomeRoot(),
+            MarketAnalysis(),
+            LearningRoot()
+          ],
         ));
   }
 }

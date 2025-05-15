@@ -38,8 +38,9 @@ class _OnboardingCompletedScreenState extends State<OnboardingCompletedScreen> {
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 100,
                     height: 100,
                     child: Stack(

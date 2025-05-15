@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/onboarding/complete_onboarding_screen.dart';
 
@@ -31,7 +29,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(Assets.performingAnalysis),
+                      Image.asset(Assets.completeTradingProfile),
                       40.verticalSpace,
                       Text(
                         'Complete Your Trading \nProfile',
@@ -44,7 +42,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
                       30.verticalSpace,
                       PrimaryButton.primary(
                         onPressed: (){
-                          context.push(CompleteOnboardingScreen());
+                          context.push(const CompleteOnboardingScreen());
                         },
                         text: 'Start',
                       ),

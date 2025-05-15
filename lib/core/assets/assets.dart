@@ -37,6 +37,7 @@ class Assets{
   static final marketIntelligence = 'market_intelligence'.png;
   static final personalizedTrading = 'personalized_trading'.png;
   static final performingAnalysis = 'performing_analysis'.png;
+  static final completeTradingProfile = 'complete_trading_profile'.png;
   static final bgGradient = 'bg_Gradient'.png;
   static final loadingState = 'loading_state'.png;
   static final homeGradient = 'home_gradient'.png;
