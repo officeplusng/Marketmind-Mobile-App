@@ -30,6 +30,7 @@ class AppColors{
   static Color dividerColor = Color(0xFF4A5578);
   static const gray = Color(0xFFDCDFEA);
   static const textGray1 = Color(0xFF667085);
+  static const bottomNavColor = Color(0xFF111322);
   static const coolBlack = Color(0xFF0E101B);
   //#667085
 

@@ -3,8 +3,8 @@ import 'package:marketmind/core/export/export.core.dart';
 class SelectionEntity {
   final String title;
   final String? subtitle;
-
-  const SelectionEntity({required this.title, this.subtitle});
+  final Widget? child;
+  const SelectionEntity({required this.title, this.subtitle,this.child});
 }
 
 class SelectableComponent extends StatelessWidget {
@@ -14,25 +14,27 @@ class SelectableComponent extends StatelessWidget {
       required this.selected,
       this.onSelect,
       this.subtitle,
+        this.child,
       this.radio = false});
 
   final String title;
   final String? subtitle;
   final bool selected;
+  final Widget? child;
   final bool radio;
   final void Function(bool?)? onSelect;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: AppColors.transparent,
+    return GestureDetector(
       child: Container(
         padding: subtitle == null
-            ? null
-            : (const EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
+            ?  const EdgeInsets.symmetric(vertical: 5)
+            : (const EdgeInsets.symmetric(horizontal: 12, vertical: 2)),
         decoration: subtitle == null
             ? null
             : ShapeDecoration(
+          color:selected? AppColors.white:AppColors.transparent,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimens.defaultBorderRadius),
                 side: BorderSide(
@@ -41,36 +43,45 @@ class SelectableComponent extends StatelessWidget {
                         ? AppColors.containerBackground1
                         : Colors.transparent),
               )),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+        child:Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            CheckOrRadio(
-              selected: selected,
-              radio: radio,
-            ),
-            10.horizontalSpace,
-            Expanded(
-                child: Column(
-              mainAxisSize: MainAxisSize.min,
+            3.verticalSpace,
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: context.textTheme.titleSmall
-                      ?.copyWith(color: AppColors.white),
+                CheckOrRadio(
+                  selected: selected,
+                  radio: radio,
                 ),
-                if (subtitle != null) ...[
-                  5.verticalSpace,
-                  Text(
-                    subtitle!,
-                    style: context.textTheme.titleSmall?.copyWith(
-                        color: AppColors.white, fontWeight: FontWeight.w500),
-                  ),
-                  5.verticalSpace
-                ]
+                10.horizontalSpace,
+                Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: context.textTheme.titleSmall
+                        ),
+                        if (subtitle != null) ...[
+                          5.verticalSpace,
+                          Text(
+                            subtitle!,
+                            style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w500),
+                          ),
+                          5.verticalSpace
+                        ]
+                      ],
+                    ))
               ],
-            ))
+            ),
+            if(selected&& child!=null)
+              ...[
+                10.verticalSpace,
+                child!
+              ]
           ],
         ),
       ),
@@ -159,6 +170,7 @@ class _SelectableOptionComponentState extends State<SelectableOptionComponent> {
                   widget.onSelect?.call(selected.toList());
                 });
               },
+              child: option.child,
             ),
           );
         })

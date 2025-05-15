@@ -38,6 +38,8 @@ class Assets{
   static final personalizedTrading = 'personalized_trading'.png;
   static final performingAnalysis = 'performing_analysis'.png;
   static final bgGradient = 'bg_Gradient'.png;
+  static final loadingState = 'loading_state'.png;
+  static final homeGradient = 'home_gradient'.png;
 
   static final splashGraphics =  'background-graphics'.png;
   static final onboardingBackground1 =  'onboarding_background1'.png;

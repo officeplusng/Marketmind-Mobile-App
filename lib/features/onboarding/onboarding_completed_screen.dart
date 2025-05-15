@@ -1,10 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
-
-import '../../core/assets/assets.dart';
-import '../../core/theme/app_colors.dart';
+import 'package:marketmind/features/onboarding/components/onboarding_text_caption_component.dart';
 
 class OnboardingCompletedScreen extends StatefulWidget {
   const OnboardingCompletedScreen({super.key});
@@ -29,20 +24,72 @@ class _OnboardingCompletedScreenState extends State<OnboardingCompletedScreen> {
           SafeArea(
               child: PagePadding(
                   child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Welcome to MarketMind.',
-                style: context.textTheme.bodyMedium
-                    ?.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: LinearProgressIndicator(
+                  value: .9,
+                  color: AppColors.primary,
+                  backgroundColor: AppColors.white,
+                  borderRadius:
+                      BorderRadius.circular(Dimens.defaultBorderRadius),
+                ),
               ),
-              10.verticalSpace,
-              Text(
-                'Personalizing your MarketMind experience',
-                style: context.textTheme.bodyMedium?.copyWith(fontSize: 16),
-              ),
-              50.verticalSpace,
-              PrimaryButton.primary(
-                text: 'Explore dashboard',
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SizedBox(
+                          width: 80,
+                          height: 80,
+                          child: CircularProgressIndicator(
+                            value: .5,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 64,
+                          width: 64,
+                          child: Image.asset(Assets.loadingState),
+                        )
+                      ],
+                    ),
+                  ),
+                  50.verticalSpace,
+                  OnboardingTextCaptionComponent(
+                    title: 'hurray!!',
+                    angle: 0,
+                    backgroundColor:
+                        AppColors.containerBackground1.withOpacity(.2),
+                  ),
+                  20.verticalSpace,
+                  Text(
+                    'Welcome to MarketMind.',
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  5.verticalSpace,
+                  Text(
+                    textAlign: TextAlign.center,
+                    "Thanks for sharing your preferences! I've personalized your MarketMind dashboard based on your profile. You can update these preferences anytime in settings.",
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(fontSize: 16, color: AppColors.textGray1),
+                  ),
+                  50.verticalSpace,
+                  PrimaryButton.primary(
+                    onPressed: (){
+
+                    },
+                    text: 'Explore dashboard',
+                  ),
+                  20.verticalSpace,
+                ],
               )
             ],
           )))

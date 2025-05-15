@@ -26,7 +26,7 @@ class _LandingPage2State extends State<LandingPage2> {
 
   @override
   Widget build(BuildContext context) {
-    final  pages = [
+    final pages = [
       PageViewEntity(
           title: "Real-time Market\nIntelligence",
           subtitle:
@@ -58,7 +58,7 @@ class _LandingPage2State extends State<LandingPage2> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     onPressed: () {
                       context.pop();
                     },
@@ -66,10 +66,10 @@ class _LandingPage2State extends State<LandingPage2> {
                       Icons.close,
                       color: AppColors.white,
                     )),
-        Expanded(child:
-        pageIndicator(currentIndex: currentPage, pages: pages.length)),
+                Expanded(
+                    child: pageIndicator(
+                        currentIndex: currentPage, pages: pages.length)),
                 TextButton(
-
                     onPressed: () {
                       if (currentPage < pages.length - 1) {
                         controller.nextPage(
@@ -128,21 +128,19 @@ class _LandingPage2State extends State<LandingPage2> {
   Widget pageIndicator({required int currentIndex, required int pages}) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        ...List.generate(
-            pages, (e) => container(e == currentIndex))
-      ],
+      children: [...List.generate(pages, (e) => container(e == currentIndex))],
     );
   }
 
-  Widget container(bool selected) => Expanded(child: Container(
-    width: double.infinity,
-    height: 2,
-    margin: const EdgeInsets.symmetric(horizontal: 5),
-    decoration: ShapeDecoration(
-        color: selected?AppColors.white:AppColors.textGray1,
-        shape: RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.circular(Dimens.defaultBorderRadius))),
-  ));
+  Widget container(bool selected) => Expanded(
+          child: Container(
+        width: double.infinity,
+        height: 2,
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        decoration: ShapeDecoration(
+            color: selected ? AppColors.white : AppColors.textGray1,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(Dimens.defaultBorderRadius))),
+      ));
 }
