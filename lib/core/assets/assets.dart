@@ -31,6 +31,13 @@ class Assets{
   static final sessionConnecting = 'session_connecting'.svg;
   static final documentBlack = 'document_black'.svg;
 
+  //onboarding graphics
+  static final earnWithPartner = 'earn_with_partner_program'.png;
+  static final learnWhileYouTrade = 'learn_while_you_trade'.png;
+  static final marketIntelligence = 'market_intelligence'.png;
+  static final personalizedTrading = 'personalized_trading'.png;
+  static final performingAnalysis = 'performing_analysis'.png;
+  static final bgGradient = 'bg_Gradient'.png;
 
   static final splashGraphics =  'background-graphics'.png;
   static final onboardingBackground1 =  'onboarding_background1'.png;
