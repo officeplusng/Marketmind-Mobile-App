@@ -129,15 +129,18 @@ class PrimaryButton extends StatelessWidget {
     Widget? icon,
     Widget? iconEnd,
     double? height,
+    double? width,
   }) =>
       PrimaryButton(
         color: AppColors.white,
         iconStart: icon,
         height: height,
+        width: width,
         iconEnd: iconEnd,
         textColor: AppColors.black,
         onPressed: onPressed,
         text: text,
+        child: child,
       );
 
   @override

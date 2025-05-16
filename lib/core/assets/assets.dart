@@ -1,7 +1,7 @@
 import '../export/export.core.dart';
 
-class Assets{
-  static const logoWhite =  'background-graphics';
+class Assets {
+  static const logoWhite = 'background-graphics';
   static const logoDark = 'logo_dark';
   static const imagePickerPlaceHolder = 'image_place_holder';
 
@@ -38,11 +38,16 @@ class Assets{
   static final personalizedTrading = 'personalized_trading'.png;
   static final performingAnalysis = 'performing_analysis'.png;
   static final completeTradingProfile = 'complete_trading_profile'.png;
+  static final homeBackground1 = 'data_list1'.png;
+  static final homeBackground2 = 'data_list2'.png;
   static final bgGradient = 'bg_Gradient'.png;
   static final loadingState = 'loading_state'.png;
   static final homeGradient = 'home_gradient'.png;
+  static final giftIcon = 'gift_icon'.svg;
+  static final bellIcon = 'bell_ringing'.svg;
+  static final searchIcon = 'search_icon'.svg;
 
-  static final splashGraphics =  'background-graphics'.png;
-  static final onboardingBackground1 =  'onboarding_background1'.png;
+  static final splashGraphics = 'background-graphics'.png;
+  static final onboardingBackground1 = 'onboarding_background1'.png;
   static final splashGraphics1 = 'background-graphics1'.png;
 }

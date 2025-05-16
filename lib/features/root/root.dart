@@ -36,7 +36,9 @@ class _RootScreenState extends State<RootScreen> {
           children: [
             HomeRoot(),
             MarketAnalysis(),
-            LearningRoot()
+            LearningRoot(),
+            SizedBox(),
+            SizedBox()
           ],
         ));
   }

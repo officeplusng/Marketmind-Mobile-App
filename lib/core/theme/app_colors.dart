@@ -32,6 +32,8 @@ class AppColors{
   static const textGray1 = Color(0xFF667085);
   static const bottomNavColor = Color(0xFF111322);
   static const coolBlack = Color(0xFF0E101B);
+  static const defaultSubtitleHomeColor = Color(0xFFD9D6FE);
+  static const defaultButtonTextHomeColor = Color(0xFF344054);
   //#667085
 
   static var transparent = Colors.transparent;
