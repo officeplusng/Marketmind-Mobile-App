@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:marketmind/core/assets/assets.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/home/components/complete_profile_component.dart';
 import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
 import 'package:marketmind/features/root/home/components/home_info_card.dart';
 import 'package:marketmind/features/root/home/components/home_trading_insight_component.dart';
 import 'package:marketmind/features/root/home/components/market_data_component.dart';
+import 'package:marketmind/features/root/home/components/market_summary_component.dart';
+
+import 'ai_trading_insight_screen.dart';
 
 class MarketDataDto {
   final String currencyPair;
@@ -47,9 +51,8 @@ class _HomeRootState extends State<HomeRoot> {
     ];
     return GradientScaffold(
         backgroundAsset: Assets.homeGradient,
-        horizontalPadding: 0,
+        horizontalPadding: 20,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -100,13 +103,20 @@ class _HomeRootState extends State<HomeRoot> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                  CompleteProfileComponent(),
+                  30.verticalSpace,
+                  MarketSummaryComponent(),
+                  20.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _title('AI Trade Insights'),
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            context.push(AiTradingInsightScreen());
+                          },
                           child: Text(
                             'View All',
                             style: context.textTheme.bodyMedium?.copyWith(

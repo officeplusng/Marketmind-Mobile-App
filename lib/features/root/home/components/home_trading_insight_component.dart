@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
 class HomeTradingInsightComponent extends StatelessWidget {
@@ -74,7 +73,7 @@ class HomeTradingInsightComponent extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: ShapeDecoration(
             color: !buy
-                ? Color(0xFFFEF0C7)
+                ? const Color(0xFFFEF0C7) //F2F4F7
                 : AppColors.greenLight1,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16))),
@@ -88,7 +87,7 @@ class HomeTradingInsightComponent extends StatelessWidget {
               style: context.textTheme.bodyMedium?.copyWith(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: buy?AppColors.textGreen:Color(0xFF93370D)),
+                  color: buy?AppColors.textGreen:const Color(0xFF93370D)),
             )
           ],
         ),

@@ -17,7 +17,7 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GradientScaffold(
+    return BaseScaffold(
         bottomWidget: AppBottomNav(
             items: [
               'home_unselected'.svg,
@@ -30,7 +30,7 @@ class _RootScreenState extends State<RootScreen> {
             onItemChange: (value) => setState(() {
                   _currentIndex = value;
                 })),
-        backgroundAsset: Assets.homeGradient,
+        horizontalPadding: 0,
         child: IndexedStack(
           index: _currentIndex,
           children: [
