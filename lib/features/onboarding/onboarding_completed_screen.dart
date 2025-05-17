@@ -1,6 +1,8 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/onboarding/components/onboarding_text_caption_component.dart';
 
+import '../root/root.dart';
+
 class OnboardingCompletedScreen extends StatefulWidget {
   const OnboardingCompletedScreen({super.key});
 
@@ -25,6 +27,7 @@ class _OnboardingCompletedScreenState extends State<OnboardingCompletedScreen> {
               child: PagePadding(
                   child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -38,7 +41,7 @@ class _OnboardingCompletedScreenState extends State<OnboardingCompletedScreen> {
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 100,
@@ -85,7 +88,7 @@ class _OnboardingCompletedScreenState extends State<OnboardingCompletedScreen> {
                   50.verticalSpace,
                   PrimaryButton.primary(
                     onPressed: (){
-
+                      context.push(const RootScreen());
                     },
                     text: 'Explore dashboard',
                   ),
