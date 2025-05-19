@@ -44,7 +44,11 @@ class Assets {
   static final bgGradient = 'bg_Gradient'.png;
   static final loadingState = 'loading_state'.png;
   static final homeGradient = 'home_gradient'.png;
+  static final aiPremium = 'ai_premium_banner'.png;
+  static final referralIllustration = 'illustration'.png;
   static final giftIcon = 'gift_icon'.svg;
+  static final trend = 'trend'.svg;
+  static final diamond = 'diamond'.svg;
   static final bellIcon = 'bell_ringing'.svg;
   static final searchIcon = 'search_icon'.svg;
 

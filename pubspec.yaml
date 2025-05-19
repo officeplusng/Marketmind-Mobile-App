@@ -19,6 +19,7 @@ dependencies:
   retrofit: ^4.4.2
   logger: ^2.4.0  # for logging purpose
   json_annotation: ^4.9.0
+  flutter_bloc: ^9.1.1
   google_fonts: ^6.2.1
   iconsax_flutter: ^1.0.0
   injectable: ^2.5.0

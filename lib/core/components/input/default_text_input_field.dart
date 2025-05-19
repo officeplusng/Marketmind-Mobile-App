@@ -185,7 +185,6 @@ class InputField extends StatelessWidget {
       hint: hint,
       controller: controller,
       prefixIcon: const Icon(Icons.search),
-      fillColor: const Color(0xFFF5F5F5),
       borderRadius: 12,
       onChange: onChange,
     );

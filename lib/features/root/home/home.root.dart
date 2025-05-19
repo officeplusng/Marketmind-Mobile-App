@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:marketmind/core/assets/assets.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/home/components/complete_profile_component.dart';
@@ -9,6 +6,8 @@ import 'package:marketmind/features/root/home/components/home_info_card.dart';
 import 'package:marketmind/features/root/home/components/home_trading_insight_component.dart';
 import 'package:marketmind/features/root/home/components/market_data_component.dart';
 import 'package:marketmind/features/root/home/components/market_summary_component.dart';
+import 'package:marketmind/features/root/home/customize_market_data.dart';
+import 'package:marketmind/features/root/home/referral/referral_home_page.dart';
 
 import 'ai_trading_insight_screen.dart';
 
@@ -103,7 +102,6 @@ class _HomeRootState extends State<HomeRoot> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   CompleteProfileComponent(),
                   30.verticalSpace,
                   MarketSummaryComponent(),
@@ -139,7 +137,9 @@ class _HomeRootState extends State<HomeRoot> {
                     children: [
                       _title('Market Data'),
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            context.push(const CustomizeMarketData());
+                          },
                           child: Text(
                             'Edit',
                             style: context.textTheme.bodyMedium?.copyWith(
@@ -186,6 +186,9 @@ class _HomeRootState extends State<HomeRoot> {
                       title: 'Your Referral Network',
                       subtitle: "Track your referrals and earnings",
                       buttonText: 'Earn commission',
+                      onClick: (){
+                        context.push(ReferralHomePage());
+                      },
                       backgroundAsset: Assets.homeBackground2,
                       subtitleColor: AppColors.defaultSubtitleHomeColor,
                       buttonIcon: SvgPicture.asset(Assets.giftIcon)),

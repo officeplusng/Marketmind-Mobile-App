@@ -33,12 +33,14 @@ class AppColors{
   static const textGray12 = Color(0xFFD0D5DD);
   static const errorText = Color(0xFF912018);
   static const textGreen = Color(0xFF085D3A);
+  static const yellowDark = Color(0xFF93370D);
   static const greenLight1 = Color(0xFFDCFAE6);
   static const redLight = Color(0xFFFEE4E2);
   static const onSurfaceCardColor = Color(0xFFEAECF0);
   static const bottomNavColor = Color(0xFF111322);
   static const coolBlack = Color(0xFF0E101B);
   static const defaultSubtitleHomeColor = Color(0xFFD9D6FE);
+  static const textBlack1 = Color(0xFF101828);
   static const defaultButtonTextHomeColor = Color(0xFF344054);
   static const secondaryCardBorder = Color(0xFF2F4F7);
   //#667085

@@ -10,7 +10,7 @@ class GradientScaffold extends StatelessWidget {
       this.verticalPadding,
       this.appBar,
       this.bottomWidget,
-        required this.backgroundAsset,
+      required this.backgroundAsset,
       this.backgroundColor});
 
   final Widget child;
@@ -36,7 +36,8 @@ class GradientScaffold extends StatelessWidget {
               height: double.infinity,
               fit: BoxFit.cover,
             ),
-            SafeArea(child: PagePadding(
+            SafeArea(
+                child: PagePadding(
               verticalPadding: verticalPadding ?? 0,
               horizontalPadding: horizontalPadding,
               child: child,

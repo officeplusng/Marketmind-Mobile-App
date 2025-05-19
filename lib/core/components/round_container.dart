@@ -14,6 +14,7 @@ class WrapperContainer extends StatelessWidget {
       this.shape,
       this.onClick,
       this.circle = true,
+        this.useHeight=true,
       this.bordered = true});
 
   final double? width;
@@ -25,13 +26,16 @@ class WrapperContainer extends StatelessWidget {
   final Color? borderColor;
   final VoidCallback? onClick;
   final EdgeInsets? padding;
+  final bool useHeight;
   final ShapeBorder? shape;
 
   factory WrapperContainer.rectangular(
       {EdgeInsets? padding,
       VoidCallback? onClick,
       Color? backgroundColor,
+        double? borderRadius,
       bool bordered = true,
+        bool useHeight=true,
       Color? borderColor,
       double? height,
       double? width,
@@ -44,12 +48,14 @@ class WrapperContainer extends StatelessWidget {
       onClick: onClick,
       backgroundColor: backgroundColor,
       borderColor: borderColor,
+
       bordered: bordered,
       height: height,
+      useHeight: useHeight,
       width: width,
       shape: RoundedRectangleBorder(
           side: side,
-          borderRadius: BorderRadius.circular(Dimens.defaultBorderRadius)),
+          borderRadius: BorderRadius.circular(borderRadius??Dimens.defaultBorderRadius)),
       child: child,
     );
   }
@@ -64,7 +70,7 @@ class WrapperContainer extends StatelessWidget {
       customBorder: shape ?? const CircleBorder(),
       child: Container(
         width: width ?? 120,
-        height: height ?? 120,
+        height: useHeight?(height ?? 120):null,
         alignment: Alignment.center,
         padding: padding,
         decoration: ShapeDecoration(

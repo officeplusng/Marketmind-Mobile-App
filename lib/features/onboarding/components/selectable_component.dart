@@ -138,7 +138,7 @@ class _SelectableOptionComponentState extends State<SelectableOptionComponent> {
               style: context.textTheme.bodyMedium
                   ?.copyWith(color: AppColors.textGray1),
             ),
-            15.verticalSpace
+            10.verticalSpace
           ],
         ...List.generate(widget.options.length, (index) {
           final option = widget.options[index];

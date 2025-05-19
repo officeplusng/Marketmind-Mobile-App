@@ -26,10 +26,10 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GradientScaffold(
-      backgroundAsset: Assets.homeGradient,
+    return BaseScaffold(
       horizontalPadding: 20,
-      child: Column(
+      child: SafeArea(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -63,43 +63,53 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
                 ?.copyWith(color: AppColors.black),
           ),
           20.verticalSpace,
-          TabBar(
-            controller: _tabController,
-            indicatorColor: AppColors.primary,
-            dividerColor: AppColors.transparent,
-            unselectedLabelColor: const Color(0xFF667085),
-            labelColor: const Color(0xFF344054),
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            labelStyle: context.textTheme.bodyMedium,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorPadding: const EdgeInsets.symmetric(vertical: 8),
-            onTap: (value) {
-              setState(() {
-                _currentTab = value;
-              });
-            },
-            indicator: ShapeDecoration(
-              color: AppColors.grayDark,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6)),
+          //#F9FAFB
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 3),
+            decoration: ShapeDecoration(
+              color: const Color(0xFFF9FAFB),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(width: 1, color: Color(0xFFEAECF0)))),
+            child: TabBar(
+              controller: _tabController,
+              indicatorColor: AppColors.primary,
+              dividerColor: AppColors.transparent,
+              unselectedLabelColor: const Color(0xFF667085),
+              labelColor: const Color(0xFF344054),
+              isScrollable: true,
+              tabAlignment: TabAlignment.start,
+              labelStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorPadding: const EdgeInsets.symmetric(vertical: 5),
+              onTap: (value) {
+                setState(() {
+                  _currentTab = value;
+                });
+              },
+              indicator: ShapeDecoration(
+                color: AppColors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6)),
+              ),
+              tabs: List.generate(tabs.length, (value) {
+                final e = tabs[value];
+                return Tab(
+                  text: e,
+                );
+              }),
             ),
-            tabs: List.generate(tabs.length, (value) {
-              final e = tabs[value];
-              return Tab(
-                text: e,
-              );
-            }),
           ),
           10.verticalSpace,
-         Expanded(child:  ListView.builder(
-             itemCount: 15,
-             shrinkWrap: true,
-             itemBuilder: (context, index) {
-               return TradingInsightComponent();
-             }))
+          Expanded(
+              child: ListView.builder(
+                  itemCount: 15,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return TradingInsightComponent();
+                  }))
         ],
-      ),
+      )),
     );
   }
 }
