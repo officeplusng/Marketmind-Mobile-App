@@ -43,7 +43,6 @@ class AppColors{
   static const textBlack1 = Color(0xFF101828);
   static const defaultButtonTextHomeColor = Color(0xFF344054);
   static const secondaryCardBorder = Color(0xFF2F4F7);
-  //#667085
 
   static var transparent = Colors.transparent;
 

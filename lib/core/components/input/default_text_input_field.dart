@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketmind/core/export/export.core.dart';
@@ -20,6 +21,7 @@ class InputField extends StatelessWidget {
   final Widget? prefixIcon;
   final Color? textColor;
   final Widget? surfixIcon;
+  final OutlineInputBorder? border;
   final bool useErrorBorder;
   final double? borderRadius;
   final bool readOnly;
@@ -34,6 +36,7 @@ class InputField extends StatelessWidget {
     super.key,
     this.prefixIcon,
     this.readOnly = false,
+    this.border,
     this.surfixIcon,
     this.hint,
     this.maxLines,
@@ -62,6 +65,7 @@ class InputField extends StatelessWidget {
   factory InputField.filled({
     Key? key,
     String? hint,
+    OutlineInputBorder? border,
     String? label,
     TextEditingController? controller,
     Widget? prefixIcon,
@@ -91,6 +95,7 @@ class InputField extends StatelessWidget {
       hint: hint,
       label: label,
       controller: controller,
+      border: border,
       prefixIcon: prefixIcon,
       surfixIcon: surfixIcon,
       validator: validator,
@@ -179,12 +184,20 @@ class InputField extends StatelessWidget {
     String? hint = "Search...",
     TextEditingController? controller,
     void Function(String)? onChange,
+    OutlineInputBorder? border,
   }) {
     return InputField.filled(
       key: key,
       hint: hint,
       controller: controller,
-      prefixIcon: const Icon(Icons.search),
+      border: border ??
+          OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: AppColors.gray)),
+      prefixIcon: Icon(
+        Iconsax.search_normal_1_copy,
+        color: AppColors.textGray1,
+      ),
       borderRadius: 12,
       onChange: onChange,
     );
@@ -197,7 +210,11 @@ class InputField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (label != null) ...[
-          Text(label!,style: context.textTheme.bodyMedium?.copyWith(color: AppColors.white,fontWeight: FontWeight.w500),),
+          Text(
+            label!,
+            style: context.textTheme.bodyMedium
+                ?.copyWith(color: AppColors.white, fontWeight: FontWeight.w500),
+          ),
           const SizedBox(height: 5),
         ],
         TextFormField(
@@ -225,39 +242,44 @@ class InputField extends StatelessWidget {
             hintText: hint,
             fillColor: fillColor,
             filled: fillColor != null,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             constraints: BoxConstraints(minHeight: height ?? 42),
             hintStyle: context.textTheme.bodyMedium?.copyWith(
               color: Colors.grey,
             ),
-            errorStyle:context
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: Colors.red),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 8),
-              borderSide: BorderSide(
-                color: useErrorBorder
-                    ? Colors.red
-                    : (useFocusBorder ? Colors.blue : Colors.grey),
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 8),
-              borderSide: BorderSide(
-                  color: useErrorBorder ? Colors.red : Colors.blue, width: 1),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 8),
-              borderSide: const BorderSide(color: Colors.grey),
-            ),
+            errorStyle:
+                context.textTheme.bodySmall?.copyWith(color: Colors.red),
+            enabledBorder: border,
+            border: border ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: BorderSide(
+                    color: useErrorBorder
+                        ? Colors.red
+                        : (useFocusBorder ? Colors.blue : Colors.grey),
+                  ),
+                ),
+            focusedBorder: border?.copyWith(
+                    borderSide:
+                        BorderSide(width: 1.5, color: AppColors.gray)) ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: BorderSide(
+                      color: useErrorBorder ? Colors.red : Colors.blue,
+                      width: 1),
+                ),
+            disabledBorder: border ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                  borderSide: const BorderSide(color: Colors.grey),
+                ),
           ),
         ),
       ],
     );
   }
 }
-
 
 class ClickableInputField extends StatelessWidget {
   final String? hint;

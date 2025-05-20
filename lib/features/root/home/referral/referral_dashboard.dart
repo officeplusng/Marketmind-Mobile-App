@@ -4,6 +4,7 @@ import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/custom_app_bar.dart';
 import 'package:marketmind/features/root/home/components/faq_component.dart';
 import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
+import 'package:marketmind/features/root/home/referral/referral_list_page.dart';
 
 import '../components/referral_component.dart';
 
@@ -94,6 +95,7 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                             child: Column(
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _dashboardComponent(context,
                                         title: "Total Referrals", value: "502"),
@@ -105,6 +107,7 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                                 ),
                                 20.verticalSpace,
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     _dashboardComponent(context,
                                         title: "Total Earned", value: "\$69.3"),
@@ -120,8 +123,8 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                             width: double.infinity,
                             useHeight: false,
                             backgroundColor: AppColors.white,
-                            borderColor: Color(0xFFF2F4F7),
-                            padding: EdgeInsets.all(16),
+                            borderColor: const Color(0xFFF2F4F7),
+                            padding: const EdgeInsets.all(16),
                             bordered: true,
                             child: Column(
                               children: [
@@ -138,6 +141,9 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                                               fontWeight: FontWeight.w700),
                                     ),
                                     InkWell(
+                                      onTap: (){
+                                        context.push(ReferralListPage());
+                                      },
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
@@ -161,9 +167,9 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                                   ],
                                 ),
                                 10.verticalSpace,
-                                ReferralComponent(),
+                                const ReferralComponent(),
                                 5.verticalSpace,
-                                ReferralComponent(),
+                                const ReferralComponent(),
                                 5.verticalSpace,
                                 ReferralComponent(),
                                 5.verticalSpace,

@@ -11,6 +11,7 @@ class Assets {
   static final receipt = 'receipt'.svg;
   static final eye = 'eye'.svg;
   static final search = 'search_icon'.svg;
+  static final search1 = 'search'.svg;
   static final filterList = 'filter_list'.svg;
   static final google = 'google'.svg;
   static final apple = 'apple'.svg;
