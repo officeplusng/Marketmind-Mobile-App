@@ -16,6 +16,14 @@ class Assets {
   static final google = 'google'.svg;
   static final apple = 'apple'.svg;
   static final face = 'face'.svg;
+  static final riskAnalysis = 'risk_analysis'.svg;
+  static final aiMagicLine = 'ai-magic-line'.svg;
+  static final paperClip = 'paper_clip'.svg;
+  static final globe = 'globe_blue'.svg;
+  static final vector = 'vector'.svg;
+  static final calendar = 'calendar'.svg;
+  static final chart = 'chart_blue'.svg;
+  static final barChart = 'bar_chart'.svg;
   static final doubleArrow = 'double_arrow'.svg;
   static final checkBoxCheck = 'check_box_check'.svg;
   static final radioCheck = 'radio_checked'.svg;

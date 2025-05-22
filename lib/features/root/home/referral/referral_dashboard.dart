@@ -119,6 +119,69 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                               ],
                             )),
                         20.verticalSpace,
+                        //
+                        WrapperContainer.rectangular(
+                            width: double.infinity,
+                            useHeight: false,
+                            backgroundColor: AppColors.white,
+                            borderColor: const Color(0xFFF2F4F7),
+                            padding: const EdgeInsets.all(16),
+                            bordered: true,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Your Referrals",
+                                      style: context.textTheme.titleSmall
+                                          ?.copyWith(
+                                          color: AppColors.textBlack1,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    InkWell(
+                                      onTap: (){
+                                        context.push(ReferralListPage());
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "View All",
+                                            style: context.textTheme.titleSmall
+                                                ?.copyWith(
+                                                color: AppColors.primary),
+                                          ),
+                                          3.horizontalSpace,
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: AppColors.primary,
+                                            size: 14,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                10.verticalSpace,
+                                const ReferralComponent(),
+                                5.verticalSpace,
+                                const ReferralComponent(),
+                                5.verticalSpace,
+                                const ReferralComponent(),
+                                5.verticalSpace,
+                                const ReferralComponent(),
+                                5.verticalSpace,
+                                const ReferralComponent(),
+                                5.verticalSpace,
+                              ],
+                            )),
+                        //
+                        20.verticalSpace,
                         WrapperContainer.rectangular(
                             width: double.infinity,
                             useHeight: false,
@@ -184,8 +247,8 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                           width: double.infinity,
                           useHeight: false,
                           backgroundColor: AppColors.white,
-                          borderColor: Color(0xFFF2F4F7),
-                          padding: EdgeInsets.all(16),
+                          borderColor: const Color(0xFFF2F4F7),
+                          padding: const EdgeInsets.all(16),
                           bordered: true,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,7 +331,9 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                                   text: 'Invite & Earn',
                                 )
                               ],
-                            ))
+                            )),
+
+                        20.verticalSpace,
                       ],
                     )),
                   ))

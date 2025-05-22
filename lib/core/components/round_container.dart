@@ -15,10 +15,12 @@ class WrapperContainer extends StatelessWidget {
       this.onClick,
       this.circle = true,
         this.useHeight=true,
+        this.alignCenter=true,
       this.bordered = true});
 
   final double? width;
   final double? height;
+  final bool alignCenter;
   final bool circle;
   final Widget child;
   final bool bordered;
@@ -49,6 +51,7 @@ class WrapperContainer extends StatelessWidget {
       backgroundColor: backgroundColor,
       borderColor: borderColor,
 
+      alignCenter: false,
       bordered: bordered,
       height: height,
       useHeight: useHeight,
@@ -75,7 +78,7 @@ class WrapperContainer extends StatelessWidget {
         padding: padding,
         decoration: ShapeDecoration(
             color: backgroundColor, shape: shape ?? CircleBorder(side: side)),
-        child: Align(
+        child: !alignCenter?child: Align(
           alignment: Alignment.center,
           child: child,
         ),
