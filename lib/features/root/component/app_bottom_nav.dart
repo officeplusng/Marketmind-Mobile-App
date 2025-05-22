@@ -17,7 +17,7 @@ class AppBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      margin: const EdgeInsets.symmetric(vertical: 40,horizontal: 60),
+      margin: const EdgeInsets.only(bottom: 40,right: 60,left: 60,top: 10),
       decoration: ShapeDecoration(
         color: AppColors.bottomNavColor,
           shape:

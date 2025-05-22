@@ -32,6 +32,6 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.light,
             theme: AppTheme.light,
-            home: const RootScreen()));
+            home: const LandingPage1()));
   }
 }

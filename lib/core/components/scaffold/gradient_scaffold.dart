@@ -30,11 +30,12 @@ class GradientScaffold extends StatelessWidget {
         bottomNavigationBar: bottomWidget,
         body: Stack(
           children: [
-            // Image.asset(
-            //   backgroundAsset,
-            //   width: double.infinity,
-            //   height: double.infinity,
-            // ),
+            Image.asset(
+              backgroundAsset,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
             SafeArea(child: PagePadding(
               verticalPadding: verticalPadding ?? 0,
               horizontalPadding: horizontalPadding,

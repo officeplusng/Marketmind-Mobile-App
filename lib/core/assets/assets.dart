@@ -10,7 +10,8 @@ class Assets {
   static final reset_password_At = 'reset_password_At'.svg;
   static final receipt = 'receipt'.svg;
   static final eye = 'eye'.svg;
-  static final search = 'search'.svg;
+  static final search = 'search_icon'.svg;
+  static final filterList = 'filter_list'.svg;
   static final google = 'google'.svg;
   static final apple = 'apple'.svg;
   static final face = 'face'.svg;
