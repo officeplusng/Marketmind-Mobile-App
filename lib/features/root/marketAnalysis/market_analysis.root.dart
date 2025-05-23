@@ -5,6 +5,7 @@ import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/marketAnalysis/components/news_components.dart';
 
+import 'components/market_analysis_dasboard.dart';
 import 'components/technical_analysis.dart';
 
 class MarketAnalysis extends StatefulWidget {
@@ -71,6 +72,8 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              MarketAnalysisDashboardComponent(),
+              10.verticalSpace,
               MarketAnalysisTechnicalAnalysisComponent(),
               10.verticalSpace,
               NewsComponents(),
