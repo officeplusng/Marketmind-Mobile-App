@@ -1,27 +1,28 @@
 import '../../../../core/export/export.core.dart';
 
 class MarketAnalysisDashboardComponent extends StatelessWidget {
-  const MarketAnalysisDashboardComponent({super.key});
+  const MarketAnalysisDashboardComponent({super.key,this.backgroundColor,this.textColor});
 
+  final Color? backgroundColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return WrapperContainer.rectangular(
-        width: 168,
-        backgroundColor: AppColors.white,
-        borderColor: const Color(0xFFF2F4F7),
+        backgroundColor:backgroundColor?? AppColors.white,
+        borderColor: backgroundColor??const Color(0xFFF2F4F7),
         useHeight: false,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 16),
         bordered: true,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('DeFi TVL',
                 style: context.textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textGray1, fontWeight: FontWeight.w500)),
+                    color: textColor??AppColors.textGray1, fontWeight: FontWeight.w500)),
             10.verticalSpace,
             Text(
               '\$45.8B',
-              style: context.textTheme.headlineMedium,
+              style: context.textTheme.headlineMedium?.copyWith(color: textColor),
             ),
             20.verticalSpace,
             _spikeIcon(context, text: '+1.25%'),
@@ -30,7 +31,7 @@ class MarketAnalysisDashboardComponent extends StatelessWidget {
               '24h Change: +45.2B',
               maxLines: 1,
               style: context.textTheme.bodyMedium
-                  ?.copyWith(color: AppColors.textGray1),
+                  ?.copyWith(color: textColor??AppColors.textGray1),
             )
           ],
         ));

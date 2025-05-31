@@ -13,6 +13,7 @@ class AppColors{
   static Color green = Color(0xFF08D88D); //#34C240
   static Color greenDark = Color(0xFF34C240);
   static Color onlineGreen = Color(0xFF22BB33);
+  static Color purpleLight = Color(0xFF7A5AF8);
   static Color coolGray = Color(0xFF0E101B);
   static Color grayDark = Color(0xFFD9D9D9);
   static Color blue = Color(0xFF1752D9);

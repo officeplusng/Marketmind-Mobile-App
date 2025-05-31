@@ -72,7 +72,24 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MarketAnalysisDashboardComponent(),
+              GridView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.all(0),
+
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: .95,
+                    crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10),
+              children: [
+
+                MarketAnalysisDashboardComponent(
+                  backgroundColor: Color(0xFF6938EF),
+                  textColor: AppColors.white,
+                ),
+                MarketAnalysisDashboardComponent(),
+                MarketAnalysisDashboardComponent(),
+                MarketAnalysisDashboardComponent(),
+              ],),
               10.verticalSpace,
               MarketAnalysisTechnicalAnalysisComponent(),
               10.verticalSpace,

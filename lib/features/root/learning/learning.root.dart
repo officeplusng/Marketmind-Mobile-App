@@ -76,9 +76,10 @@ class _LearningRootState extends State<LearningRoot>
                     ],
                   )),
                   20.verticalSpace,
-
-                  PagePadding(child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                  PagePadding(
+                      child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: ShapeDecoration(
                         color: const Color(0xFF2D53DD),
                         shape: RoundedRectangleBorder(
@@ -91,13 +92,13 @@ class _LearningRootState extends State<LearningRoot>
                       dividerColor: AppColors.transparent,
                       unselectedLabelColor: const Color(0xFFBFCDFB),
                       labelColor: const Color(0xFF315BF3),
-                      isScrollable: true,
-                      tabAlignment: TabAlignment.center,
+                      isScrollable: false,
+                      tabAlignment: TabAlignment.fill,
                       labelStyle: context.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
                       indicatorSize: TabBarIndicatorSize.tab,
-                      indicatorPadding:
-                      const EdgeInsets.symmetric(vertical: 5),
+                      indicatorPadding: const EdgeInsets.symmetric(
+                          vertical: 3, horizontal: 2),
                       onTap: (value) {
                         setState(() {
                           _currentTab = value;
@@ -196,6 +197,45 @@ class _LearningRootState extends State<LearningRoot>
                               Icons.star_border,
                               color: AppColors.white,
                             )),
+                        20.verticalSpace,
+                        WrapperContainer.rectangular(
+                            width: double.infinity,
+                            useHeight: false,
+                            backgroundColor: AppColors.white,
+                            borderColor: const Color(0xFFF2F4F7),
+                            borderRadius: 8,
+                            padding: const EdgeInsets.all(16),
+                            bordered: true,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Why learn with MarketMind?',
+                                  style: context.textTheme.titleSmall
+                                      ?.copyWith(color: AppColors.textBlack1),
+                                ),
+                                15.verticalSpace,
+                                ...[
+                                  (
+                                    'AI-powered personalized learning paths',
+                                    AppColors.primary
+                                  ),
+                                  (
+                                    'Risk-free trading simulations',
+                                    AppColors.purpleLight
+                                  ),
+                                  (
+                                    'Real-time market insights',
+                                    AppColors.textGreenLight
+                                  ),
+                                ].map((e) =>
+                                    _infoComponent(text: e.$1, color: e.$2)),
+                              ],
+                            )),
+                        50.verticalSpace,
+                        Center(
+                          child: _startLearningButton(context),
+                        )
                       ],
                     )),
                   ))
@@ -205,6 +245,65 @@ class _LearningRootState extends State<LearningRoot>
           ],
         ));
   }
+
+  Widget _startLearningButton(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 18, vertical: 11),
+        height: 44,
+        decoration: ShapeDecoration(
+            shadows: [
+              BoxShadow(
+                  color: const Color(0x1018280D)
+                      .withOpacity(.05))
+            ],
+            color: AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius:
+              BorderRadiusGeometry.circular(999),
+            )),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              'page3'.svg,
+              color: AppColors.white,
+            ),
+            15.horizontalSpace,
+            Text(
+              'Start Your Learning Journey',
+              style: context.textTheme.titleSmall?.copyWith(
+                  color: AppColors.white,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _infoComponent({Color? color, required String text}) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          children: [
+            Icon(
+              Icons.circle,
+              size: 10,
+              color: color ?? AppColors.primary,
+            ),
+            10.horizontalSpace,
+            Text(
+              text,
+              style: context.textTheme.bodyMedium
+                  ?.copyWith(fontSize: 16, color: AppColors.textGray1),
+            )
+          ],
+        ),
+      );
 
   Widget container(
       {required String title,
@@ -220,7 +319,7 @@ class _LearningRootState extends State<LearningRoot>
         onClick: onClick,
         backgroundColor: primaryColor,
         borderRadius: 20,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         bordered: true,
         child: Row(
           children: [
