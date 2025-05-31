@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
-import 'package:marketmind/features/authentication/components/have_an_account_component.dart';
+import 'package:marketmind/features/authentication/presentation/components/have_an_account_component.dart';
 import 'package:marketmind/features/onboarding/components/selectable_component.dart';
 
-import '../../../core/export/export.core.dart';
+import 'package:marketmind/core/export/export.core.dart';
 import '../components/auth_logo_component.dart';
 
 class CreateAccountReferralCode extends StatefulWidget {

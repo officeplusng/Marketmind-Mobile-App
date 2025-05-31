@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:marketmind/core/network/base_url.dart';
+import 'package:marketmind/features/authentication/data/service/auth_service.dart';
 import 'interceptor.dart';
 
 @module
@@ -23,4 +25,7 @@ abstract class NetworkModule {
 
     return dio;
   }
+
+  @lazySingleton
+  AuthService apiService(Dio dio) => AuthService(dio,baseUrl: '$apiBaseUrl/auth');
 }

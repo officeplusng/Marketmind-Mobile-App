@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 
-import '../../../core/export/export.core.dart';
+import 'package:marketmind/core/export/export.core.dart';
+
 
 class HaveAnAccountComponent extends StatelessWidget {
   const HaveAnAccountComponent({super.key,required this.actionText,required this.contentText,this.onClick});

@@ -17,6 +17,7 @@ class Assets {
   static final apple = 'apple'.svg;
   static final face = 'face'.svg;
   static final riskAnalysis = 'risk_analysis'.svg;
+  static final menuIcon = 'menu-icon'.svg;
   static final aiMagicLine = 'ai-magic-line'.svg;
   static final paperClip = 'paper_clip'.svg;
   static final globe = 'globe_blue'.svg;
@@ -48,6 +49,7 @@ class Assets {
   static final personalizedTrading = 'personalized_trading'.png;
   static final performingAnalysis = 'performing_analysis'.png;
   static final completeTradingProfile = 'complete_trading_profile'.png;
+  static final illustration31 = 'illustration31'.png;
   static final homeBackground1 = 'data_list1'.png;
   static final homeBackground2 = 'data_list2'.png;
   static final bgGradient = 'bg_Gradient'.png;

@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/authentication/components/auth_logo_component.dart';
-import 'package:marketmind/features/authentication/components/continue_with.dart';
-import '../../../core/assets/assets.dart';
-import '../../../core/theme/app_colors.dart';
+import 'package:marketmind/features/authentication/presentation/components/auth_logo_component.dart';
+import 'package:marketmind/features/authentication/presentation/components/continue_with.dart';
 import '../components/have_an_account_component.dart';
 import '../components/social_button.dart';
 

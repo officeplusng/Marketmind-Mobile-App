@@ -14,6 +14,10 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:marketmind/core/local/secured_storage_service.dart' as _i497;
 import 'package:marketmind/core/network/interceptor.dart' as _i1025;
 import 'package:marketmind/core/network/network_service.dart' as _i1056;
+import 'package:marketmind/features/authentication/data/repositories/auth_repository.dart'
+    as _i553;
+import 'package:marketmind/features/authentication/data/service/auth_service.dart'
+    as _i668;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -33,6 +37,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1025.NetworkInterceptor(gh<_i497.SecureStorageService>()));
     gh.lazySingleton<_i361.Dio>(
         () => networkModule.dio(gh<_i1025.NetworkInterceptor>()));
+    gh.lazySingleton<_i668.AuthService>(
+        () => networkModule.apiService(gh<_i361.Dio>()));
+    gh.lazySingleton<_i553.AuthRepository>(
+        () => _i553.AuthRepository(gh<_i668.AuthService>()));
     return this;
   }
 }

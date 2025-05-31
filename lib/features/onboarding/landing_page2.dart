@@ -1,6 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/authentication/screens/create_account.dart';
-import 'package:marketmind/features/authentication/screens/login_screen.dart';
+import 'package:marketmind/features/authentication/presentation/screens/login_screen.dart';
 import 'package:marketmind/features/onboarding/components/landing_pageview_component.dart';
 import 'package:marketmind/features/onboarding/onboarding_screen1.dart';
 

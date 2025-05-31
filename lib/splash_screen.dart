@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/authentication/components/continue_with.dart';
-import 'package:marketmind/features/authentication/components/social_button.dart';
 import 'package:marketmind/features/onboarding/components/onboarding_text_caption_component.dart';
 import 'package:marketmind/features/onboarding/components/selectable_component.dart';
+
+import 'features/authentication/presentation/components/continue_with.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -58,15 +58,6 @@ class _SplashScreenState extends State<SplashScreen> {
                    hint: 'Enter full name',
                  ),
                  20.verticalSpace,
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   crossAxisAlignment: CrossAxisAlignment.center,
-                   children: [
-                     SignInOption.google(onPress: () {}),
-                     10.horizontalSpace,
-                     SignInOption.apple(onPress: () {}),
-                   ],
-                 ),
                  10.verticalSpace,
                  ContinueWith(),
                  20.verticalSpace,
