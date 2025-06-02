@@ -4,6 +4,9 @@ import 'package:marketmind/core/export/export.core.dart';
 
 import '../component/custom_app_bar.dart';
 import '../home/components/home_app_bar_action_icon.dart';
+import '_components/course_item_component.dart';
+import '_components/learning_progress_component.dart';
+import '_components/upgrade_learning_component.dart';
 
 class LearningRoot extends StatefulWidget {
   const LearningRoot({super.key});
@@ -129,6 +132,13 @@ class _LearningRootState extends State<LearningRoot>
                           style: context.textTheme.bodyMedium
                               ?.copyWith(color: AppColors.white),
                         ),
+                        20.verticalSpace,
+
+                        UpgradeLearningComponent(),
+                        20.verticalSpace,
+                        CourseItemComponent(),
+                        20.verticalSpace,
+                        LearningProgressComponent(),
                         20.verticalSpace,
                         _container(
                             child: Column(

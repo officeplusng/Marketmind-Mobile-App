@@ -49,6 +49,7 @@ class Assets {
   static final personalizedTrading = 'personalized_trading'.png;
   static final performingAnalysis = 'performing_analysis'.png;
   static final completeTradingProfile = 'complete_trading_profile'.png;
+  static final learningThumbNail = 'learning_thumbnail'.png;
   static final illustration31 = 'illustration31'.png;
   static final homeBackground1 = 'data_list1'.png;
   static final homeBackground2 = 'data_list2'.png;

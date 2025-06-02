@@ -54,7 +54,7 @@ class HomeInfoCard extends StatelessWidget {
                     color: subtitleColor ?? AppColors.defaultSubtitleHomeColor),
               ),
               20.verticalSpace,
-              buttonInfo(context, onClick: onClick)
+              buttonInfo(context,buttonText,buttonIcon, onClick: onClick)
             ],
           ),
         ),
@@ -62,32 +62,33 @@ class HomeInfoCard extends StatelessWidget {
     );
   }
 
-  Widget buttonInfo(BuildContext context, {VoidCallback? onClick}) {
-    return InkWell(
-      onTap: onClick,
-      radius: 999,
-      child: Container(
-        height: 32,
-        constraints: const BoxConstraints(minWidth: 100),
-        decoration: ShapeDecoration(
-            color: AppColors.white,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(999))),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            15.horizontalSpace,
-            Text(
-              buttonText,
-              style: context.textTheme.bodyMedium?.copyWith(
-                  color: Colors.black, fontWeight: FontWeight.w600,fontSize: 14.5),
-            ),
-            10.horizontalSpace,
-            buttonIcon,
-            15.horizontalSpace,
-          ],
-        ),
+}
+
+Widget buttonInfo(BuildContext context,String buttonText,Widget buttonIcon, {VoidCallback? onClick}) {
+  return InkWell(
+    onTap: onClick,
+    radius: 999,
+    child: Container(
+      height: 32,
+      constraints: const BoxConstraints(minWidth: 100),
+      decoration: ShapeDecoration(
+          color: AppColors.white,
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(999))),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          15.horizontalSpace,
+          Text(
+            buttonText,
+            style: context.textTheme.bodyMedium?.copyWith(
+                color: Colors.black, fontWeight: FontWeight.w600,fontSize: 14.5),
+          ),
+          10.horizontalSpace,
+          buttonIcon,
+          15.horizontalSpace,
+        ],
       ),
-    );
-  }
+    ),
+  );
 }

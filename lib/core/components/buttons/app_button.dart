@@ -86,6 +86,8 @@ class PrimaryButton extends StatelessWidget {
     Widget? child,
     Widget? iconEnd,
     double? height,
+    double? width,
+    bool? useWidth,
     VoidCallback? onPressed,
     bool enabled=true,
   }) =>
@@ -93,6 +95,7 @@ class PrimaryButton extends StatelessWidget {
         color: enabled?AppColors.blue:AppColors.disabledButtonColor,
         textColor: AppColors.white,
         height: height,
+        width: width,
         iconStart: icon,
         removeBorder: true,
         onPressed: onPressed,
