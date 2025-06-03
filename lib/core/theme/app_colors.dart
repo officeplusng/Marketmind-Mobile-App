@@ -8,6 +8,7 @@ class AppColors{
   static const Color white = Color(0xFFFFFFFF);
   static Color primary = const Color(0xFF315BF3); //#315BF3
   static const primaryLight =  Color(0xFF233FAD);
+  static const primaryDark =  Color(0xFF2D53DD);
   static Color red = Color(0xFFD32F2F); //#D32F2F
   static Color greenLight = Color(0xFFD4FFF0);
   static Color green = Color(0xFF08D88D); //#34C240
@@ -15,7 +16,10 @@ class AppColors{
   static Color gray2 = Color(0xFF4F3FF);
   static Color onlineGreen = Color(0xFF22BB33);
   static Color purpleLight = Color(0xFF7A5AF8);
+  static Color purpleDark = Color(0xFF4A1FB8);
   static Color coolGray = Color(0xFF0E101B);
+  static Color purpleTransparent = Color(0xFFEBE9FE);
+
   static Color grayDark = Color(0xFFD9D9D9);
   static Color blue = Color(0xFF1752D9);
   static Color disabledButtonColor = Color(0xFFA0B5F9);

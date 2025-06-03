@@ -1,8 +1,9 @@
 import 'package:marketmind/core/export/export.core.dart';
 
 class CourseItemComponent extends StatelessWidget {
-  const CourseItemComponent({super.key});
+  const CourseItemComponent({super.key, this.buttonText});
 
+  final String? buttonText;
   @override
   Widget build(BuildContext context) {
     return WrapperContainer.rectangular(
@@ -34,6 +35,21 @@ class CourseItemComponent extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                      decoration: ShapeDecoration(
+                          color: AppColors.purpleTransparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100))),
+                      child: Center(
+                        child: Text(
+                          'TRADING MASTERY',
+                          style: context.textTheme.bodySmall
+                              ?.copyWith(color: AppColors.purpleDark),
+                        ),
+                      ),
+                    ),
+                    10.verticalSpace,
                     Text(
                       'Intermediate Forex Trading',
                       maxLines: 1,
@@ -56,17 +72,17 @@ class CourseItemComponent extends StatelessWidget {
             20.verticalSpace,
             Container(
               height: 36,
-              padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 14),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
               decoration: ShapeDecoration(
-                  color:  AppColors.primary,
-                  shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(999))),
+                  color: AppColors.primary,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(999))),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Continue Course',
+                    buttonText??'Continue Course',
                     style: context.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold, color: AppColors.white),
                   ),
