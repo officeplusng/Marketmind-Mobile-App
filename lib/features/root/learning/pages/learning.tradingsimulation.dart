@@ -35,7 +35,23 @@ class _LearningTradingSimulationState extends State<LearningTradingSimulation> {
               'Complete Your Forex Journey. Upgrade to access premium learning modules, advanced trading simulations, and personalized AI mentoring.',
         ),
         20.verticalSpace,
-        TradingSimulationComponent()
+        ...[
+
+          TradingSimulationComponent(
+            title: 'Live Price Action Trading',
+            description: 'Practice making real-time decisions based on current market conditions',
+            difficulty: 'Intermediate',
+          ),
+          TradingSimulationComponent(
+            title: 'Fundamental Analysis Challenge',
+            description: 'Learn to incorporate economic data and news events into your trading decisions',
+            difficulty: 'Advanced',),
+          TradingSimulationComponent(
+            title: 'Support & Resistance Trading',
+            lastScore: 'Last score: 82/100',
+            description: 'Apply technical analysis to identify key levels and execute trades',
+            difficulty: 'Intermediate',),
+        ],
       ],
     ));
   }

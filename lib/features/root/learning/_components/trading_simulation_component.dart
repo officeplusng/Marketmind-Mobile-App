@@ -1,7 +1,18 @@
 import 'package:marketmind/core/export/export.core.dart';
 
+
 class TradingSimulationComponent extends StatelessWidget {
-  const TradingSimulationComponent({super.key});
+  const TradingSimulationComponent(
+      {super.key,
+      this.lastScore,
+      required this.title,
+      required this.description,
+      required this.difficulty});
+
+  final String? lastScore;
+  final String title;
+  final String description;
+  final String difficulty;
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +36,12 @@ class TradingSimulationComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Live Price Action Trading',
+                title,
                   style: context.textTheme.titleSmall,
                 ),
                 10.verticalSpace,
                 Text(
-                  'Practice making real-time decisions based on current market conditions',
+                description,
                   style: context.textTheme.bodySmall
                       ?.copyWith(color: AppColors.textGray1),
                 )
@@ -60,7 +71,7 @@ class TradingSimulationComponent extends StatelessWidget {
                             bodyMedium2?.copyWith(fontWeight: FontWeight.w500),
                         children: [
                           TextSpan(
-                              text: 'Advanced',
+                              text: difficulty,
                               style: bodyMedium2?.copyWith(
                                   color: AppColors.textGray1))
                         ])),
@@ -83,9 +94,11 @@ class TradingSimulationComponent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Not attempted yet',
-                      style: context.textTheme.bodyMedium
-                          ?.copyWith(color: AppColors.textGray1),
+                      lastScore ?? 'Not attempted yet',
+                      style: context.textTheme.bodyMedium?.copyWith(
+                          color: lastScore != null
+                              ? AppColors.primaryDark
+                              : AppColors.textGray1),
                     ),
                     InkWell(
                       onTap: () {},
