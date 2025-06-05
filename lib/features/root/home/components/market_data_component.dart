@@ -15,7 +15,6 @@ class MarketDataComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       margin: EdgeInsets.only(right: 10),
       constraints: const BoxConstraints(
         minWidth: 150
@@ -27,6 +26,7 @@ class MarketDataComponent extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             currencyPair,
@@ -47,7 +47,6 @@ class MarketDataComponent extends StatelessWidget {
   }
 
   Widget priceChange(BuildContext context) => Container(
-        height: 21.5,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: ShapeDecoration(
             color: percentageMovement < 0
