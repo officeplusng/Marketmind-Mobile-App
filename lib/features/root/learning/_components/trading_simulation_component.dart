@@ -1,4 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/learning/pages/trading/trading_simulation.dart';
 
 
 class TradingSimulationComponent extends StatelessWidget {
@@ -101,7 +102,9 @@ class TradingSimulationComponent extends StatelessWidget {
                               : AppColors.textGray1),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.push(TradingSimulationScreen());
+                      },
                       child: Container(
                         height: 36,
                         padding: const EdgeInsets.symmetric(
