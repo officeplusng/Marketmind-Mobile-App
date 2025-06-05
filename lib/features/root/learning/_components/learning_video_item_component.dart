@@ -24,7 +24,6 @@ class LearningVideoItemComponent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(6),
       width: 252,
-
       margin: EdgeInsets.only(right: 10),
       decoration: ShapeDecoration(
           color: AppColors.white, shape: roundedRectangleBorder),
@@ -35,12 +34,17 @@ class LearningVideoItemComponent extends StatelessWidget {
           Container(
             width: 240,
             decoration: ShapeDecoration(
-                image:
-                    const DecorationImage(image: NetworkImage(url), fit: BoxFit.fill),
+                image: const DecorationImage(
+                    image: NetworkImage(url), fit: BoxFit.fill),
                 shape: roundedRectangleBorder),
             height: 130,
             child: Center(
-              child: Icon(Icons.play_arrow),
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: ShapeDecoration(
+                    shape: CircleBorder(), color: AppColors.grayDark),
+                child: Icon(Icons.play_arrow),
+              ),
             ),
           ),
           10.verticalSpace,

@@ -108,12 +108,13 @@ class PrimaryButton extends StatelessWidget {
     Widget? child,
     double? height,
     Widget? iconEnd,
+    Color? color,
     double? width,
     Widget? icon,
     VoidCallback? onPressed,
   }) =>
       PrimaryButton(
-        color: AppColors.black,
+        color: color??AppColors.black,
         textColor: AppColors.white,
         height: height ?? Dimens.buttonHeightMin,
         removeBorder: true,
