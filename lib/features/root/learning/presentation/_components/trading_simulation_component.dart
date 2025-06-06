@@ -1,6 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/root/learning/pages/trading/trading_simulation.dart';
-
+import 'package:marketmind/features/root/learning/presentation/pages/trading/trading_simulation.dart';
 
 class TradingSimulationComponent extends StatelessWidget {
   const TradingSimulationComponent(

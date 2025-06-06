@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/root/root.dart';
+import 'package:marketmind/features/root/learning/root.dart';
 import 'package:marketmind/splash_screen.dart';
 
 import 'bootstrap.dart';

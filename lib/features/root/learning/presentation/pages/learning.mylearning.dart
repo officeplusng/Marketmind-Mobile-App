@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/root/learning/_components/learning_video_item_component.dart';
 
 import '../_components/course_item_component.dart';
+import '../_components/learning_video_item_component.dart';
 import '../_components/recommended_course.dart';
 
 class MyLearningScreen extends StatefulWidget {

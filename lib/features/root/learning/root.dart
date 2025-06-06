@@ -2,7 +2,7 @@ import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/app_bottom_nav.dart';
 import 'package:marketmind/features/root/home/home.root.dart';
-import 'package:marketmind/features/root/learning/learning.root.dart';
+import 'package:marketmind/features/root/learning/presentation/learning.root.dart';
 import 'package:marketmind/features/root/marketAnalysis/market_analysis.root.dart';
 
 class RootScreen extends StatefulWidget {

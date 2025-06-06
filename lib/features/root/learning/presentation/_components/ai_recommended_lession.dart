@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
-import '../../../../core/components/round_container.dart';
-
 class AiRecommendedLesson extends StatelessWidget {
   const AiRecommendedLesson({super.key});
 

@@ -1,7 +1,7 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/onboarding/components/onboarding_text_caption_component.dart';
 
-import '../root/root.dart';
+import '../root/learning/root.dart';
 
 class OnboardingCompletedScreen extends StatefulWidget {
   const OnboardingCompletedScreen({super.key});
