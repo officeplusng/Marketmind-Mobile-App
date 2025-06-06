@@ -18,6 +18,7 @@ class AppColors{
   static Color gray3 = Color(0xFFF5F8FF);
   static Color gray4 = Color(0xFFEAECF0);
   static Color onlineGreen = Color(0xFF22BB33);
+  static Color buttonGreen = Color(0xFF17B26A);
   static Color purpleLight = Color(0xFF7A5AF8);
   static Color purpleDark = Color(0xFF4A1FB8);
   static Color coolGray = Color(0xFF0E101B);

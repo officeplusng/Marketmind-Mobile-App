@@ -1,10 +1,11 @@
-
 import 'package:marketmind/core/export/export.core.dart';
+
 class BaseModalParent extends StatelessWidget {
   const BaseModalParent(
       {super.key,
       required this.child,
       this.height,
+      this.verticalPadding,
       this.horizontalPadding,
       this.header,
       this.verticalMargin});
@@ -13,11 +14,12 @@ class BaseModalParent extends StatelessWidget {
   final double? height;
   final double? horizontalPadding;
   final double? verticalMargin;
+  final double? verticalPadding;
   final Widget? header;
 
   factory BaseModalParent.withDefaultHeader(
       {required String title,
-       String closeButtonText = 'Close',
+      String closeButtonText = 'Close',
       void Function(BuildContext)? onClickCloseButton,
       required Widget child}) {
     return BaseModalParent(
@@ -31,10 +33,10 @@ class BaseModalParent extends StatelessWidget {
   }
 
   factory BaseModalParent.withCustomHeader(
-      { Widget? startIcon,
+      {Widget? startIcon,
       void Function(BuildContext)? onClickCloseButton,
-       Widget? centerIcon,
-       Widget? endIcon,
+      Widget? centerIcon,
+      Widget? endIcon,
       required Widget child}) {
     return BaseModalParent(
         verticalMargin: 60,
@@ -62,20 +64,35 @@ class BaseModalParent extends StatelessWidget {
         maxHeight: 600,
       ),
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding ?? 15, vertical: verticalPadding ?? 10),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            10.verticalSpace,
             if (header != null) ...[
+              10.verticalSpace,
               header!,
               20.verticalSpace,
             ],
             child
           ],
         ),
+      ),
+    );
+  }
+
+  static Widget modalPin() {
+    return Center(
+      child: Container(
+        margin: EdgeInsets.only(bottom: 20),
+        height: 4,
+        width: 75,
+        decoration: ShapeDecoration(
+            color: Color(0XFFD0D5DD),
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
       ),
     );
   }

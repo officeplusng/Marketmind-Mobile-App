@@ -3,6 +3,8 @@ import 'package:marketmind/features/root/component/custom_app_bar.dart';
 import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
 import 'package:marketmind/features/root/learning/presentation/_components/ai_trading_feedback.dart';
 import 'package:marketmind/features/root/learning/presentation/_components/expandable_info_component.dart';
+import 'package:marketmind/features/root/learning/presentation/_components/trading_news_component.dart';
+import 'package:marketmind/features/root/learning/presentation/pages/trading/tabs/chart_tab.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/trading/trade_execution_screen.dart';
 
 import '../../_components/opened_position_component.dart';
@@ -28,6 +30,7 @@ class _TradingSimulationScreenState extends State<TradingSimulationScreen>
     super.initState();
   }
 
+  int _currentTab = 0;
   @override
   Widget build(BuildContext context) {
     var copyWith =
@@ -123,6 +126,11 @@ class _TradingSimulationScreenState extends State<TradingSimulationScreen>
             dividerColor: AppColors.transparent,
             unselectedLabelColor: AppColors.textGray1,
             labelColor: const Color(0xFF315BF3),
+            onTap: (value){
+              setState(() {
+                _currentTab=value;
+              });
+            },
             isScrollable: false,
             tabAlignment: TabAlignment.fill,
             labelStyle: context.textTheme.bodyMedium
@@ -136,30 +144,11 @@ class _TradingSimulationScreenState extends State<TradingSimulationScreen>
             }),
           ),
           20.verticalSpace,
-          ExpandableInfoComponent(
-              child: AiTradingFeedback(), title: 'AI Commentary'),
-          5.verticalSpace,
-          ExpandableInfoComponent(
-              child: OpenedPosition(), title: 'Opened Positions'),
-          5.verticalSpace,
-          ExpandableInfoComponent(
-              child: TradeStatistics(), title: 'Trade Statistics',divide: false,),
-          50.verticalSpace,
-          PrimaryButton.primary(
-            height: 44,
-            icon: SvgPicture.asset(Assets.rotate),
-            text: 'Complete & View Results',
-          ),
-          10.verticalSpace,
-          Text(
-            'Goal: Apply support & resistance trading strategies in the current market scenario',
-            style: context.textTheme.bodySmall
-                ?.copyWith(color: AppColors.textGray1),
-            textAlign: TextAlign.center,
-          ),
-          50.verticalSpace,
+        _currentTab==0?ChartTab():TradingNewsItems()
         ],
       ),
     )));
   }
+
+
 }

@@ -88,12 +88,14 @@ class PrimaryButton extends StatelessWidget {
     double? height,
     double? width,
     bool? useWidth,
+    Color? textColor,
+    Color? color,
     VoidCallback? onPressed,
     bool enabled=true,
   }) =>
       PrimaryButton(
-        color: enabled?AppColors.blue:AppColors.disabledButtonColor,
-        textColor: AppColors.white,
+        color:color?? (enabled?AppColors.blue:AppColors.disabledButtonColor),
+        textColor:textColor?? AppColors.white,
         height: height,
         width: width,
         iconStart: icon,
