@@ -22,6 +22,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   google_sign_in: ^6.3.0
   sign_in_with_apple: ^7.0.1
+
   pie_chart: ^5.4.0
   google_fonts: ^6.2.1
   iconsax_flutter: ^1.0.0

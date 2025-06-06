@@ -38,7 +38,6 @@ class AppTheme {
       ),
       bodySmall: _textStyle(
         fontSize: 12,
-        letterSpacing: .4,
       ),
     ),
     fontFamily: GoogleFonts.interTight().fontFamily,

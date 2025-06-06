@@ -4,6 +4,7 @@ class AppColors{
 
   static Color black =Color(0xFF242424);
   static Color containerBackground1 =Color(0xFFBFCDFB);
+  static Color containerBackground2 =Color(0xFFEAEDFE);
   static Color socialGray =Color(0xFF30374F);
   static const Color white = Color(0xFFFFFFFF);
   static Color primary = const Color(0xFF315BF3); //#315BF3
@@ -14,6 +15,8 @@ class AppColors{
   static Color green = Color(0xFF08D88D); //#34C240
   static Color greenDark = Color(0xFF34C240);
   static Color gray2 = Color(0xFF4F3FF);
+  static Color gray3 = Color(0xFFF5F8FF);
+  static Color gray4 = Color(0xFFEAECF0);
   static Color onlineGreen = Color(0xFF22BB33);
   static Color purpleLight = Color(0xFF7A5AF8);
   static Color purpleDark = Color(0xFF4A1FB8);
