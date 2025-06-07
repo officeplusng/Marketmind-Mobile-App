@@ -1,4 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/learning/presentation/pages/course_details_screen.dart';
 
 class CourseItemComponent extends StatelessWidget {
   const CourseItemComponent({super.key, this.buttonText});
@@ -9,6 +10,7 @@ class CourseItemComponent extends StatelessWidget {
     return WrapperContainer.rectangular(
         width: double.infinity,
         useHeight: false,
+
         backgroundColor: AppColors.white,
         bordered: true,
         borderColor: AppColors.secondaryCardBorder,
@@ -70,28 +72,33 @@ class CourseItemComponent extends StatelessWidget {
               ],
             ),
             20.verticalSpace,
-            Container(
-              height: 36,
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-              decoration: ShapeDecoration(
-                  color: AppColors.primary,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(999))),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    buttonText??'Continue Course',
-                    style: context.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold, color: AppColors.white),
-                  ),
-                  5.horizontalSpace,
-                  const Icon(
-                    Icons.keyboard_arrow_right,
-                    color: AppColors.white,
-                  )
-                ],
+            InkWell(
+              onTap: (){
+                context.push(const CourseDetailsScreen());
+              },
+              child: Container(
+                height: 36,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+                decoration: ShapeDecoration(
+                    color: AppColors.primary,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(999))),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      buttonText??'Continue Course',
+                      style: context.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold, color: AppColors.white),
+                    ),
+                    5.horizontalSpace,
+                    const Icon(
+                      Icons.keyboard_arrow_right,
+                      color: AppColors.white,
+                    )
+                  ],
+                ),
               ),
             ),
           ],

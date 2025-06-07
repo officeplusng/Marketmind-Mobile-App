@@ -17,6 +17,13 @@ class Assets {
   static final filterList = 'filter_list'.svg;
   static final google = 'google'.svg;
   static final close = 'close'.svg;
+  static final caption = 'caption'.svg;
+  static final maximize = 'maximize-02'.svg;
+  static final iphone = 'iphone'.svg;
+  static final video = 'video'.svg;
+  static final document = 'document'.svg;
+  static final downloadDocument = 'download_document'.svg;
+  static final crest = 'crest'.svg;
   static final plus = 'plus'.svg;
   static final apple = 'apple'.svg;
   static final face = 'face'.svg;

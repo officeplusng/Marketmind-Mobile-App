@@ -49,6 +49,7 @@ class _MyLearningScreenState extends State<MyLearningScreen> {
                  timeRemaining: '17:43 remaining'),
              LearningVideoItemComponent(
                  thumbnail: 'thumbnail',
+
                  title: 'Technical Analysis: Support & Resistance',
                  timeRemaining: '17:43 remaining'),
            ],
