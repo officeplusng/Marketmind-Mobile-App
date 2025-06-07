@@ -24,7 +24,7 @@ class _QuizProgressModalState extends State<QuizProgressModal> {
         horizontalPadding: 5,
         scrollable: false,
         verticalMargin: 10,
-        child: Column(
+        child: Expanded(child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             BaseModalParent.modalPin(),
@@ -42,7 +42,7 @@ class _QuizProgressModalState extends State<QuizProgressModal> {
                   ?.copyWith(color: AppColors.textGray1),
             ),
             20.verticalSpace,
-            ListView.builder(
+            Expanded(child: ListView.builder(
               shrinkWrap: true,
               itemCount: widget.quiz.length,
               itemBuilder: (context, index) {
@@ -53,7 +53,7 @@ class _QuizProgressModalState extends State<QuizProgressModal> {
                     answering: index == widget.currentIndex,
                     answered: widget.answered.containsKey(index));
               },
-            ),
+            )),
             20.verticalSpace,
             PrimaryButton.primary(
               onPressed: () {
@@ -63,7 +63,7 @@ class _QuizProgressModalState extends State<QuizProgressModal> {
             ),
             20.verticalSpace
           ],
-        ));
+        )));
   }
 
   Widget _questionItemComponent(
