@@ -155,7 +155,6 @@ class _AiChatScreenState extends State<AiChatScreen> {
 
   Widget _header(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         HomeAppBarActionIcon(
           onClick: () {
@@ -166,13 +165,17 @@ class _AiChatScreenState extends State<AiChatScreen> {
             size: 18,
           ),
         ),
-        Text(
-          'New Conversation',
+        20.horizontalSpace,
+        Expanded(child: Text(
+          'A long title is always truncated, rest assured',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: context.textTheme.titleSmall?.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: AppColors.textBlack),
-        ),
+        )),
+        20.horizontalSpace,
         HomeAppBarActionIcon(
           onClick: () {
             ModalHelper.showModalMax(context, ChatOptionModal());

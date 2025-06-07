@@ -1,4 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/learning/presentation/pages/quiz_screen.dart';
 
 enum QuizStatus { done, pending, locked }
 
@@ -151,6 +152,9 @@ class QuizItemComponent extends StatelessWidget {
         useHeight: false,
         borderColor: getBorder(),
         borderRadius: 12,
+        onClick: (){
+          context.push(QuizScreen());
+        },
         backgroundColor: getColor(),
         padding: const EdgeInsets.all(16),
         child: Column(
