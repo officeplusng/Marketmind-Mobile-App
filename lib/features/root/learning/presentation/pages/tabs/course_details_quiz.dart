@@ -54,15 +54,37 @@ class CourseDetailsQuiz extends StatefulWidget {
 class _CourseDetailsQuizState extends State<CourseDetailsQuiz> {
   @override
   Widget build(BuildContext context) {
+    var copyWith = context.textTheme.bodyMedium?.copyWith(color: AppColors.primary);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         20.verticalSpace,
-        Text(
-          'Frequently Asked Questions',
-          style: context.textTheme.titleMedium
-              ?.copyWith(color: AppColors.textBlack),
-        ),
+       Row(
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+         children: [
+           Text(
+             'Quiz (12)',
+             style: context.textTheme.titleMedium
+                 ?.copyWith(color: AppColors.textBlack),
+           ),
+           WrapperContainer.rectangular(
+             useHeight: false,
+               useWidth: false,
+               borderRadius: 100,
+               padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+               backgroundColor:const Color(0XFFEAEDFE) ,
+               child: Row(
+
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                   Text('4 Completed ',style: copyWith),
+                   Text('\t\t|\t\t',style: copyWith,),
+                   Text('8 Remaining',style: copyWith),
+                 ],
+               ))
+
+         ],
+       ),
         20.verticalSpace,
         ListView.separated(
             shrinkWrap: true,
