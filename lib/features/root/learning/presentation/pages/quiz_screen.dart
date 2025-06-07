@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/learning/domain/entity/quiz_entity.dart';
-
-import '../../../home/components/home_app_bar_action_icon.dart';
+import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
+import 'package:marketmind/features/root/learning/presentation/modals/quiz_progress_modal.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -14,7 +13,7 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   int _currentQuestionIndex = 0;
 
-  Map<int, int> _selectedOptions = {};
+  final Map<int, int> _selectedOptions = {};
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +208,15 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             20.horizontalSpace,
             HomeAppBarActionIcon(
-              onClick: () {},
+              onClick: () {
+                ModalHelper.showModalMax(
+                    context,
+                    QuizProgressModal(
+                      quiz: QuizEntity.forexQuizQuestions,
+                      currentIndex: _currentQuestionIndex,
+                      answered: _selectedOptions,
+                    ));
+              },
               child: const Icon(
                 Icons.menu,
                 size: 18,

@@ -20,6 +20,10 @@ class Assets {
   static final caption = 'caption'.svg;
   static final quizLock = 'quiz_lock'.svg;
   static final quizPending = 'quiz_pending'.svg;
+  static final quizDocument = 'quiz_document'.svg;
+  static final rectangleVertical = 'rectangle_vertical'.svg;
+  static final lock01 = 'lock-01'.svg;
+  static final checkboxCircle = 'checkbox-circle'.svg;
   static final quizDone = 'quiz_done'.svg;
   static final maximize = 'maximize-02'.svg;
   static final mic = 'mic-line'.svg;

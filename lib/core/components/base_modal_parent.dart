@@ -8,11 +8,13 @@ class BaseModalParent extends StatelessWidget {
       this.verticalPadding,
       this.horizontalPadding,
       this.header,
+        this.scrollable=true,
       this.verticalMargin});
 
   final Widget child;
   final double? height;
   final double? horizontalPadding;
+  final bool scrollable;
   final double? verticalMargin;
   final double? verticalPadding;
   final Widget? header;
@@ -66,7 +68,7 @@ class BaseModalParent extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding ?? 15, vertical: verticalPadding ?? 10),
-      child: SingleChildScrollView(
+      child:scrollable? SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -79,6 +81,17 @@ class BaseModalParent extends StatelessWidget {
             child
           ],
         ),
+      ):Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (header != null) ...[
+            10.verticalSpace,
+            header!,
+            20.verticalSpace,
+          ],
+          child
+        ],
       ),
     );
   }
