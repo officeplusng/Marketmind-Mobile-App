@@ -54,7 +54,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>   with Single
                children: [
                  buildRow(icon: Icons.play_circle_outline, text: '36 lessons'),
                  buildRow(icon: Icons.access_time_outlined, text: '4h 30min'),
-                 buildRow(icon: Iconsax.document, text: '12 Assignments'),
+                 buildRow(icon: Iconsax.document_1_copy, text: '12 Assignments'),
                ],
              ),
              20.verticalSpace,
@@ -99,10 +99,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>   with Single
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(
-          Icons.play_circle_outline,
+        Icon(icon,
           color: AppColors.primary,
-          size: 13,
+          size: 16,
         ),
         5.horizontalSpace,
         Text(

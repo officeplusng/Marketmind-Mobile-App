@@ -22,7 +22,15 @@ class Assets {
   static final quizPending = 'quiz_pending'.svg;
   static final quizDone = 'quiz_done'.svg;
   static final maximize = 'maximize-02'.svg;
+  static final mic = 'mic-line'.svg;
+  static final send = 'send-01'.svg;
   static final iphone = 'iphone'.svg;
+  static final globe1 = 'globe'.svg;
+  static final share = 'share'.svg;
+  static final rename = 'rename'.svg;
+  static final trash = 'trash'.svg;
+  static final favorite = 'favorite'.svg;
+  static final clearConversation = 'clear_conversation'.svg;
   static final video = 'video'.svg;
   static final document = 'document'.svg;
   static final downloadDocument = 'download_document'.svg;
@@ -69,6 +77,7 @@ class Assets {
   static final homeBackground2 = 'data_list2'.png;
   static final bgGradient = 'bg_Gradient'.png;
   static final loadingState = 'loading_state'.png;
+  static final aiChatIcon = 'ai_icon'.png;
   static final homeGradient = 'home_gradient'.png;
   static final aiPremium = 'ai_premium_banner'.png;
   static final referralIllustration = 'illustration'.png;

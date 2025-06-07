@@ -65,6 +65,9 @@ class ConfirmTradeModal extends StatelessWidget {
               children: [
                 Expanded(
                     child: PrimaryButton.outlined(
+                      onPressed: (){
+                        context.pop();}
+                      ,
                   text: 'Cancel',
                 )),
                 20.horizontalSpace,
@@ -73,8 +76,7 @@ class ConfirmTradeModal extends StatelessWidget {
                   text: 'Confirm & Execute',
                   color: AppColors.buttonGreen,
                   onPressed: () {
-                    ModalHelper.showModalMax(
-                        context, const ConfirmTradeModal());
+                    context.pop();
                   },
                 ))
               ],

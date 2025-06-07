@@ -32,7 +32,7 @@ class AppTheme {
       titleSmall: _textStyle(fontSize: 16, fontWeight: FontWeight.w500),
       headlineMedium: _textStyle(fontSize: 30, fontWeight: FontWeight.w600),
       headlineLarge: _textStyle(fontSize: 42, fontWeight: FontWeight.w700),
-      headlineSmall: _textStyle(fontSize: 24),
+      headlineSmall: _textStyle(fontSize: 24,fontWeight: FontWeight.bold),
       bodyLarge: _textStyle(
         fontSize: 18,
       ),

@@ -24,7 +24,7 @@ class LearningVideoItemComponent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(6),
       width: 252,
-      margin: EdgeInsets.only(right: 10),
+      margin: const EdgeInsets.only(right: 10),
       decoration: ShapeDecoration(
           color: AppColors.white, shape: roundedRectangleBorder),
       child: Column(
