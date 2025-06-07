@@ -1,7 +1,6 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/learning/presentation/_components/tp_sl_configuration.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/video_player_screen.dart';
-import 'package:marketmind/features/root/learning/presentation/video_player_screen.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPreviewComponent extends StatefulWidget {

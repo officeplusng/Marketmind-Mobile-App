@@ -18,6 +18,9 @@ class Assets {
   static final google = 'google'.svg;
   static final close = 'close'.svg;
   static final caption = 'caption'.svg;
+  static final quizLock = 'quiz_lock'.svg;
+  static final quizPending = 'quiz_pending'.svg;
+  static final quizDone = 'quiz_done'.svg;
   static final maximize = 'maximize-02'.svg;
   static final iphone = 'iphone'.svg;
   static final video = 'video'.svg;

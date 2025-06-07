@@ -62,7 +62,6 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>   with Single
              TabBar(
                controller: _tabController,
                indicatorColor: AppColors.primary,
-               dividerColor: AppColors.transparent,
                unselectedLabelColor: AppColors.textGray1,
                labelColor: const Color(0xFF315BF3),
                onTap: (value){
