@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/learning/root.dart';
 import 'package:marketmind/splash_screen.dart';
 
 import 'bootstrap.dart';
+import 'features/onboarding/landing_page1.dart';
 
 void main() {
   configureDependencies();
@@ -21,10 +23,10 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(390, 844),
         child: MaterialApp(
-            title: 'Sainte',
+            title: '',
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.light,
             theme: AppTheme.light,
-            home: const SplashScreen()));
+            home: const RootScreen()));
   }
 }

@@ -11,7 +11,7 @@ class AppLogo extends StatelessWidget {
   final String assetName;
 
   factory AppLogo.dark() {
-    return AppLogo(assetName: Assets.logoDark.svg);
+    return AppLogo(assetName: Assets.appLogo.svg);
   }
   factory AppLogo.light() {
     return AppLogo(assetName: Assets.logoWhite.svg);

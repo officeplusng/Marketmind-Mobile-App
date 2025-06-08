@@ -1,0 +1,1 @@
+const apiBaseUrl = 'https://marketmind-ezjx.onrender.com/';

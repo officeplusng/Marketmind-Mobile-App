@@ -15,6 +15,7 @@ class PasswordInputField extends StatefulWidget {
       this.validator,
       this.confirmed = false,
       this.error,
+        this.label,
       this.length = 4});
 
   final String hint;
@@ -22,6 +23,7 @@ class PasswordInputField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final int length;
+  final String? label;
   final String? error;
   final bool confirmed;
 
@@ -38,24 +40,22 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        InputField(
+        InputField.filled(
           hint: widget.hint,
+          label:widget.label??'Password' ,
           controller: widget.controller,
           useFocusBorder: widget.confirmed,
           onChange: widget.onChange,
           fontWeight: FontWeight.bold,
-          textColor: AppColors.primary,
-          keyboardType: TextInputType.number,
-          letterSpacing: 12,
+          keyboardType: TextInputType.text,
+          letterSpacing: 2,
           useErrorBorder: widget.error != null,
-          inputFormatters: [LengthLimitingTextInputFormatter(widget.length)],
           validator: widget.validator ?? InputValidators.required,
           maxLines: 1,
           obscureText: !showPassword,
           surfixIcon: IconButton(
               onPressed: () => setState(() => showPassword = !showPassword),
-              icon: SvgPicture.asset(
-                  showPassword ? Assets.eye : Assets.eyeSlash)),
+              icon: Icon(showPassword?Icons.visibility_outlined:Icons.visibility_off_outlined)),
         ),
         if (widget.error != null) ...[
           10.verticalSpace,
