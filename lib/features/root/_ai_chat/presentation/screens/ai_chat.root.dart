@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/_ai_chat/presentation/modal/chat_option_modal.dart';
 import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
-
-import '../../../learning/presentation/_components/input_field2.dart';
+import 'package:marketmind/features/root/learning/presentation/_components/input_field2.dart';
 
 class AiChatScreen extends StatefulWidget {
   const AiChatScreen({super.key});
