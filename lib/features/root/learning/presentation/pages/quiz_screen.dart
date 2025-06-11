@@ -2,6 +2,8 @@ import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/learning/domain/entity/quiz_entity.dart';
 import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
 import 'package:marketmind/features/root/learning/presentation/modals/quiz_progress_modal.dart';
+import 'package:marketmind/features/root/learning/presentation/pages/quiz_complete_screen.dart';
+import 'package:marketmind/features/root/learning/presentation/pages/quiz_result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -84,6 +86,8 @@ class _QuizScreenState extends State<QuizScreen> {
                   setState(() {
                     _currentQuestionIndex++;
                   });
+                }else{
+                  context.push(QuizCompleteScreen());
                 }
               },
               text: 'Next',

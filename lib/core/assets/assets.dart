@@ -24,6 +24,8 @@ class Assets {
   static final rectangleVertical = 'rectangle_vertical'.svg;
   static final lock01 = 'lock-01'.svg;
   static final checkboxCircle = 'checkbox-circle'.svg;
+  static final download01 = 'download-01'.svg;
+  static final share07 = 'share-07'.svg;
   static final quizDone = 'quiz_done'.svg;
   static final maximize = 'maximize-02'.svg;
   static final mic = 'mic-line'.svg;
