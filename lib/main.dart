@@ -1,11 +1,13 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/learning/root.dart';
 import 'bootstrap.dart';
+import 'features/_shared/utils/providers.dart';
 
 void main() {
   configureDependencies();
   bootstrap(() {
-    return const MyApp();
+    return MultiBlocProvider(providers: providers, child: const MyApp());
   });
 }
 

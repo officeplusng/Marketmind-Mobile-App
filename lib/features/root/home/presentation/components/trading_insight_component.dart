@@ -1,22 +1,26 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart';
 
 class TradingInsightComponent extends StatelessWidget {
-  const TradingInsightComponent({super.key});
+  const TradingInsightComponent({super.key, required this.data});
+
+  final TradingInsightDto data;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minHeight: 160),
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
       decoration: ShapeDecoration(
-          color: const Color(0xFFECFDF3),
+          color: data.buy ? const Color(0xFFECFDF3) : const Color(0XFFFEF3F2),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
-              side: const BorderSide(color: Color(0xFFABEFC6)))),
+              side: BorderSide(
+                  color: data.buy ? Color(0xFFABEFC6) : Color(0XFFFECDCA)))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,18 +29,19 @@ class TradingInsightComponent extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'EUR/USD',
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold,color: Color(0xFF101828)),
+                    data.asset,
+                    style: context.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold, color: Color(0xFF101828)),
                   ),
                   10.horizontalSpace,
-                  priceChange(context, true, 87)
+                  priceChange(context, data.buy, data.confidence.toDouble())
                 ],
               ),
               Text(
-                'EUR/USD',
-                style: context.textTheme.bodyMedium
-                    ?.copyWith(fontWeight: FontWeight.bold,color: const Color(0xFF079455)),
+                '${data.signal} Signal',
+                style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: data.buy ? const Color(0xFF079455) : AppColors.red),
               ),
             ],
           ),
@@ -44,14 +49,18 @@ class TradingInsightComponent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _tradeParameter(context, title: 'Entry', value: '1.1050'),
-              _tradeParameter(context, title: 'Stop Loss', value: '0.9821'),
-              _tradeParameter(context, title: 'Take Profile', value: '2.1051'),
+              _tradeParameter(context,
+                  title: 'Entry', value: data.entryPrice?.toString() ?? ''),
+              _tradeParameter(context,
+                  title: 'Stop Loss', value: data.sl?.toString() ?? ''),
+              _tradeParameter(context,
+                  title: 'Take Profile', value: data.tp?.toString() ?? ''),
             ],
           ),
           10.verticalSpace,
           Text(
-            "Strong support at 1.1020 with increasing bullish momentum on 4H chart. Sentiment analysis of recent ECB statements shows 68% positive tone.",
+            data.info ?? '',
+            textAlign: TextAlign.start,
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontSize: 12, color: const Color(0xFF667085)),
           ),
@@ -79,11 +88,7 @@ class TradingInsightComponent extends StatelessWidget {
         ],
       );
 
-  Widget priceChange(
-      BuildContext context,
-      bool buy,
-      double confidence
-      ) =>
+  Widget priceChange(BuildContext context, bool buy, double confidence) =>
       Container(
         height: 21.5,
         padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -99,11 +104,11 @@ class TradingInsightComponent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '$confidence%',
+              '${data.confidence}% Confidence',
               style: context.textTheme.bodyMedium?.copyWith(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: buy?AppColors.textGreen:const Color(0xFF93370D)),
+                  color: buy ? AppColors.textGreen : const Color(0xFF93370D)),
             )
           ],
         ),

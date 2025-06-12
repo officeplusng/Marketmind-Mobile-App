@@ -1,6 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
+import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_cubit.dart';
+import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart';
+import 'package:marketmind/src/state_management/cubit_state.dart';
+
 import '../../../../core/export/export.core.dart';
 import 'components/home_app_bar_action_icon.dart';
 import 'components/trading_insight_component.dart';
+
+typedef TradingInsight = List<TradingInsightDto>;
 
 class AiTradingInsightScreen extends StatefulWidget {
   const AiTradingInsightScreen({super.key});
@@ -22,6 +30,8 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
   }
 
   int _currentTab = 0;
+  String category = '';
+  final categories = ['', 'forex', 'deriv', 'stock', 'crypto'];
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +41,7 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          20.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -47,10 +58,6 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   HomeAppBarActionIcon(asset: Assets.bellIcon),
-                  10.horizontalSpace,
-                  HomeAppBarActionIcon(
-                    asset: Assets.filterList,
-                  ),
                 ],
               )
             ],
@@ -66,7 +73,7 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
           Container(
             padding: EdgeInsets.symmetric(horizontal: 3),
             decoration: ShapeDecoration(
-              color: const Color(0xFFF9FAFB),
+                color: const Color(0xFFF9FAFB),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                     side: BorderSide(width: 1, color: Color(0xFFEAECF0)))),
@@ -78,12 +85,14 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
               labelColor: const Color(0xFF344054),
               isScrollable: true,
               tabAlignment: TabAlignment.start,
-              labelStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              labelStyle: context.textTheme.bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding: const EdgeInsets.symmetric(vertical: 5),
               onTap: (value) {
                 setState(() {
                   _currentTab = value;
+                  category = categories[value];
                 });
               },
               indicator: ShapeDecoration(
@@ -100,13 +109,31 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
             ),
           ),
           10.verticalSpace,
-          Expanded(
-              child: ListView.builder(
-                  itemCount: 15,
+          Expanded(child:
+              BlocBuilder<TradingInsightCubit, BaseState<TradingInsight>>(
+                  builder: (context, state) {
+            if (state is LoadingState<TradingInsight>) {
+              return const BaseShimmer(
+                height: 150,
+                radius: 16,
+              );
+            }
+            if (state is SuccessState<TradingInsight>) {
+              final data = (state.data ?? [])
+                  .where((e) => e.category?.contains(category) ?? true)
+                  .toList();
+              return ListView.builder(
+                  itemCount: data.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return TradingInsightComponent();
-                  }))
+                    final item = data[index];
+                    return TradingInsightComponent(
+                      data: item,
+                    );
+                  });
+            }
+            return SizedBox();
+          }))
         ],
       )),
     );

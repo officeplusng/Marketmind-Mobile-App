@@ -22,6 +22,7 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
     var data = 'Risk Analysis';
     const marketInsightText = "AI Market Insights";
     var bodyMedium = context.textTheme.bodyMedium;
+
     return BaseScaffold(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +95,7 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
               10.verticalSpace,
               MarketAnalysisTechnicalAnalysisComponent(),
               10.verticalSpace,
-              CandleChart(),
+               CandleChart(),
               10.verticalSpace,
               NewsComponents(),
               10.verticalSpace,

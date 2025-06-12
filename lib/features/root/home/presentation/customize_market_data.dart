@@ -1,8 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/onboarding/components/selectable_component.dart';
+import 'package:marketmind/features/root/home/data/dto/watch_list_dto.dart';
+import 'package:marketmind/src/state_management/cubit_state.dart';
 
+import '../../../_shared/presentation/base_shimmer.dart';
+import '../controllers/cubit/watch_list_cubit.dart';
 import 'components/home_app_bar_action_icon.dart';
 import 'components/watch_list_component.dart';
+import 'modal/market_data_modal.dart';
 
 class CustomizeMarketData extends StatefulWidget {
   const CustomizeMarketData({super.key});
@@ -19,6 +25,7 @@ class _CustomizeMarketDataState extends State<CustomizeMarketData> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                20.verticalSpace,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -32,7 +39,9 @@ class _CustomizeMarketDataState extends State<CustomizeMarketData> {
                       ),
                     ),
                     HomeAppBarActionIcon(
-                      onClick: () {},
+                      onClick: () {
+                        ModalHelper.showModalMax(context, MarketDataModal());
+                      },
                       child: const Icon(
                         Icons.info_outline,
                         size: 13,
@@ -66,7 +75,37 @@ class _CustomizeMarketDataState extends State<CustomizeMarketData> {
                            ?.copyWith(color: AppColors.textGray1),
                      ),
                      20.verticalSpace,
-                     WatchListComponent(),
+
+                     BlocBuilder<WatchListCubit,BaseState<List<WatchListDto>>>(builder: (context,state){
+                       if(state is LoadingState<List<WatchListDto>>){
+                         return const SizedBox(
+                           height: 100,
+                           child: BaseShimmer(
+                             height: 100,
+                             direction: Axis.horizontal,
+                             radius: 16,
+                           ),
+                         );
+                       }
+                       if(state is SuccessState<List<WatchListDto>>){
+
+                         final item  = state.data??[];
+                         return ListView.separated(
+                           separatorBuilder: (_,index)=>8.verticalSpace,
+                           shrinkWrap: true,
+                           physics: NeverScrollableScrollPhysics(),
+                           itemCount: item.length,
+                           itemBuilder: (context, index) {
+                             final data = item[index];
+                             return
+                               WatchListComponent(data: data,onClickDelete: (){
+                                 context.read<WatchListCubit>().removeWatchList(index);
+                               },);
+                           },
+                         );
+                       }
+                       return SizedBox();
+                     }),
                      20.verticalSpace,
                      SelectableOptionComponent(
                          onSelect: (result){},

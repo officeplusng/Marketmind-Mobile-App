@@ -5,8 +5,13 @@ import 'package:marketmind/core/assets/assets.dart';
 import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
+import '../../data/dto/watch_list_dto.dart';
+
 class WatchListComponent extends StatelessWidget {
-  const WatchListComponent({super.key});
+  const WatchListComponent({super.key, required this.data,required this.onClickDelete});
+
+  final WatchListDto data;
+  final VoidCallback? onClickDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +20,8 @@ class WatchListComponent extends StatelessWidget {
       decoration: ShapeDecoration(
           color: const Color(0xFF111322),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-      padding: EdgeInsets.all(12),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+      padding: const EdgeInsets.all(12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -24,48 +29,48 @@ class WatchListComponent extends StatelessWidget {
               width: 32,
               height: 32,
               backgroundColor: AppColors.socialGray,
-              child: Icon(CupertinoIcons.arrow_up_arrow_down)),
+              child: const Icon(CupertinoIcons.arrow_up_arrow_down,size: 16,color: AppColors.white,)),
           10.horizontalSpace,
           Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'EUR/USD',
+                data.asset,
                 style: context.textTheme.titleMedium
                     ?.copyWith(color: AppColors.white),
               ),
               8.verticalSpace,
               Text(
-                'British Pound / Japanese Yen',
+                data.assetName,
                 style: context.textTheme.bodyMedium
                     ?.copyWith(color: AppColors.textGray12),
               ),
               8.verticalSpace,
               Text(
-                '188.75',
+                '${data.priceSymbol ?? ''}${data.price}',
                 style: context.textTheme.bodySmall
                     ?.copyWith(color: AppColors.textGray12),
               )
             ],
           ),
-          Spacer(),
+         const  Spacer(),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               10.horizontalSpace,
-              currencySummary(context, percentageMovement: -.2),
+              currencySummary(context, percentageMovement: data.move),
               10.horizontalSpace,
               GestureDetector(
-                onTap: () {},
+                onTap:onClickDelete,
                 child: const WrapperContainer(
                   backgroundColor: Color(0xFF7A271A),
-                  child: Icon(
+                  width: 28,
+                  height: 28,
+                  child: const Icon(
                     Icons.remove,
                     color: AppColors.white,
                   ),
-                  width: 28,
-                  height: 28,
                 ),
               )
             ],

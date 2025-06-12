@@ -12,6 +12,7 @@ class Assets {
   static final eye = 'eye'.svg;
   static final idea = 'idea'.svg;
   static final rotate = 'rotate'.svg;
+  static final yellowInfoIcon = 'info_icon'.svg;
   static final search = 'search_icon'.svg;
   static final search1 = 'search'.svg;
   static final filterList = 'filter_list'.svg;

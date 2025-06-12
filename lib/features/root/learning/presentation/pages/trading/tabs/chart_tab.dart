@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/presentation/candle_chart.dart';
 
 import '../../../../../../../core/assets/assets.dart';
 import '../../../../../../../core/components/buttons/app_button.dart';
@@ -17,6 +18,8 @@ class ChartTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        CandleChart(),
+        20.verticalSpace,
         ExpandableInfoComponent(
             child: AiTradingFeedback(), title: 'AI Commentary'),
         5.verticalSpace,

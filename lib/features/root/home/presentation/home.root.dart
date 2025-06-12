@@ -1,6 +1,13 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
+import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_cubit.dart';
+import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit.dart';
+import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart';
+import 'package:marketmind/features/root/home/data/dto/watch_list_dto.dart';
 import 'package:marketmind/features/root/home/presentation/referral/referral_home_page.dart';
+import 'package:marketmind/src/state_management/cubit_state.dart';
 
 import 'ai_trading_insight_screen.dart';
 import 'components/complete_profile_component.dart';
@@ -32,28 +39,13 @@ class HomeRoot extends StatefulWidget {
 class _HomeRootState extends State<HomeRoot> {
   @override
   Widget build(BuildContext context) {
-    final dummyMarketData = [
-      MarketDataDto(
-          currentPrice: '1.105', currencyPair: 'EUR/USD', percentage: -.2),
-      MarketDataDto(
-          currentPrice: '\$2,9671.05',
-          currencyPair: 'NVIDIA (NVDA)',
-          percentage: 7.5),
-      MarketDataDto(
-          currentPrice: '\$32,742.0',
-          currencyPair: 'Microsoft',
-          percentage: 4.2),
-      MarketDataDto(
-          currentPrice: '\$78,742.0', currencyPair: 'Apple', percentage: 17.6),
-      MarketDataDto(
-          currentPrice: '\$106,000', currencyPair: 'Bitcoin', percentage: 10.1),
-    ];
     return GradientScaffold(
         backgroundAsset: Assets.homeGradient,
         horizontalPadding: 20,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            20.verticalSpace,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -73,14 +65,14 @@ class _HomeRootState extends State<HomeRoot> {
                           'Welcome',
                           style: context.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w500,
-                              color: AppColors.white),
+                              color: AppColors.textBlack1),
                         ),
                         Text(
                           'Kariaki Ebilate',
                           style: context.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                               fontSize: 20,
-                              color: AppColors.white),
+                              color: AppColors.textBlack1),
                         ),
                       ],
                     )
@@ -125,11 +117,38 @@ class _HomeRootState extends State<HomeRoot> {
                     ],
                   ),
                   5.verticalSpace,
-                  HomeTradingInsightComponent(
-                      currencyPair: 'EUR/GBP',
-                      insight: '',
-                      percentageConfidence: 85,
-                      tradeDirection: 'SELL'),
+                  BlocBuilder<TradingInsightCubit,
+                          BaseState<List<TradingInsightDto>>>(
+                      builder: (context, state) {
+                    if (state is LoadingState) {
+                      return const BaseShimmer(
+                        itemCount: 2,
+                        radius: 20,
+                      );
+                    }
+                    if (state is ErrorState) {
+                      return SizedBox();
+                    }
+                    if (state is SuccessState<List<TradingInsightDto>>) {
+                      int itemCount = (state.data?.length ?? 1) > 2
+                          ? 2
+                          : state.data!.length;
+                      return ListView.builder(
+                          itemCount: itemCount,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, index) {
+                            final item = state.data![index];
+                            return HomeTradingInsightComponent(
+                                currencyPair: item.asset,
+                                insight: item.info,
+                                percentageConfidence:
+                                    item.confidence.toDouble(),
+                                tradeDirection: item.signal);
+                          });
+                    }
+                    return SizedBox();
+                  }),
                   20.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,22 +169,40 @@ class _HomeRootState extends State<HomeRoot> {
                     ],
                   ),
                   5.verticalSpace,
-                  SizedBox(
-                    height: 100,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: dummyMarketData.length,
-                      itemBuilder: (context, index) {
-                        final item = dummyMarketData[index];
-                        return MarketDataComponent(
-                          currencyPair: item.currencyPair,
-                          currentPrice: item.currentPrice,
-                          percentageMovement: item.percentage,
-                        );
-                      },
-                    ),
-                  ),
+                  BlocBuilder<WatchListCubit,BaseState<List<WatchListDto>>>(builder: (context,state){
+                    if(state is LoadingState<List<WatchListDto>>){
+                      return const SizedBox(
+                        height: 100,
+                        child: BaseShimmer(
+                          height: 100,
+                          direction: Axis.horizontal,
+                          width: 150,
+                          radius: 16,
+                        ),
+                      );
+                    }
+                    if(state is SuccessState<List<WatchListDto>>){
+
+                      final item  = state.data??[];
+                      return SizedBox(
+                        height: 100,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: item.length,
+                          itemBuilder: (context, index) {
+                            final data = item[index];
+                            return MarketDataComponent(
+                              currencyPair: data.asset,
+                              currentPrice: "${data.priceSymbol??''}${data.price}",
+                              percentageMovement: data.move,
+                            );
+                          },
+                        ),
+                      );
+                    }
+                    return SizedBox();
+                  }),
                   20.verticalSpace,
                   _title('Learning Progress'),
                   5.verticalSpace,
@@ -186,7 +223,7 @@ class _HomeRootState extends State<HomeRoot> {
                       title: 'Your Referral Network',
                       subtitle: "Track your referrals and earnings",
                       buttonText: 'Earn commission',
-                      onClick: (){
+                      onClick: () {
                         context.push(ReferralHomePage());
                       },
                       backgroundAsset: Assets.homeBackground2,

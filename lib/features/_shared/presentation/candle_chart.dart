@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:interactive_chart/interactive_chart.dart';
+import 'package:marketmind/core/export/export.core.dart';
 
 import 'mock_data.dart';
 
@@ -13,84 +16,47 @@ class CandleChart extends StatefulWidget {
 
 class _CandleChartState extends State<CandleChart> {
   final List<CandleData> _data = MockDataTesla.candles;
-  bool _darkMode = true;
-  bool _showAverage = false;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: _darkMode ? Brightness.dark : Brightness.light,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Interactive Chart Demo"),
-          actions: [
-            IconButton(
-              icon: Icon(_darkMode ? Icons.dark_mode : Icons.light_mode),
-              onPressed: () => setState(() => _darkMode = !_darkMode),
-            ),
-            IconButton(
-              icon: Icon(
-                _showAverage ? Icons.show_chart : Icons.bar_chart_outlined,
-              ),
-              onPressed: () {
-                setState(() => _showAverage = !_showAverage);
-                if (_showAverage) {
-                  _computeTrendLines();
-                } else {
-                  _removeTrendLines();
-                }
-              },
-            ),
-          ],
-        ),
-        body: SafeArea(
-          minimum: const EdgeInsets.all(24.0),
-          child: InteractiveChart(
-            /** Only [candles] is required */
-            candles: _data,
-            /** Uncomment the following for examples on optional parameters */
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child:SizedBox(
+        height: 280,
+        width: double.infinity,
+        child:  InteractiveChart(
+          /** Only [candles] is required */
 
-            /** Example styling */
-            // style: ChartStyle(
-            //   priceGainColor: Colors.teal[200]!,
-            //   priceLossColor: Colors.blueGrey,
-            //   volumeColor: Colors.teal.withOpacity(0.8),
-            //   trendLineStyles: [
-            //     Paint()
-            //       ..strokeWidth = 2.0
-            //       ..strokeCap = StrokeCap.round
-            //       ..color = Colors.deepOrange,
-            //     Paint()
-            //       ..strokeWidth = 4.0
-            //       ..strokeCap = StrokeCap.round
-            //       ..color = Colors.orange,
-            //   ],
-            //   priceGridLineColor: Colors.blue[200]!,
-            //   priceLabelStyle: TextStyle(color: Colors.blue[200]),
-            //   timeLabelStyle: TextStyle(color: Colors.blue[200]),
-            //   selectionHighlightColor: Colors.red.withOpacity(0.2),
-            //   overlayBackgroundColor: Colors.red[900]!.withOpacity(0.6),
-            //   overlayTextStyle: TextStyle(color: Colors.red[100]),
-            //   timeLabelHeight: 32,
-            //   volumeHeightFactor: 0.2, // volume area is 20% of total height
-            // ),
-            /** Customize axis labels */
-            // timeLabel: (timestamp, visibleDataCount) => "📅",
-            // priceLabel: (price) => "${price.round()} 💎",
-            /** Customize overlay (tap and hold to see it)
-             ** Or return an empty object to disable overlay info. */
-            // overlayInfo: (candle) => {
-            //   "💎": "🤚    ",
-            //   "Hi": "${candle.high?.toStringAsFixed(2)}",
-            //   "Lo": "${candle.low?.toStringAsFixed(2)}",
-            // },
-            /** Callbacks */
-            // onTap: (candle) => print("user tapped on $candle"),
-            // onCandleResize: (width) => print("each candle is $width wide"),
+          candles: _data,
+          /** Uncomment the following for examples on optional parameters */
+
+
+          style: ChartStyle(
+            priceGainColor: Color(0XFF17B26A),
+            priceLossColor: Color(0XFFF04438),
+            volumeColor: Colors.teal.withOpacity(0.8),
+            priceGridLineColor: Color(0XFFF2F4F7),
+            priceLabelStyle:context.textTheme.bodyMedium!.copyWith(color: AppColors.textGray1,fontWeight: FontWeight.w500),
+            timeLabelStyle: context.textTheme.bodyMedium!.copyWith(color: AppColors.textGray1,fontWeight: FontWeight.w500),
+            selectionHighlightColor: Colors.grey.withValues(alpha: 0.2),
+            overlayBackgroundColor: Colors.grey[900]!.withValues(alpha: 0.6),
+            overlayTextStyle: TextStyle(color: Colors.white),
+            timeLabelHeight: 32,
+            volumeHeightFactor: 0, // volume area is 20% of total height
           ),
+          /** Customize axis labels */
+          // timeLabel: (timestamp, visibleDataCount) => "📅",
+          // priceLabel: (price) => "${price.round()} 💎",
+          /** Customize overlay (tap and hold to see it)
+           ** Or return an empty object to disable overlay info. */
+          // overlayInfo: (candle) => {
+          //   "💎": "🤚    ",
+          //   "Hi": "${candle.high?.toStringAsFixed(2)}",
+          //   "Lo": "${candle.low?.toStringAsFixed(2)}",
+          // },
+          /** Callbacks */
+          // onTap: (candle) => print("user tapped on $candle"),
+          // onCandleResize: (width) => print("each candle is $width wide"),
         ),
       ),
     );
