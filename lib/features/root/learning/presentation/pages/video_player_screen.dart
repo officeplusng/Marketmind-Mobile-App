@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/export/export.core.dart';
-import '../../../home/components/home_app_bar_action_icon.dart';
+import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
 import '../_components/tp_sl_configuration.dart';
 import '../_components/video_preview_component.dart';
 

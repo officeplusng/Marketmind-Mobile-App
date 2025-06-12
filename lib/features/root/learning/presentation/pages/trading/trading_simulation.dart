@@ -1,8 +1,6 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/custom_app_bar.dart';
-import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
-import 'package:marketmind/features/root/learning/presentation/_components/ai_trading_feedback.dart';
-import 'package:marketmind/features/root/learning/presentation/_components/expandable_info_component.dart';
+import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
 import 'package:marketmind/features/root/learning/presentation/_components/trading_news_component.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/trading/tabs/chart_tab.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/trading/trade_execution_screen.dart';

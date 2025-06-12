@@ -1,9 +1,8 @@
-import 'package:marketmind/features/root/home/components/referral_component.dart';
 
-import '../../../../core/export/export.core.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../component/custom_app_bar.dart';
+import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/component/custom_app_bar.dart';
 import '../components/home_app_bar_action_icon.dart';
+import '../components/referral_component.dart';
 
 class ReferralListPage extends StatefulWidget {
   const ReferralListPage({super.key});

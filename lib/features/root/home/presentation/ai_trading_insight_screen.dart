@@ -1,7 +1,6 @@
-import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
-import 'package:marketmind/features/root/home/components/trading_insight_component.dart';
-import '../../../core/export/export.core.dart';
+import '../../../../core/export/export.core.dart';
 import 'components/home_app_bar_action_icon.dart';
+import 'components/trading_insight_component.dart';
 
 class AiTradingInsightScreen extends StatefulWidget {
   const AiTradingInsightScreen({super.key});

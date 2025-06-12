@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/custom_app_bar.dart';
-import 'package:marketmind/features/root/home/components/faq_component.dart';
-import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
-import 'package:marketmind/features/root/home/referral/referral_list_page.dart';
+import 'package:marketmind/features/root/home/presentation/referral/referral_list_page.dart';
 
+import '../components/faq_component.dart';
+import '../components/home_app_bar_action_icon.dart';
 import '../components/referral_component.dart';
 
 class ReferralDashboard extends StatefulWidget {

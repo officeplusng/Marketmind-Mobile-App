@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/custom_app_bar.dart';
-import 'package:marketmind/features/root/home/referral/referral_dashboard.dart';
+import 'package:marketmind/features/root/home/presentation/referral/referral_dashboard.dart';
 
 class ReferralHomePage extends StatefulWidget {
   const ReferralHomePage({super.key});

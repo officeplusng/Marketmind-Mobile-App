@@ -1,6 +1,6 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/custom_app_bar.dart';
-import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
+import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
 import 'package:marketmind/features/root/learning/presentation/_components/tp_sl_configuration.dart';
 import 'package:marketmind/features/root/learning/presentation/modals/confirm_trade_modal.dart';
 

@@ -1,8 +1,8 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/onboarding/components/selectable_component.dart';
-import 'package:marketmind/features/root/home/components/watch_list_component.dart';
 
 import 'components/home_app_bar_action_icon.dart';
+import 'components/watch_list_component.dart';
 
 class CustomizeMarketData extends StatefulWidget {
   const CustomizeMarketData({super.key});

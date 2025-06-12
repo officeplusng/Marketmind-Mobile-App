@@ -1,15 +1,15 @@
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/root/home/components/complete_profile_component.dart';
-import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
-import 'package:marketmind/features/root/home/components/home_info_card.dart';
-import 'package:marketmind/features/root/home/components/home_trading_insight_component.dart';
-import 'package:marketmind/features/root/home/components/market_data_component.dart';
-import 'package:marketmind/features/root/home/components/market_summary_component.dart';
-import 'package:marketmind/features/root/home/customize_market_data.dart';
-import 'package:marketmind/features/root/home/referral/referral_home_page.dart';
+import 'package:marketmind/features/root/home/presentation/referral/referral_home_page.dart';
 
 import 'ai_trading_insight_screen.dart';
+import 'components/complete_profile_component.dart';
+import 'components/home_app_bar_action_icon.dart';
+import 'components/home_info_card.dart';
+import 'components/home_trading_insight_component.dart';
+import 'components/market_data_component.dart';
+import 'components/market_summary_component.dart';
+import 'customize_market_data.dart';
 
 class MarketDataDto {
   final String currencyPair;

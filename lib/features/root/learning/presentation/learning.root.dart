@@ -1,7 +1,6 @@
 import 'package:marketmind/core/export/export.core.dart';
 
-import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
-
+import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
 import '_components/ai_recommended_lession.dart';
 import '_components/course_item_component.dart';
 import '_components/learning_progress_component.dart';

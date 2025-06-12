@@ -3,6 +3,7 @@ import 'package:marketmind/core/assets/assets.dart';
 import 'package:marketmind/core/components/scaffold/base_scaffold.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/presentation/candle_chart.dart';
 import 'package:marketmind/features/root/marketAnalysis/components/news_components.dart';
 
 import 'components/market_analysis_dasboard.dart';
@@ -92,6 +93,8 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
               ],),
               10.verticalSpace,
               MarketAnalysisTechnicalAnalysisComponent(),
+              10.verticalSpace,
+              CandleChart(),
               10.verticalSpace,
               NewsComponents(),
               10.verticalSpace,

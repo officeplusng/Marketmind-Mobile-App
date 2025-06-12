@@ -1,5 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
-import 'package:marketmind/features/root/home/components/home_app_bar_action_icon.dart';
+import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
 import 'package:marketmind/features/root/learning/presentation/_components/video_preview_component.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/tabs/course_details_faq.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/tabs/course_details_overview.dart';
