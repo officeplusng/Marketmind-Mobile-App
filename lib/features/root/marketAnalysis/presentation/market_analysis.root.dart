@@ -1,12 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:marketmind/core/assets/assets.dart';
-import 'package:marketmind/core/components/scaffold/base_scaffold.dart';
-import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/presentation/candle_chart.dart';
-import 'package:marketmind/features/root/marketAnalysis/components/news_components.dart';
-
 import 'components/market_analysis_dasboard.dart';
+import 'components/news_components.dart';
 import 'components/technical_analysis.dart';
 
 class MarketAnalysis extends StatefulWidget {

@@ -14,6 +14,8 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:marketmind/core/local/secured_storage_service.dart' as _i497;
 import 'package:marketmind/core/network/interceptor.dart' as _i1025;
 import 'package:marketmind/core/network/network_service.dart' as _i1056;
+import 'package:marketmind/features/_shared/domain/new_repository.dart'
+    as _i1042;
 import 'package:marketmind/features/authentication/data/repositories/auth_repository.dart'
     as _i553;
 import 'package:marketmind/features/authentication/data/service/auth_service.dart'
@@ -41,6 +43,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i131.TradingInsightRepository());
     gh.lazySingleton<_i956.WatchListRepository>(
         () => _i956.WatchListRepository());
+    gh.lazySingleton<_i1042.NewsRepository>(() => _i1042.NewsRepository());
     gh.lazySingleton<_i1025.NetworkInterceptor>(
         () => _i1025.NetworkInterceptor(gh<_i497.SecureStorageService>()));
     gh.lazySingleton<_i361.Dio>(

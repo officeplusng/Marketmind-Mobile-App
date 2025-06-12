@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/news_cubit.dart';
 import 'package:marketmind/features/root/_ai_chat/presentation/screens/ai_chat.root.dart';
 import 'package:marketmind/features/root/component/app_bottom_nav.dart';
 import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_cubit.dart';
 import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit.dart';
 import 'package:marketmind/features/root/learning/presentation/learning.root.dart';
-import 'package:marketmind/features/root/marketAnalysis/market_analysis.root.dart';
+import 'package:marketmind/features/root/marketAnalysis/presentation/market_analysis.root.dart';
 
 import '../home/presentation/home.root.dart';
 
@@ -24,6 +25,7 @@ class _RootScreenState extends State<RootScreen> {
   void initState() {
     context.read<WatchListCubit>().fetchWatchList();
     context.read<TradingInsightCubit>().fetchTradingInsight();
+    context.read<NewsCubit>().fetchNews();
     super.initState();
   }
 

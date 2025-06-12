@@ -1,4 +1,6 @@
-import '../../../../core/export/export.core.dart';
+
+
+import 'package:marketmind/core/export/export.core.dart';
 
 class MarketAnalysisDashboardComponent extends StatelessWidget {
   const MarketAnalysisDashboardComponent({super.key,this.backgroundColor,this.textColor});

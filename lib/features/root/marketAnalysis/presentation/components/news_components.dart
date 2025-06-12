@@ -1,5 +1,10 @@
-import '../../../../core/components/round_container.dart';
-import '../../../../core/export/export.core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/core/extension/date_time_extension.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/news_cubit.dart';
+import 'package:marketmind/features/_shared/data/dto/new_dto.dart';
+import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
+import 'package:marketmind/src/state_management/cubit_state.dart';
 
 class NewsComponents extends StatefulWidget {
   const NewsComponents({super.key});
@@ -21,12 +26,12 @@ class _NewsComponentsState extends State<NewsComponents>
   }
 
   int _currentTab = 0;
+  String _category = '';
 
   @override
   Widget build(BuildContext context) {
     var bodyMedium = context.textTheme.bodyMedium;
     return WrapperContainer.rectangular(
-
         width: double.infinity,
         useHeight: false,
         backgroundColor: AppColors.white,
@@ -92,6 +97,7 @@ class _NewsComponentsState extends State<NewsComponents>
                 onTap: (value) {
                   setState(() {
                     _currentTab = value;
+                    _category = tabs[value];
                   });
                 },
                 indicator: ShapeDecoration(
@@ -108,21 +114,43 @@ class _NewsComponentsState extends State<NewsComponents>
               ),
             ),
             10.verticalSpace,
-            ListView.separated(
-              itemCount: 5,
-              padding: EdgeInsets.all(0),
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (_,index)=>NewsItemComponent(),
-              separatorBuilder: (_,index)=>10.verticalSpace,
-            )
+            BlocBuilder<NewsCubit, BaseState<List<NewsDto>>>(builder: (context, state) {
+              if (state is LoadingState<List<NewsDto>>) {
+                print('data-result -> ${state.data}');
+                return const BaseShimmer(
+                  height: 60,
+                  itemCount: 6,
+                );
+              }
+              if (state is SuccessState<List<NewsDto>>) {
+                final data = (state.data ?? []).where((e) {
+                  String value = _currentTab == 0 ? '' : _category;
+                  return e.category?.toLowerCase().contains(value.toLowerCase()) ?? false;
+                }).toList();
+                return ListView.separated(
+                  itemCount: data.length,
+                  padding: const EdgeInsets.all(0),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) => NewsItemComponent(
+                    data: data[index],
+                  ),
+                  separatorBuilder: (_, index) => 10.verticalSpace,
+                );
+              }
+              return const SizedBox(
+                height: 100,
+              );
+            })
           ],
         ));
   }
 }
 
 class NewsItemComponent extends StatelessWidget {
-  const NewsItemComponent({super.key});
+  const NewsItemComponent({super.key, required this.data});
+
+  final NewsDto data;
 
   @override
   Widget build(BuildContext context) {
@@ -140,25 +168,28 @@ class NewsItemComponent extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Bloomberg',
+                  data.source?.toString() ?? '',
                   style: context.textTheme.bodySmall?.copyWith(
                       color: AppColors.textGray1, fontWeight: FontWeight.w500),
                 ),
                 10.horizontalSpace,
-                const Icon(Icons.access_time_sharp,color: AppColors.textGray1,size: 14,),
+                const Icon(
+                  Icons.access_time_sharp,
+                  color: AppColors.textGray1,
+                  size: 14,
+                ),
                 2.5.horizontalSpace,
                 Text(
-                  '15 mins ago',
+                  data.time?.timeAgo() ?? '',
                   style: context.textTheme.bodySmall?.copyWith(
                       color: AppColors.textGray1, fontWeight: FontWeight.w500),
                 ),
                 10.horizontalSpace,
-
               ],
             ),
             15.verticalSpace,
             Text(
-              'Tech Stocks Rally on Strong Earnings Reports',
+              data.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: context.textTheme.titleSmall
@@ -166,7 +197,7 @@ class NewsItemComponent extends StatelessWidget {
             ),
             5.verticalSpace,
             Text(
-              'Major tech companies exceed Q4 expectations, driving sector-wide gains.',
+              data.content,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: context.textTheme.bodyMedium
@@ -196,7 +227,9 @@ class NewsItemComponent extends StatelessWidget {
                 Text(
                   'Read more',
                   style: context.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500, color: AppColors.primary,fontSize: 12),
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.primary,
+                      fontSize: 12),
                 ),
                 5.horizontalSpace,
                 Icon(

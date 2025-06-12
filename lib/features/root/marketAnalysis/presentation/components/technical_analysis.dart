@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
-import '../../../../core/theme/app_colors.dart';
-
 class MarketAnalysisTechnicalAnalysisComponent extends StatefulWidget {
   const MarketAnalysisTechnicalAnalysisComponent({super.key});
 
