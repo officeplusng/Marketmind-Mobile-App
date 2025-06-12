@@ -81,6 +81,7 @@ class _QuizScreenState extends State<QuizScreen> {
             Expanded(
                 child: PrimaryButton.primary(
               onPressed: () {
+
                 if (_currentQuestionIndex <
                     QuizEntity.forexQuizQuestions.length - 1) {
                   setState(() {

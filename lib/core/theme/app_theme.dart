@@ -52,6 +52,6 @@ class AppTheme {
       GoogleFonts.interTight(
           fontSize: fontSize,
           color: color,
-          letterSpacing: letterSpacing ?? -.41,
+          letterSpacing: letterSpacing ?? .2,
           fontWeight: fontWeight ?? FontWeight.w500);
 }

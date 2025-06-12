@@ -1,4 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/learning/presentation/pages/quiz_result_screen.dart';
 import 'package:marketmind/features/root/learning/presentation/pages/quiz_screen.dart';
 
 enum QuizStatus { done, pending, locked }
@@ -209,7 +210,9 @@ class QuizItemComponent extends StatelessWidget {
               )
             else
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.push(QuizResultScreen());
+                },
                 child: Text(
                   'View Submission',
                   style: context.textTheme.titleSmall

@@ -27,6 +27,8 @@ class Assets {
   static final download01 = 'download-01'.svg;
   static final share07 = 'share-07'.svg;
   static final quizDone = 'quiz_done'.svg;
+  static final courseModule = 'course_module'.svg;
+  static final simulation = 'simulation_graph'.svg;
   static final maximize = 'maximize-02'.svg;
   static final mic = 'mic-line'.svg;
   static final send = 'send-01'.svg;
