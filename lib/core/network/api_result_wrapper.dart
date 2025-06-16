@@ -1,12 +1,16 @@
+import 'package:dio/dio.dart';
+import 'package:marketmind/core/exceptions/api_exception.dart';
 import 'package:marketmind/core/network/api_result.dart';
 
-class ApiResultWrapper{
-
+class ApiResultWrapper {
   static Future<ApiResult<T>> wrap<T>(Future<T> Function() func) async {
-    try{
+    try {
       final result = await func.call();
       return Success(data: result);
-    }catch(e){
+    } on DioException catch (e) {
+      final error = e.error as ApiException;
+      return Failure(error: error.message);
+    } catch (e) {
       return Failure(error: e.toString());
     }
   }

@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:marketmind/core/network/base_url.dart';
-import 'package:marketmind/features/authentication/data/service/auth_service.dart';
+import 'package:marketmind/features/_shared/data/source/upload_source.dart';
+import 'package:marketmind/features/_shared/data/source/user_source.dart';
+import 'package:marketmind/features/authentication/data/source/auth_source.dart';
+import 'package:marketmind/features/root/home/data/source/referral_source.dart';
 import 'interceptor.dart';
 
 @module
@@ -27,5 +30,17 @@ abstract class NetworkModule {
   }
 
   @lazySingleton
-  AuthService apiService(Dio dio) => AuthService(dio,baseUrl: '$apiBaseUrl/auth');
+  AuthSource apiService(Dio dio) =>
+      AuthSource(dio, baseUrl: '$apiBaseUrl/auth');
+
+  @lazySingleton
+  UserSource userSource(Dio dio) =>
+      UserSource(dio, baseUrl: '$apiBaseUrl/users');
+
+  @lazySingleton
+  UploadSource uploadSource(Dio dio) =>
+      UploadSource(dio, baseUrl: '$apiBaseUrl/upload');
+  @lazySingleton
+  ReferralSource referralSource(Dio dio) =>
+      ReferralSource(dio, baseUrl: '$apiBaseUrl/referrals');
 }
