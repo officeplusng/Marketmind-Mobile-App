@@ -19,4 +19,6 @@ class RegisterDto {
     required this.password,
     required this.inviteCode,
   });
+
+  Map<String, dynamic> toJson() => _$RegisterDtoToJson(this);
 }

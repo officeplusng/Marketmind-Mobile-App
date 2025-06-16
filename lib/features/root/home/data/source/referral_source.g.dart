@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_service.dart';
+part of 'referral_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,14 @@ part of 'auth_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _AuthService implements AuthService {
-  _AuthService(
+class _ReferralSource implements ReferralSource {
+  _ReferralSource(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
-  });
+  }) {
+    baseUrl ??= 'https://marketmind-ezjx.onrender.com//referrals';
+  }
 
   final Dio _dio;
 
@@ -22,19 +24,19 @@ class _AuthService implements AuthService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> register(RegisterDto dto) async {
+  Future<List<ReferralDto>> getReferrals() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<List<ReferralDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/register',
+          '',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -43,25 +45,33 @@ class _AuthService implements AuthService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<ReferralDto> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) => ReferralDto.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 
   @override
-  Future<dynamic> login(LoginDto dto) async {
+  Future<ReferralStatisticsDto> getReferralStatistics() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<ReferralStatisticsDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/login',
+          '/statistics',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -70,8 +80,14 @@ class _AuthService implements AuthService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ReferralStatisticsDto _value;
+    try {
+      _value = ReferralStatisticsDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 
