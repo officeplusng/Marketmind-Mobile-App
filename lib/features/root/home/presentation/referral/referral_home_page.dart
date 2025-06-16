@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/component/custom_app_bar.dart';
 import 'package:marketmind/features/root/home/presentation/referral/referral_dashboard.dart';
+import 'package:marketmind/src/presentation/snack_bar_helper.dart';
 
 class ReferralHomePage extends StatefulWidget {
   const ReferralHomePage({super.key});
@@ -38,6 +39,7 @@ class _ReferralHomePageState extends State<ReferralHomePage> {
             child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        20.verticalSpace,
         CustomAppBar(
           action: [
             _dashboardButton()
@@ -93,6 +95,10 @@ class _ReferralHomePageState extends State<ReferralHomePage> {
                     WrapperContainer.rectangular(
                         height: 42,
                         width: double.infinity,
+                        onClick: (){
+                          AppSnackBarHelper.showCopiedSnackBar(context);
+                          FlutterClipboard.copy('hello flutter friends');
+                        },
                         padding: const EdgeInsets.symmetric(horizontal: 10),
 
                         borderColor: Color(0xFFEAECF0),
@@ -136,6 +142,11 @@ class _ReferralHomePageState extends State<ReferralHomePage> {
               WrapperContainer.rectangular(
                   height: 42,
                   width: double.infinity,
+                  onClick: (){
+
+                    AppSnackBarHelper.showCopiedSnackBar(context);
+                    FlutterClipboard.copy('hello flutter friends');
+                  },
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   bordered: true,
                   borderColor: Color(0xFFEAECF0),
@@ -233,15 +244,17 @@ class _ReferralHomePageState extends State<ReferralHomePage> {
     },
     child: Container(
       width: 100,
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      height:40,
       decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
               side: const BorderSide(width: 1, color: Color(0xFFD0D5DD)),
               borderRadius: BorderRadius.circular(999))),
-      child: Text(
-        'Dashboard',
-        style: context.textTheme.bodyMedium
-            ?.copyWith(fontWeight: FontWeight.w500, color: Color(0xFF344054),),
+      child: Center(
+        child:Text(
+          'Dashboard',
+          style: context.textTheme.bodyMedium
+              ?.copyWith(fontWeight: FontWeight.w500, color: Color(0xFF344054),),
+        )
       ),
     ),
   );
