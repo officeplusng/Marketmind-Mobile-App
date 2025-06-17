@@ -9,9 +9,9 @@ part 'referral_source.g.dart';
 abstract class ReferralSource {
   factory ReferralSource(Dio dio, {String baseUrl}) = _ReferralSource;
 
-
   @GET("")
   Future<List<ReferralDto>> getReferrals();
+
   @GET("/statistics")
   Future<ReferralStatisticsDto> getReferralStatistics();
 }

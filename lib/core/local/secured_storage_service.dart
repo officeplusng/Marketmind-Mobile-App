@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import '../export/export.core.dart';
@@ -22,6 +24,10 @@ class SecureStorageService {
 
   Future<void> write(String key, String value) async {
     await _storage.write(key: key, value: value);
+  }
+
+  Future<void> writeJson(String key, Map<String, dynamic> json) async {
+    write(key, jsonEncode(json));
   }
 
   Future<void> deleteToken() async {
