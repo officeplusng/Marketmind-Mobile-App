@@ -133,7 +133,8 @@ class _HomeRootState extends State<HomeRoot> {
                       int itemCount = (state.data?.length ?? 1) > 2
                           ? 2
                           : state.data!.length;
-                      return ListView.builder(
+                      return ListView.separated(
+                        separatorBuilder: (_,a)=>10.verticalSpace,
                           itemCount: itemCount,
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),

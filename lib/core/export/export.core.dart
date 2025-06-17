@@ -11,6 +11,7 @@ export '../network/network_service.dart';
 export '../theme/app_colors.dart';
 export '../theme/app_theme.dart';
 export '../util/app_constants.dart';
+export 'package:clipboard/clipboard.dart';
 export '../util/app_utils.dart';
 export '../util/input_validators.dart';
 export '../util/modal_helper.dart';
