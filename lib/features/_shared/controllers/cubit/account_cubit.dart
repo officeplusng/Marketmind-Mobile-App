@@ -27,6 +27,7 @@ class AccountCubit extends BaseCubit<UserDto> {
   }
 
   void updateUser(UserUpdateDto dto) async {
+    emitLoading();
     final response = await _repo.updateUser(dto);
     response.when(onSuccess: (result) {
       emitSuccess();
@@ -41,6 +42,7 @@ class AccountCubit extends BaseCubit<UserDto> {
   }
 
   void refresh() async {
+    emitLoading();
     final response = await _repo.getUser();
     response.when(
         onSuccess: (result) {

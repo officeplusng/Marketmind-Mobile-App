@@ -19,6 +19,7 @@ class AuthenticationCubit extends BaseCubit<AuthState> {
   }
 
   void login(LoginDto dto) async {
+    emitLoading();
     final response = await _repository.login(dto);
     response.when(
         onSuccess: (result) {
@@ -28,6 +29,7 @@ class AuthenticationCubit extends BaseCubit<AuthState> {
   }
 
   void register(RegisterDto dto) async {
+    emitLoading();
     final response = await _repository.register(dto);
     response.when(
         onSuccess: (result) {
@@ -37,16 +39,19 @@ class AuthenticationCubit extends BaseCubit<AuthState> {
   }
 
   void resendEmail(EmailDto dto) async {
+    emitLoading();
     final response = await _repository.resendEmail(dto);
     response.when(onSuccess: (result) {}, onError: (error) {});
   }
 
   void verifyToken(VerifyTokenDto dto) async {
+    emitLoading();
     final response = await _repository.verifyToken(dto);
     response.when(onSuccess: (result) {}, onError: (error) {});
   }
 
   void verifySignUp(VerifySignUpDto dto) async {
+    emitLoading();
     final response = await _repository.verifySignUp(dto);
     response.when(onSuccess: (result) {}, onError: (error) {});
   }
