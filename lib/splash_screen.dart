@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/components/export.core.component.dart';
@@ -5,6 +7,8 @@ import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
 import 'package:marketmind/features/onboarding/components/onboarding_text_caption_component.dart';
 import 'package:marketmind/features/onboarding/components/selectable_component.dart';
+import 'package:marketmind/features/onboarding/landing_page1.dart';
+import 'package:marketmind/features/root/learning/root.dart';
 
 import 'features/authentication/presentation/components/continue_with.dart';
 
@@ -18,78 +22,44 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool selected = false;
 
+  Timer? _timer;
   @override
   void initState() {
     context.read<AccountCubit>().init();
     super.initState();
+
+  _timer =   Timer.periodic(const Duration(seconds: 2), (result)async{
+      final isLoggedIn = await context.read<AccountCubit>().userAvailable();
+      if(isLoggedIn){
+        context.pushRemoveUntil(RootScreen());
+      }else{
+        context.pushReplace(LandingPage1());
+      }
+    });
+
   }
 
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
         backgroundColor: AppColors.coolGray,
         verticalPadding: 0,
         horizontalPadding: 20,
-        child: Stack(
-          children: [
-            Image.asset(
-              Assets.splashGraphics,
-              fit: BoxFit.cover,
-            ),
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PrimaryButton.primary(
-                    text: 'Get Started',
-                    iconEnd: Icon(
-                      Icons.keyboard_arrow_right,
-                      color: AppColors.white,
-                    ),
-                  ),
-                  20.verticalSpace,
-                  PrimaryButton.light(
-                    text: 'Create Account',
-                    iconEnd: Icon(
-                      Icons.keyboard_arrow_right,
-                    ),
-                  ),
-                  20.verticalSpace,
-                  PrimaryButton.outlined(
-                      text: 'Back',
-                      iconStart: Icon(
-                        Icons.keyboard_arrow_left,
-                      )),
-                  20.verticalSpace,
-                  InputField.filled(
-                    label: 'Full name',
-                    hint: 'Enter full name',
-                  ),
-                  20.verticalSpace,
-                  10.verticalSpace,
-                  ContinueWith(),
-                  20.verticalSpace,
-                  OnboardingTextCaptionComponent(title: 'Interest'),
-                  20.verticalSpace,
-                  PasswordInputField(
-                      hint: 'enter your password', onChange: (_) {}),
-                  20.verticalSpace,
-                  SelectableOptionComponent(
-                      radio: false,
-                      title: 'How would you describe your trading experience?',
-                      options: [
-                        'Beginner (New to trading)',
-                        'Intermediate (Some experience with trading)',
-                        'Advanced (Experienced trader)',
-                        'Professional (Industry professional)'
-                      ]
-                          .map((e) => SelectionEntity(
-                              title: e, subtitle: 'subtitle-sample'))
-                          .toList())
-                ],
-              ),
-            )
-          ],
+        child: Center(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppLogo(assetName: Assets.appLogo,width: 45,height: 45,),
+              5.horizontalSpace,
+              Text(AppConstants.appName,style: context.textTheme.bodySmall?.copyWith(fontSize: 30,color: AppColors.white,fontWeight: FontWeight.bold),)
+            ],
+          ),
         ));
   }
 }

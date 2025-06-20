@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/core/network/api_result.dart';
 import 'package:marketmind/features/_shared/data/dto/update_user_dto.dart';
 import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
 import 'package:marketmind/features/_shared/domain/repo/user_repository.dart';
@@ -38,6 +39,11 @@ class AccountCubit extends BaseCubit<UserDto> {
     }, onError: (error) {
       emitError(error);
     });
+  }
+
+  Future<bool> userAvailable() async {
+    final localUser = await _repo.getLoggedInUser();
+    return localUser is Success<UserDto>;
   }
 
   _cacheUser(UserDto dto) async {
