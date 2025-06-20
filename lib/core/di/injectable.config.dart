@@ -11,6 +11,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:marketmind/core/export/export.core.dart' as _i56;
 import 'package:marketmind/core/local/secured_storage_service.dart' as _i497;
 import 'package:marketmind/core/network/interceptor.dart' as _i1025;
 import 'package:marketmind/core/network/network_service.dart' as _i1056;
@@ -70,10 +71,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkModule.referralSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i936.AuthRepository>(
         () => _i936.AuthRepository(gh<_i2.AuthSource>()));
+    gh.lazySingleton<_i847.UserRepository>(() => _i847.UserRepository(
+          gh<_i156.UserSource>(),
+          gh<_i56.SecureStorageService>(),
+        ));
     gh.lazySingleton<_i500.UploadRepository>(
         () => _i500.UploadRepository(gh<_i258.UploadSource>()));
-    gh.lazySingleton<_i847.UserRepository>(
-        () => _i847.UserRepository(gh<_i156.UserSource>()));
     gh.lazySingleton<_i329.ReferralRepository>(
         () => _i329.ReferralRepository(gh<_i484.ReferralSource>()));
     return this;

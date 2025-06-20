@@ -81,6 +81,23 @@ class _AiChatScreenState extends State<AiChatScreen> {
     );
   }
 
+  Widget _roundButton(
+      {required Widget icon, required void Function() onClick}) {
+    return InkWell(
+      onTap: onClick,
+      radius: 999,
+      child: Container(
+        width: 38,
+        decoration: ShapeDecoration(
+            shape: const CircleBorder(), color: AppColors.primary),
+        height: 38,
+        alignment: Alignment.center,
+        child: Center(
+          child: icon,
+        ),
+      ),
+    );
+  }
   Widget _howCanIHelp() {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -134,23 +151,6 @@ class _AiChatScreenState extends State<AiChatScreen> {
     );
   }
 
-  Widget _roundButton(
-      {required Widget icon, required void Function() onClick}) {
-    return InkWell(
-      onTap: onClick,
-      radius: 999,
-      child: Container(
-        width: 38,
-        decoration: ShapeDecoration(
-            shape: const CircleBorder(), color: AppColors.primary),
-        height: 38,
-        alignment: Alignment.center,
-        child: Center(
-          child: icon,
-        ),
-      ),
-    );
-  }
 
   Widget _header(BuildContext context) {
     return Row(

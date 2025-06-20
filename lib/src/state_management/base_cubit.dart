@@ -21,7 +21,7 @@ mixin CubitUtilsMixin<T> on Cubit<BaseState<T>> {
 
   void emitSuccess({T? data}) {
     if (isClosed) return;
-    emit(SuccessState(data: data));
+    emit(SuccessState(data: data??data));
   }
 
   /// this emits data to a non-special state ie: initial
