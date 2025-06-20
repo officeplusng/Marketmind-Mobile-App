@@ -3,8 +3,10 @@ import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/learning/root.dart';
 import 'bootstrap.dart';
 import 'features/_shared/utils/providers.dart';
+import 'features/onboarding/landing_page1.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   bootstrap(() {
     return MultiBlocProvider(providers: providers, child: const MyApp());
@@ -25,6 +27,6 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.light,
             theme: AppTheme.light,
-            home: const RootScreen()));
+            home: const LandingPage1()));
   }
 }

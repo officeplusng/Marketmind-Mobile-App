@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "236579319826",
+    "project_id": "marketmind-1d553",
+    "storage_bucket": "marketmind-1d553.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236579319826:android:87cb899954310189d368cb",
+        "android_client_info": {
+          "package_name": "com.app.marketmind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236579319826-3uauphqt7fakcd50o6t9fnr3p3n3tk5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv0nxOUiT0F0gm-eVGMpiPh2i4__nERD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236579319826-3uauphqt7fakcd50o6t9fnr3p3n3tk5d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "236579319826-5mf4j6c5robncufa2edmt47ul6ttkokb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.marketmind"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

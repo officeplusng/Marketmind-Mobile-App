@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -13,6 +14,7 @@ class PrimaryButton extends StatelessWidget {
       this.textStyle,
       this.iconStart,
       this.iconEnd,
+        this.loading=false,
         this.enableFeedback=true,
       this.color});
 
@@ -29,6 +31,7 @@ class PrimaryButton extends StatelessWidget {
   final bool removeBorder;
   final Color? color;
   final TextStyle? textStyle;
+  final bool loading;
 
   factory PrimaryButton.state(
       {String? text,
@@ -88,6 +91,7 @@ class PrimaryButton extends StatelessWidget {
     double? height,
     double? width,
     bool? useWidth,
+    bool loading=false,
     Color? textColor,
     Color? color,
     VoidCallback? onPressed,
@@ -98,6 +102,7 @@ class PrimaryButton extends StatelessWidget {
         textColor:textColor?? AppColors.white,
         height: height,
         width: width,
+        loading: loading,
         iconStart: icon,
         removeBorder: true,
         onPressed: onPressed,
@@ -111,6 +116,7 @@ class PrimaryButton extends StatelessWidget {
     double? height,
     Widget? iconEnd,
     Color? color,
+    bool loading=false,
     double? width,
     Widget? icon,
     VoidCallback? onPressed,
@@ -118,6 +124,7 @@ class PrimaryButton extends StatelessWidget {
       PrimaryButton(
         color: color??AppColors.black,
         textColor: AppColors.white,
+        loading: loading,
         height: height ?? Dimens.buttonHeightMin,
         removeBorder: true,
         iconEnd: iconEnd,
@@ -151,39 +158,54 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: () {
-        onPressed?.call();
-      },
-      height: height ?? Dimens.buttonHeight,
-      minWidth: width ?? double.infinity,
-      disabledColor: color ?? AppColors.transparent,
-      elevation: 0,
-      focusElevation: 0,
-      highlightElevation: 0,
-      padding: const EdgeInsets.symmetric(vertical: Dimens.buttonPadding),
-      shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Dimens.buttonRadius),
-          borderSide: removeBorder
-              ? BorderSide.none
-              : BorderSide(
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        MaterialButton(
+          onPressed: () {
+            if(loading){
+              return;
+            }
+            onPressed?.call();
+          },
+          height: height ?? Dimens.buttonHeight,
+          minWidth: width ?? double.infinity,
+          disabledColor: color ?? AppColors.transparent,
+          elevation: 0,
+          focusElevation: 0,
+          highlightElevation: 0,
+          padding: const EdgeInsets.symmetric(vertical: Dimens.buttonPadding),
+          shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Dimens.buttonRadius),
+              borderSide: removeBorder
+                  ? BorderSide.none
+                  : BorderSide(
                   color: AppColors.textGray.withOpacity(.6), width: 1.5)),
-      color: color ?? AppColors.white,
-      enableFeedback: enableFeedback,
-      child: child ??
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (iconStart != null) ...[iconStart!, 10.horizontalSpace],
-              Text(
-                text ?? '',
-                style: textStyle ??
-                    context.textTheme.titleSmall?.copyWith(
-                        color: textColor ?? Colors.black),
+          color: color ?? AppColors.white,
+          enableFeedback: enableFeedback,
+          child: child ??
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if(loading)
+                    ...[Center(
+                      child: CupertinoActivityIndicator(
+                        color: AppColors.white,
+                        radius: 8,
+                      ),
+                    ),4.horizontalSpace],
+                  if (iconStart != null) ...[iconStart!, 10.horizontalSpace],
+                  Text(
+                    text ?? '',
+                    style: textStyle ??
+                        context.textTheme.titleSmall?.copyWith(
+                            color: textColor ?? Colors.black),
+                  ),
+                  if (iconEnd != null) ...[10.horizontalSpace, iconEnd!]
+                ],
               ),
-              if (iconEnd != null) ...[10.horizontalSpace, iconEnd!]
-            ],
-          ),
+        ),
+      ],
     );
   }
 }

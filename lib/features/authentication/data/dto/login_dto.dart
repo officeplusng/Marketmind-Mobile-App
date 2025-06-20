@@ -9,19 +9,11 @@ class LoginDto {
     required this.isGoogleSignIn,
   });
 
-  factory LoginDto.fromJson(Map<String, dynamic> json) {
-    return LoginDto(
-      email: json['email'] ?? '',
-      password: json['password'] ?? '',
-      isGoogleSignIn: json['isGoogleSignIn'] ?? false,
-    );
-  }
 
   Map<String, dynamic> toJson() {
     return {
       'email': email,
-      'password': password,
-      'isGoogleSignIn': isGoogleSignIn,
+      'password': password
     };
   }
 }

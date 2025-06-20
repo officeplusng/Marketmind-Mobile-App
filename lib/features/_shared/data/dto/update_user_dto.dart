@@ -1,3 +1,5 @@
+import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
+
 class UserUpdateDto {
   String? fullname;
   String? phone;
@@ -63,30 +65,6 @@ class UserUpdateDto {
     if (onboarding != null) {
       data['onboarding'] = onboarding!.map((e) => e.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class Avatar {
-  String? name;
-  String? fieldId;
-  String? url;
-
-  Avatar({this.name, this.fieldId, this.url});
-
-  factory Avatar.fromJson(Map<String, dynamic> json) {
-    return Avatar(
-      name: json['name'] as String?,
-      fieldId: json['fieldId'] as String?,
-      url: json['url'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    if (name != null) data['name'] = name;
-    if (fieldId != null) data['fieldId'] = fieldId;
-    if (url != null) data['url'] = url;
     return data;
   }
 }

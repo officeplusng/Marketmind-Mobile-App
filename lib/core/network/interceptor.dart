@@ -10,7 +10,8 @@ class NetworkInterceptor extends Interceptor {
   NetworkInterceptor(this._secureStorageService);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     // Fetch the token from Secure Storage
     String? token = await _secureStorageService.getToken();
 
@@ -23,6 +24,11 @@ class NetworkInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+    final data = response.data as Map<String, dynamic>;
+    final token = data['token'] as String?;
+    if (token != null) {
+      _secureStorageService.saveToken(token);
+    }
     super.onResponse(response, handler);
   }
 
@@ -35,9 +41,11 @@ class NetworkInterceptor extends Interceptor {
         err.type == DioExceptionType.receiveTimeout) {
       errorMessage = "Connection timeout, please try again.";
     } else if (err.type == DioExceptionType.badResponse) {
+      final json = err.response?.data as Map<String, dynamic>;
+      final message = json['message'] as String?;
       switch (statusCode) {
         case 400:
-          errorMessage = "Bad request. Please check your input.";
+          errorMessage = message ?? "Bad request. Please check your input.";
           break;
         case 401:
           errorMessage = "Unauthorized. Please log in again.";
@@ -64,7 +72,7 @@ class NetworkInterceptor extends Interceptor {
       requestOptions: err.requestOptions,
       response: err.response,
       type: err.type,
-      error: ApiException( errorMessage, statusCode: statusCode),
+      error: ApiException(errorMessage, statusCode: statusCode),
     ));
   }
 }
