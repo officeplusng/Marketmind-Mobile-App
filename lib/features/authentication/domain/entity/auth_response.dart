@@ -22,12 +22,13 @@ class AuthResponse {
       id: id ?? 0,
       email: email ?? '',
       fullname: fullname ?? '',
+      referralCode: referralCode,
       phone: phone ?? '',
       role: role ?? '',
       timezone: timezone ?? '',
       avatar: avatar != null
           ? Avatar(
-              name: avatar?.url.split('/').last ?? '',
+              name: avatar?.url?.split('/').last ?? '',
               fieldId: '', // Default or extract if available
               url: avatar?.url ?? '',
             )

@@ -26,6 +26,10 @@ class AccountCubit extends BaseCubit<UserDto> {
     }
   }
 
+  void setUser(UserDto dto) {
+    emitSuccess(data: dto);
+  }
+
   void updateUser(UserUpdateDto dto) async {
     emitLoading();
     final response = await _repo.updateUser(dto);

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
 import 'package:marketmind/features/authentication/_controller/cubit/onboarding_cubit.dart';
 import 'package:marketmind/features/authentication/_controller/state/auth_state.dart';
 import 'package:marketmind/features/authentication/data/dto/login_dto.dart';
@@ -130,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           listener: (_, state) {
                             if(state is LoginSuccess){
-                             // context.read<Account();
+                             context.read<AccountCubit>().setUser(state.user);
                               AppSnackBarHelper.showToast('Welcome back',color: AppColors.greenDark,gravity: ToastGravity.TOP);
                               context.pushRemoveUntil(RootScreen());
                             }

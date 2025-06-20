@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
+import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
 import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
 import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_cubit.dart';
 import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit.dart';
@@ -46,48 +48,65 @@ class _HomeRootState extends State<HomeRoot> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             20.verticalSpace,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const CircleAvatar(
-                      radius: 24,
-                      backgroundImage: NetworkImage(AppConstants.placeHolder),
-                    ),
-                    10.horizontalSpace,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome',
-                          style: context.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textBlack1),
-                        ),
-                        Text(
-                          'Kariaki Ebilate',
-                          style: context.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                              color: AppColors.textBlack1),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    HomeAppBarActionIcon(asset: Assets.bellIcon),
-                    10.horizontalSpace,
-                    HomeAppBarActionIcon(asset: Assets.search),
-                  ],
-                )
-              ],
-            ),
+            BlocBuilder<AccountCubit, BaseState<UserDto>>(
+                builder: (context, state) {
+              final data = state.data;
+              final nameSplit = data?.fullname?.split(' ');
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundImage: data?.avatar == null
+                            ? null
+                            : NetworkImage(
+                                data?.avatar?.url ?? AppConstants.placeHolder),
+                        backgroundColor:
+                            data?.avatar != null ? AppColors.primary : null,
+                        child: data?.avatar != null
+                            ? Text(
+                                '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
+                                style: context.textTheme.titleMedium
+                                    ?.copyWith(color: AppColors.white),
+                              )
+                            : null,
+                      ),
+                      10.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome',
+                            style: context.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textBlack1),
+                          ),
+                          Text(
+                            '${nameSplit?.firstOrNull ?? ''} ${nameSplit?.lastOrNull ?? ''}',
+                            style: context.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: AppColors.textBlack1),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      HomeAppBarActionIcon(asset: Assets.bellIcon),
+                      10.horizontalSpace,
+                      HomeAppBarActionIcon(asset: Assets.search),
+                    ],
+                  )
+                ],
+              );
+            }),
             20.verticalSpace,
             Expanded(
                 child: SingleChildScrollView(
@@ -134,7 +153,7 @@ class _HomeRootState extends State<HomeRoot> {
                           ? 2
                           : state.data!.length;
                       return ListView.separated(
-                        separatorBuilder: (_,a)=>10.verticalSpace,
+                          separatorBuilder: (_, a) => 10.verticalSpace,
                           itemCount: itemCount,
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -170,8 +189,9 @@ class _HomeRootState extends State<HomeRoot> {
                     ],
                   ),
                   5.verticalSpace,
-                  BlocBuilder<WatchListCubit,BaseState<List<WatchListDto>>>(builder: (context,state){
-                    if(state is LoadingState<List<WatchListDto>>){
+                  BlocBuilder<WatchListCubit, BaseState<List<WatchListDto>>>(
+                      builder: (context, state) {
+                    if (state is LoadingState<List<WatchListDto>>) {
                       return const SizedBox(
                         height: 100,
                         child: BaseShimmer(
@@ -182,9 +202,8 @@ class _HomeRootState extends State<HomeRoot> {
                         ),
                       );
                     }
-                    if(state is SuccessState<List<WatchListDto>>){
-
-                      final item  = state.data??[];
+                    if (state is SuccessState<List<WatchListDto>>) {
+                      final item = state.data ?? [];
                       return SizedBox(
                         height: 100,
                         child: ListView.builder(
@@ -195,7 +214,8 @@ class _HomeRootState extends State<HomeRoot> {
                             final data = item[index];
                             return MarketDataComponent(
                               currencyPair: data.asset,
-                              currentPrice: "${data.priceSymbol??''}${data.price}",
+                              currentPrice:
+                                  "${data.priceSymbol ?? ''}${data.price}",
                               percentageMovement: data.move,
                             );
                           },
