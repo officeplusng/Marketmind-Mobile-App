@@ -51,6 +51,11 @@ class AccountCubit extends BaseCubit<UserDto> {
         StorageKeys.userDetails, jsonEncode(dto.toJson()));
   }
 
+  void logout() async {
+    await _storageService.tearDown();
+    emitInitial(null);
+  }
+
   void refresh() async {
     emitLoading();
     final response = await _repo.getUser();

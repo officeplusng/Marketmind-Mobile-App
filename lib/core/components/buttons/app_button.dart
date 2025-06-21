@@ -105,7 +105,7 @@ class PrimaryButton extends StatelessWidget {
         loading: loading,
         iconStart: icon,
         removeBorder: true,
-        onPressed: onPressed,
+        onPressed: enabled?onPressed:null,
         iconEnd: iconEnd,
         text: text,
       );

@@ -11,10 +11,10 @@ class AppLogo extends StatelessWidget {
   final String assetName;
 
   factory AppLogo.dark() {
-    return AppLogo(assetName: Assets.appLogo.svg);
+    return AppLogo(assetName: Assets.appLogo);
   }
   factory AppLogo.light() {
-    return AppLogo(assetName: Assets.logoWhite.svg);
+    return AppLogo(assetName: Assets.logoWhite);
   }
   @override
   Widget build(BuildContext context) {

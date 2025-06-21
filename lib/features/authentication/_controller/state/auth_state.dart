@@ -9,7 +9,10 @@ class LoginSuccess extends AuthState {
    LoginSuccess(this.user);
 }
 
-class RegistrationSuccess extends AuthState {}
+class RegistrationSuccess extends AuthState {
+  final String message;
+  RegistrationSuccess(this.message);
+}
 
 class GoogleSignInLoading extends AuthState {}
 

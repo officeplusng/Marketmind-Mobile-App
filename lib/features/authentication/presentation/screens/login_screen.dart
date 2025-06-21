@@ -7,6 +7,7 @@ import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart
 import 'package:marketmind/features/authentication/_controller/cubit/onboarding_cubit.dart';
 import 'package:marketmind/features/authentication/_controller/state/auth_state.dart';
 import 'package:marketmind/features/authentication/data/dto/login_dto.dart';
+import 'package:marketmind/features/authentication/presentation/screens/create_account.dart';
 import 'package:marketmind/features/root/learning/root.dart';
 import 'package:marketmind/src/presentation/snack_bar_helper.dart';
 
@@ -113,32 +114,34 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       40.verticalSpace,
-                      BlocConsumer<AuthenticationCubit, AuthState>(
-                          builder: (context, state) {
-                            return PrimaryButton.primary(
-                              text: 'Continue',
-                              loading: state is AuthLoading,
-                              onPressed: () {
-                                if(formKey.currentState!.validate()) {
-                                  final dto = LoginDto(email: _emailController.text.trim(),
-                                      password: _passwordController.text.trim(),
-                                      isGoogleSignIn: false);
-                                  context.read<AuthenticationCubit>().login(
-                                      dto);
-                                }
-                              },
-                            );
-                          },
-                          listener: (_, state) {
-                            if(state is LoginSuccess){
+                     BlocProvider<AuthenticationCubit>(create: (_)=>AuthenticationCubit(),
+
+                     child:  BlocConsumer<AuthenticationCubit, AuthState>(
+                         builder: (context, state) {
+                           return PrimaryButton.primary(
+                             text: 'Continue',
+                             loading: state is AuthLoading,
+                             onPressed: () {
+                               if(formKey.currentState!.validate()) {
+                                 final dto = LoginDto(email: _emailController.text.trim(),
+                                     password: _passwordController.text.trim(),
+                                     isGoogleSignIn: false);
+                                 context.read<AuthenticationCubit>().login(
+                                     dto);
+                               }
+                             },
+                           );
+                         },
+                         listener: (_, state) {
+                           if(state is LoginSuccess){
                              context.read<AccountCubit>().setUser(state.user);
-                              AppSnackBarHelper.showToast('Welcome back',color: AppColors.greenDark,gravity: ToastGravity.TOP);
-                              context.pushRemoveUntil(RootScreen());
-                            }
-                            if(state is AuthError){
-                              AppSnackBarHelper.showToast(state.message,gravity: ToastGravity.TOP,color: AppColors.red);
-                            }
-                          }),
+                             AppSnackBarHelper.showToast('Welcome back',color: AppColors.greenDark,gravity: ToastGravity.TOP);
+                             context.pushRemoveUntil(RootScreen());
+                           }
+                           if(state is AuthError){
+                             AppSnackBarHelper.showToast(state.message,gravity: ToastGravity.TOP,color: AppColors.red);
+                           }
+                         }),),
                       20.verticalSpace,
                       ContinueWith(),
                       30.verticalSpace,
@@ -160,7 +163,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       HaveAnAccountComponent(
                         actionText: "Sign up",
                         contentText: "Don't have an account",
-                        onClick: () {},
+                        onClick: () {
+                          context.push(CreateAccount());
+                        },
                       ),
                       30.verticalSpace,
                     ],
