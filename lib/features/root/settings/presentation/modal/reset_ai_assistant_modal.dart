@@ -16,8 +16,6 @@ class ResetAiAssistantModal extends StatefulWidget {
 class _ResetAiAssistantModalState extends State<ResetAiAssistantModal> {
   final TextEditingController controller = TextEditingController();
 
-  String _password = '';
-
   @override
   Widget build(BuildContext context) {
     return BaseModalParent(

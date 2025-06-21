@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'referral_source.dart';
+part of 'trading_insight_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,13 +8,13 @@ part of 'referral_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _ReferralSource implements ReferralSource {
-  _ReferralSource(
+class _TradingInsightSource implements TradingInsightSource {
+  _TradingInsightSource(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://marketmind-ezjx.onrender.com/';
+    baseUrl ??= 'https://api.fastapi.getmarketmind.com/api';
   }
 
   final Dio _dio;
@@ -24,54 +24,27 @@ class _ReferralSource implements ReferralSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<ReferralDto>> getReferrals() async {
+  Future<MarketAnalysisData> getTradingInsight({
+    required String symbols,
+    required String timeframe,
+    required String signalMode,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'symbols': symbols,
+      r'timeframe': timeframe,
+      r'signal_mode': signalMode,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ReferralDto>>(Options(
+    final _options = _setStreamType<MarketAnalysisData>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/referrals',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ReferralDto> _value;
-    try {
-      _value = _result.data!
-          .map((dynamic i) => ReferralDto.fromJson(i as Map<String, dynamic>))
-          .toList();
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<ReferralStatisticsDto> getReferralStatistics() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ReferralStatisticsDto>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/referrals/statistics',
+          '/ai-insights-fixed',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -81,9 +54,9 @@ class _ReferralSource implements ReferralSource {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ReferralStatisticsDto _value;
+    late MarketAnalysisData _value;
     try {
-      _value = ReferralStatisticsDto.fromJson(_result.data!);
+      _value = MarketAnalysisData.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

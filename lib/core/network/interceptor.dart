@@ -26,10 +26,11 @@ class NetworkInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     final data = response.data as Map<String, dynamic>;
-    final token = data['token'] as String?;
+    final token = data['accessToken'] as String?;
     if (token != null) {
       _secureStorageService.saveToken(token);
     }
+    debugPrint('🟢 🟢  API RESPONSE -> ${response.data}');
     super.onResponse(response, handler);
   }
 
@@ -68,6 +69,7 @@ class NetworkInterceptor extends Interceptor {
     } else if (err.type == DioExceptionType.cancel) {
       errorMessage = "Request was cancelled.";
     } else if (err.type == DioExceptionType.unknown) {
+      debugPrintStack(stackTrace: err.stackTrace);
       errorMessage = "No internet connection.";
     }
 

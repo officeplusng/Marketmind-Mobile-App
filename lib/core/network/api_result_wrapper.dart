@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/exceptions/api_exception.dart';
 import 'package:marketmind/core/network/api_result.dart';
 
@@ -10,7 +11,8 @@ class ApiResultWrapper {
     } on DioException catch (e) {
       final error = e.error as ApiException;
       return Failure(error: error.message);
-    } catch (e) {
+    } catch (e,trace) {
+      debugPrintStack(stackTrace:trace );
       return Failure(error: e.toString());
     }
   }

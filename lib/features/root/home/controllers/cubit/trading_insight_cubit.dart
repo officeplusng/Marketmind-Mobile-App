@@ -5,19 +5,21 @@ import 'package:marketmind/features/root/home/domain/repository/trading_insight_
 import 'package:marketmind/src/state_management/base_cubit.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
+import '../../data/dto/trading_insight_data_dto.dart';
+
 class TradingInsightCubit extends BaseCubit<List<TradingInsightDto>> {
   late TradingInsightRepository _repository;
 
-  TradingInsightCubit() :super(InitialState()){
+  TradingInsightCubit() : super(InitialState()) {
     _repository = getIt<TradingInsightRepository>();
   }
 
   void fetchTradingInsight() async {
     emitLoading();
     final result = await _repository.fetchTradingInsight();
-    result.when(onSuccess: (data){
+    result.when(onSuccess: (data) {
       emitSuccess(data: data);
-    }, onError: (error){
+    }, onError: (error) {
       emitError(error);
     });
     // if (result is Success<List<TradingInsightDto>>) {
@@ -26,5 +28,24 @@ class TradingInsightCubit extends BaseCubit<List<TradingInsightDto>> {
     // if(result is Failure<List<TradingInsightDto>>){
     //   emitError(result.error);
     // }
+  }
+}
+
+class AiInsightCubit extends BaseCubit<MarketAnalysisData> {
+  late TradingInsightRepository _repository;
+
+  AiInsightCubit() : super(InitialState()) {
+    _repository = getIt<TradingInsightRepository>();
+  }
+
+  void generateAISpotLight() async {
+    final assets = ['BTCUSD','ETHUSD', 'EURUSD', 'GBPUSD', 'USDJPY', 'CADJPY', 'USDCAD', 'USDCHF'];
+    emitLoading();
+    final result = await _repository.fetchInsightData(assets);
+    result.when(onSuccess: (data) {
+      emitSuccess(data: data);
+    }, onError: (error) {
+      emitError(error);
+    });
   }
 }

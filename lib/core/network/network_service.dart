@@ -5,6 +5,7 @@ import 'package:marketmind/features/_shared/data/source/upload_source.dart';
 import 'package:marketmind/features/_shared/data/source/user_source.dart';
 import 'package:marketmind/features/authentication/data/source/auth_source.dart';
 import 'package:marketmind/features/root/home/data/source/referral_source.dart';
+import 'package:marketmind/features/root/home/data/source/trading_insight_source.dart';
 import 'interceptor.dart';
 
 @module
@@ -38,9 +39,14 @@ abstract class NetworkModule {
       UserSource(dio, baseUrl: '$apiBaseUrl/users');
 
   @lazySingleton
+  TradingInsightSource tradingInsightSource(Dio dio) =>
+      TradingInsightSource(dio, baseUrl: aiBaseUrl);
+
+  @lazySingleton
   UploadSource uploadSource(Dio dio) =>
       UploadSource(dio, baseUrl: '$apiBaseUrl/upload');
+
   @lazySingleton
   ReferralSource referralSource(Dio dio) =>
-      ReferralSource(dio, baseUrl: '$apiBaseUrl/referrals');
+      ReferralSource(dio, baseUrl: apiBaseUrl);
 }

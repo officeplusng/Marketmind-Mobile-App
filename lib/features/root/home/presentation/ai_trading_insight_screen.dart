@@ -5,6 +5,7 @@ import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart'
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
 import '../../../../core/export/export.core.dart';
+import '../data/dto/trading_insight_data_dto.dart';
 import 'components/home_app_bar_action_icon.dart';
 import 'components/trading_insight_component.dart';
 
@@ -110,25 +111,27 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
           ),
           10.verticalSpace,
           Expanded(child:
-              BlocBuilder<TradingInsightCubit, BaseState<TradingInsight>>(
+              BlocBuilder<AiInsightCubit, BaseState<MarketAnalysisData>>(
                   builder: (context, state) {
-            if (state is LoadingState<TradingInsight>) {
+            if (state is LoadingState<MarketAnalysisData>) {
               return const BaseShimmer(
                 height: 150,
                 radius: 16,
               );
             }
-            if (state is SuccessState<TradingInsight>) {
-              final data = (state.data ?? [])
-                  .where((e) => e.category?.contains(category) ?? true)
-                  .toList();
+            if (state is SuccessState<MarketAnalysisData>) {
+              final data = state.data?.aiSignalSpotlights ?? [];
               return ListView.builder(
                   itemCount: data.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final item = data[index];
                     return TradingInsightComponent(
-                      data: item,
+                      data: TradingInsightDto(
+                          asset: item.pair ?? '',
+                          confidence: item.confidence?.toDouble().round() ?? 0,
+                          signal: item.signal??'',
+                          info: 'info'),
                     );
                   });
             }

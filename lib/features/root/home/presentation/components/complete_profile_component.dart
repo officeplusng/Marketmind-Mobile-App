@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
 import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
+import 'package:marketmind/features/root/settings/presentation/screens/personal_information_screen.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
 class CompleteProfileComponent extends StatelessWidget {
@@ -86,7 +87,9 @@ class CompleteProfileComponent extends StatelessWidget {
   }
 
   Widget button(BuildContext context) => GestureDetector(
-    onTap: (){},
+    onTap: (){
+      context.push(PersonalInformationScreen());
+    },
     child: Container(
       height: 36,
       padding: const EdgeInsets.symmetric(horizontal: 14),

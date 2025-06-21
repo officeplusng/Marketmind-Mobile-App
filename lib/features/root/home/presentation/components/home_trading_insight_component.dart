@@ -1,5 +1,7 @@
 import 'package:marketmind/core/export/export.core.dart';
 
+import '../../controllers/cubit/trading_insight_cubit.dart';
+
 class HomeTradingInsightComponent extends StatelessWidget {
   const HomeTradingInsightComponent(
       {super.key,
@@ -15,6 +17,10 @@ class HomeTradingInsightComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data =
+        context.read<AiInsightCubit>().state.data?.marketSentiments ?? [];
+    final sentiment =
+        data.where((element) => element.pair == currencyPair).firstOrNull?.summary??'';
     final buy = tradeDirection.toLowerCase() == 'buy';
     const buyGradient = LinearGradient(colors: [
       Color(0xFFACCBEE),
@@ -43,7 +49,7 @@ class HomeTradingInsightComponent extends StatelessWidget {
                     ?.copyWith(fontWeight: FontWeight.w500),
               ),
               10.horizontalSpace,
-              priceChange(context,buy)
+              priceChange(context, buy)
             ],
           ),
           8.verticalSpace,
@@ -54,7 +60,8 @@ class HomeTradingInsightComponent extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20))),
             child: Text(
-              'Entry: 1.1050 | SL: 1.1020 | TP: 1.1100. Strong support at 1.1020 with increasing bullish momentum on 4H chart.',
+              sentiment,
+              //'Entry: 1.1050 | SL: 1.1020 | TP: 1.1100. Strong support at 1.1020 with increasing bullish momentum on 4H chart.',
               style: context.textTheme.bodyMedium
                   ?.copyWith(color: AppColors.textGray1),
             ),
@@ -64,11 +71,7 @@ class HomeTradingInsightComponent extends StatelessWidget {
     );
   }
 
-  Widget priceChange(
-    BuildContext context,
-      bool buy
-  ) =>
-      Container(
+  Widget priceChange(BuildContext context, bool buy) => Container(
         height: 21.5,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: ShapeDecoration(
@@ -87,7 +90,7 @@ class HomeTradingInsightComponent extends StatelessWidget {
               style: context.textTheme.bodyMedium?.copyWith(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: buy?AppColors.textGreen:const Color(0xFF93370D)),
+                  color: buy ? AppColors.textGreen : const Color(0xFF93370D)),
             )
           ],
         ),

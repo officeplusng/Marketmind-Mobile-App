@@ -6,6 +6,7 @@ import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
 import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
 import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_cubit.dart';
 import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit.dart';
+import 'package:marketmind/features/root/home/data/dto/trading_insight_data_dto.dart';
 import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart';
 import 'package:marketmind/features/root/home/data/dto/watch_list_dto.dart';
 import 'package:marketmind/features/root/home/presentation/referral/referral_home_page.dart';
@@ -61,24 +62,23 @@ class _HomeRootState extends State<HomeRoot> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           context.push(SettingsRoot());
                         },
-                        child:
-                        CircleAvatar(
+                        child: CircleAvatar(
                           radius: 24,
                           backgroundImage: data?.avatar == null
                               ? null
-                              : NetworkImage(
-                              data?.avatar?.url ?? AppConstants.placeHolder),
+                              : NetworkImage(data?.avatar?.url ??
+                                  AppConstants.placeHolder),
                           backgroundColor:
-                          data?.avatar != null ? AppColors.primary : null,
+                              data?.avatar != null ? AppColors.primary : null,
                           child: data?.avatar != null
                               ? Text(
-                            '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
-                            style: context.textTheme.titleMedium
-                                ?.copyWith(color: AppColors.white),
-                          )
+                                  '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
+                                  style: context.textTheme.titleMedium
+                                      ?.copyWith(color: AppColors.white),
+                                )
                               : null,
                         ),
                       ),
@@ -143,8 +143,7 @@ class _HomeRootState extends State<HomeRoot> {
                     ],
                   ),
                   5.verticalSpace,
-                  BlocBuilder<TradingInsightCubit,
-                          BaseState<List<TradingInsightDto>>>(
+                  BlocBuilder<AiInsightCubit, BaseState<MarketAnalysisData>>(
                       builder: (context, state) {
                     if (state is LoadingState) {
                       return const BaseShimmer(
@@ -155,23 +154,34 @@ class _HomeRootState extends State<HomeRoot> {
                     if (state is ErrorState) {
                       return SizedBox();
                     }
-                    if (state is SuccessState<List<TradingInsightDto>>) {
-                      int itemCount = (state.data?.length ?? 1) > 2
-                          ? 2
-                          : state.data!.length;
+                    if (state is SuccessState) {
+                      final data = state.data?.aiSignalSpotlights ?? [];
+                      int itemCount = data.length > 2 ? 2 : data.length;
+                      if (itemCount == 0) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'No Trading Insight available',
+                              style: context.textTheme.titleMedium
+                                  ?.copyWith(color: AppColors.textGray1),
+                            ),
+                          ),
+                        );
+                      }
                       return ListView.separated(
                           separatorBuilder: (_, a) => 10.verticalSpace,
                           itemCount: itemCount,
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (_, index) {
-                            final item = state.data![index];
+                            final item = data[index];
                             return HomeTradingInsightComponent(
-                                currencyPair: item.asset,
-                                insight: item.info,
+                                currencyPair: item.pair ?? '',
+                                insight: 'item.info',
                                 percentageConfidence:
-                                    item.confidence.toDouble(),
-                                tradeDirection: item.signal);
+                                    item.confidence?.toDouble() ?? 0,
+                                tradeDirection: item.signal ?? '');
                           });
                     }
                     return SizedBox();
@@ -196,9 +206,9 @@ class _HomeRootState extends State<HomeRoot> {
                     ],
                   ),
                   5.verticalSpace,
-                  BlocBuilder<WatchListCubit, BaseState<List<WatchListDto>>>(
+                  BlocBuilder<AiInsightCubit, BaseState<MarketAnalysisData>>(
                       builder: (context, state) {
-                    if (state is LoadingState<List<WatchListDto>>) {
+                    if (state is LoadingState) {
                       return const SizedBox(
                         height: 100,
                         child: BaseShimmer(
@@ -209,8 +219,8 @@ class _HomeRootState extends State<HomeRoot> {
                         ),
                       );
                     }
-                    if (state is SuccessState<List<WatchListDto>>) {
-                      final item = state.data ?? [];
+                    if (state is SuccessState) {
+                      final item = state.data?.assetsToWatch ?? [];
                       return SizedBox(
                         height: 100,
                         child: ListView.builder(
@@ -220,10 +230,12 @@ class _HomeRootState extends State<HomeRoot> {
                           itemBuilder: (context, index) {
                             final data = item[index];
                             return MarketDataComponent(
-                              currencyPair: data.asset,
-                              currentPrice:
-                                  "${data.priceSymbol ?? ''}${data.price}",
-                              percentageMovement: data.move,
+                              currencyPair: data.symbol ?? '',
+                              currentPrice: data.price?.toString() ?? '0',
+                              percentageMovement: double.tryParse(
+                                      data.change24h?.toStringAsFixed(3) ??
+                                          '') ??
+                                  0,
                             );
                           },
                         ),

@@ -1,6 +1,8 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart';
 
+import '../../controllers/cubit/trading_insight_cubit.dart';
+
 class TradingInsightComponent extends StatelessWidget {
   const TradingInsightComponent({super.key, required this.data});
 
@@ -8,6 +10,14 @@ class TradingInsightComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubitData =
+        context.read<AiInsightCubit>().state.data?.marketSentiments ?? [];
+    final sentiment = cubitData
+            .where((element) => element.pair == data.asset)
+            .firstOrNull
+            ?.summary ??
+        '';
+
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 10),
@@ -57,9 +67,10 @@ class TradingInsightComponent extends StatelessWidget {
                   title: 'Take Profile', value: data.tp?.toString() ?? ''),
             ],
           ),
-          10.verticalSpace,
+          5.verticalSpace,
           Text(
-            data.info ?? '',
+            sentiment,
+            // data.info ?? '',
             textAlign: TextAlign.start,
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontSize: 12, color: const Color(0xFF667085)),

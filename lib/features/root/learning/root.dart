@@ -24,10 +24,10 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   void initState() {
-
     context.read<AccountCubit>().refresh();
     context.read<WatchListCubit>().fetchWatchList();
     context.read<TradingInsightCubit>().fetchTradingInsight();
+    context.read<AiInsightCubit>().generateAISpotLight();
     context.read<NewsCubit>().fetchNews();
     super.initState();
   }
