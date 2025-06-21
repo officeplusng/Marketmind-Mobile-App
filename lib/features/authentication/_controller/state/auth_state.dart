@@ -1,4 +1,5 @@
 import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
+import 'package:marketmind/features/authentication/domain/entity/auth_response.dart';
 
 sealed class AuthState {}
 
@@ -17,8 +18,8 @@ class RegistrationSuccess extends AuthState {
 class GoogleSignInLoading extends AuthState {}
 
 class AppleSignInLoading extends AuthState {}
-
 class AuthLoading extends AuthState {}
+class OAuthLoading extends AuthState{}
 
 class AuthError extends AuthState {
   final String message;
@@ -29,6 +30,7 @@ class AuthError extends AuthState {
 class OAuthSuccess extends AuthState {
   final String email;
   final String? name;
+  final AuthResponse? response;
 
-  OAuthSuccess({required this.email, this.name});
+  OAuthSuccess({required this.email, this.name,this.response});
 }

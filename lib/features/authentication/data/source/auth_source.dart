@@ -9,6 +9,7 @@ import 'package:marketmind/features/authentication/data/dto/verify_sign_up_dto.d
 import 'package:marketmind/features/authentication/data/dto/verify_token_dto.dart';
 import 'package:marketmind/features/authentication/domain/entity/auth_response.dart';
 import 'package:retrofit/retrofit.dart';
+
 part 'auth_source.g.dart';
 
 @RestApi(baseUrl: '$apiBaseUrl/auth')
@@ -27,8 +28,15 @@ abstract class AuthSource {
   @POST("/verify-token")
   Future<dynamic> verifyToken(@Body() VerifyTokenDto dto);
 
+  @POST("/apple-mobile")
+  Future<AuthResponse> appleSignIn(@Body() OAuthTokenDto dto);
+
+  @POST("/google-mobile")
+  Future<AuthResponse> googleSignIn(@Body() OAuthTokenDto dto);
+
   @POST("/resend-email")
   Future<dynamic> resendEmail(@Body() EmailDto dto);
+
   @POST("/contact-us")
   Future<dynamic> contactUs(@Body() ContactUsDto dto);
 }

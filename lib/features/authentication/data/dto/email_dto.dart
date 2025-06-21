@@ -5,4 +5,11 @@ class EmailDto{
   Map<String,dynamic> toJson() => {
     'email':email
   };
+}class OAuthTokenDto{
+  final String token;
+  const OAuthTokenDto({required this.token});
+
+  Map<String,dynamic> toJson() => {
+    'idToken':token
+  };
 }

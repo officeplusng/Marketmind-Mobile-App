@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "236579319826-r2ougja85qt8g3af7ptcc1qthfa11tlo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.marketmind",
+            "certificate_hash": "a9c5b22ea3826fdefe091b0f3cc0d7a2a100adb8"
+          }
+        },
+        {
           "client_id": "236579319826-3uauphqt7fakcd50o6t9fnr3p3n3tk5d.apps.googleusercontent.com",
           "client_type": 3
         }

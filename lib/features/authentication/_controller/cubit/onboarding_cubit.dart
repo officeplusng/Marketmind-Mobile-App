@@ -7,6 +7,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:marketmind/core/di/injectable.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/authentication/_controller/state/auth_state.dart';
+import 'package:marketmind/features/authentication/data/dto/email_dto.dart';
 import 'package:marketmind/features/authentication/data/dto/login_dto.dart';
 import 'package:marketmind/features/authentication/data/dto/register_dto.dart';
 import 'package:marketmind/features/authentication/domain/repositories/auth_repository.dart';
@@ -49,7 +50,7 @@ class AuthenticationCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     final response = await _repository.register(dto);
     response.when(onSuccess: (result) {
-     final message =  result.message??'Registration successful';
+      final message = result.message ?? 'Registration successful';
       emit(RegistrationSuccess(message));
     }, onError: (error) {
       emit(AuthError(error));
@@ -66,17 +67,18 @@ class AuthenticationCubit extends Cubit<AuthState> {
     if (credential == null) {
       return;
     }
-    emit(AuthLoading());
-
-    try {
-      Map<String, dynamic> decodedToken =
-          JwtDecoder.decode(credential.credential.idToken ?? '');
-      final email = decodedToken['email'];
+    emit(OAuthLoading());
+    final response = await _repository.googleSignIn(
+        OAuthTokenDto(token: credential.credential.idToken ?? ''));
+    response.when(onSuccess: (result) {
       emit(OAuthSuccess(
-        email: credential.email ?? '',
-        name: credential.name,
-      ));
-    } catch (e) {
+          email: credential?.email ?? '',
+          name: credential?.name ?? '',
+          response: result));
+    }, onError: (error) {
+      emit(AuthError(error));
+    });
+    try {} catch (e) {
       emit(AuthError(e.toString()));
     }
   }
@@ -85,13 +87,14 @@ class AuthenticationCubit extends Cubit<AuthState> {
     try {
       // Trigger the authentication flow
 
-      await GoogleSignIn().signOut();
+      print('google auth ');
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
+      print('google auth user -> ${googleUser?.displayName}');
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-      print('google auth user -> ${googleUser?.displayName}');
+
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -105,6 +108,7 @@ class AuthenticationCubit extends Cubit<AuthState> {
         email: googleUser?.email,
       );
     } catch (e) {
+      print('authentication -> ${e.toString()}');
       emit(AuthError('Something went wrong'));
       return null;
     }

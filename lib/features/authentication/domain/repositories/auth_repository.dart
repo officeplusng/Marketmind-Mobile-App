@@ -19,6 +19,10 @@ class AuthRepository {
 
   Future<ApiResult<AuthResponse>> register(RegisterDto dto) =>
       ApiResultWrapper.wrap(() => _source.register(dto));
+  Future<ApiResult<AuthResponse>> googleSignIn(OAuthTokenDto dto) =>
+      ApiResultWrapper.wrap(() => _source.googleSignIn(dto));
+  Future<ApiResult<AuthResponse>> appleSignIn(OAuthTokenDto dto) =>
+      ApiResultWrapper.wrap(() => _source.appleSignIn(dto));
 
   Future<ApiResult<AuthResponse>> login(LoginDto dto) =>
       ApiResultWrapper.wrap(() => _source.login(dto));
