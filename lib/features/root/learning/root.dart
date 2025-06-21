@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/news_cubit.dart';
 import 'package:marketmind/features/root/_ai_chat/presentation/screens/ai_chat.root.dart';
 import 'package:marketmind/features/root/component/app_bottom_nav.dart';
@@ -24,6 +25,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   void initState() {
 
+    context.read<AccountCubit>().refresh();
     context.read<WatchListCubit>().fetchWatchList();
     context.read<TradingInsightCubit>().fetchTradingInsight();
     context.read<NewsCubit>().fetchNews();

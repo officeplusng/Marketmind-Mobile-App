@@ -31,10 +31,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _splashLogic() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     final isLoggedIn = await context.read<AccountCubit>().userAvailable();
     if (isLoggedIn) {
-      context.pushRemoveUntil(LoginScreen());
+      context.pushRemoveUntil(RootScreen());
     } else {
       context.pushReplace(LandingPage1());
     }

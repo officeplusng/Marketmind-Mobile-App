@@ -115,7 +115,6 @@ class _CreateAccountReferralCodeState extends State<CreateAccountReferralCode> {
                                       final phone = '$countryCode${_phoneNumberController.text.trim()}';
                                       final data = widget.data.copyWith(
                                         phone: phone,
-                                          email: 'kariaki.ebilat23323@gmail.com',
                                           password: _passwordController.text.trim(),
                                           inviteCode:
                                           _referralCodeController.text.isEmpty
