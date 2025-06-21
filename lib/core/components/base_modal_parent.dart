@@ -96,10 +96,10 @@ class BaseModalParent extends StatelessWidget {
     );
   }
 
-  static Widget modalPin() {
+  static Widget modalPin({double? margin}) {
     return Center(
       child: Container(
-        margin: EdgeInsets.only(bottom: 20),
+        margin: EdgeInsets.only(bottom: margin??20),
         height: 4,
         width: 75,
         decoration: ShapeDecoration(

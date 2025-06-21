@@ -100,3 +100,23 @@ class Assets {
   static final onboardingBackground1 = 'onboarding_background1'.png;
   static final splashGraphics1 = 'background-graphics1'.png;
 }
+class SettingsAssets{
+  static final aiConfiguration = 'ai-configuration'.svg;
+  static final settingsBell = 'bell'.svg;
+  static final profileEdit = 'profile-edit'.svg;
+  static final settingsBillingHistory = 'billing-history'.svg;
+  static final settingsCheckForUpdate = 'check-for-update'.svg;
+  static final settingsContactUs = 'contact-us'.svg;
+  static final settingsDeleteAccount = 'delete-account'.svg;
+  static final settingsDeviceManagement = 'device-management'.svg;
+  static final settingsDisplayMarket = 'display-market'.svg;
+  static final settingsLock = 'lock'.svg;
+  static final settingsLogout = 'logout'.svg;
+  static final settingsPaymentMethod  = 'payment-method'.svg;
+  static final settingsPayout ='payout-settings'.svg;
+  static final settingsProfile = 'profile'.svg;
+  static final settingsDeleteAccountIcon = 'delete-account-icon'.svg;
+  static final settingsReferralDashboard = 'referral-dashboard'.svg;
+  static final settingsResetAI = 'reset-ai'.svg;
+  static final settingsResetAISettings = 'reset-ai-settings'.svg;
+}

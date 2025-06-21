@@ -1,17 +1,8 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
-import 'package:marketmind/features/authentication/presentation/screens/login_screen.dart';
-import 'package:marketmind/features/onboarding/components/onboarding_text_caption_component.dart';
-import 'package:marketmind/features/onboarding/components/selectable_component.dart';
 import 'package:marketmind/features/onboarding/landing_page1.dart';
 import 'package:marketmind/features/root/learning/root.dart';
-
-import 'features/authentication/presentation/components/continue_with.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

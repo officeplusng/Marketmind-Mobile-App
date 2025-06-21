@@ -9,6 +9,7 @@ import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit
 import 'package:marketmind/features/root/home/data/dto/trading_insight_dto.dart';
 import 'package:marketmind/features/root/home/data/dto/watch_list_dto.dart';
 import 'package:marketmind/features/root/home/presentation/referral/referral_home_page.dart';
+import 'package:marketmind/features/root/settings/presentation/settings.root.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
 import 'ai_trading_insight_screen.dart';
@@ -59,21 +60,27 @@ class _HomeRootState extends State<HomeRoot> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 24,
-                        backgroundImage: data?.avatar == null
-                            ? null
-                            : NetworkImage(
-                                data?.avatar?.url ?? AppConstants.placeHolder),
-                        backgroundColor:
-                            data?.avatar != null ? AppColors.primary : null,
-                        child: data?.avatar != null
-                            ? Text(
-                                '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
-                                style: context.textTheme.titleMedium
-                                    ?.copyWith(color: AppColors.white),
-                              )
-                            : null,
+                      GestureDetector(
+                        onTap:(){
+                          context.push(SettingsRoot());
+                        },
+                        child:
+                        CircleAvatar(
+                          radius: 24,
+                          backgroundImage: data?.avatar == null
+                              ? null
+                              : NetworkImage(
+                              data?.avatar?.url ?? AppConstants.placeHolder),
+                          backgroundColor:
+                          data?.avatar != null ? AppColors.primary : null,
+                          child: data?.avatar != null
+                              ? Text(
+                            '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
+                            style: context.textTheme.titleMedium
+                                ?.copyWith(color: AppColors.white),
+                          )
+                              : null,
+                        ),
                       ),
                       10.horizontalSpace,
                       Column(
