@@ -49,7 +49,6 @@ class AuthenticationCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     final response = await _repository.register(dto);
     response.when(onSuccess: (result) {
-      print('registration success');
      final message =  result.message??'Registration successful';
       emit(RegistrationSuccess(message));
     }, onError: (error) {
