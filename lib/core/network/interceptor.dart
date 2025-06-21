@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import '../exceptions/api_exception.dart';
 import '../local/secured_storage_service.dart';
@@ -43,6 +44,8 @@ class NetworkInterceptor extends Interceptor {
     } else if (err.type == DioExceptionType.badResponse) {
       final json = err.response?.data as Map<String, dynamic>;
       final message = json['message'] as String?;
+      debugPrint('🔴 🔴  API ERROR \n-> ${err.response?.data}');
+      //What does the  mean?
       switch (statusCode) {
         case 400:
           errorMessage = message ?? "Bad request. Please check your input.";
