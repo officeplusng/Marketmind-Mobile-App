@@ -84,6 +84,7 @@ class Assets {
   static final illustration31 = 'illustration31'.png;
   static final homeBackground1 = 'data_list1'.png;
   static final homeBackground2 = 'data_list2'.png;
+  static final infoAsset = 'info-asset'.png;
   static final bgGradient = 'bg_Gradient'.png;
   static final loadingState = 'loading_state'.png;
   static final aiChatIcon = 'ai_icon'.png;

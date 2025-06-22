@@ -1,5 +1,6 @@
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/presentation/candle_chart.dart';
+import 'package:marketmind/features/root/marketAnalysis/presentation/modal/market_analysis_option.dart';
 import 'components/market_analysis_dasboard.dart';
 import 'components/news_components.dart';
 import 'components/technical_analysis.dart';
@@ -12,6 +13,14 @@ class MarketAnalysis extends StatefulWidget {
 }
 
 class _MarketAnalysisState extends State<MarketAnalysis> {
+  final options = ['Stock','Crypto','Forex'
+  ];
+  String? analysisOption;
+  @override
+  void initState() {
+    analysisOption=options.firstOrNull;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var data = 'Risk Analysis';
@@ -40,10 +49,21 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
             ),
             Spacer(),
             WrapperContainer.rectangular(
-                width: 100,
                 useHeight: false,
+                useWidth: false,
                 backgroundColor: AppColors.white,
                 borderRadius: 999,
+                onClick: (){
+                  ModalHelper.showModalMax(context, MarketAnalysisOption(
+                    options: options,
+                    initialSelected: analysisOption,
+                    onSelected: (value){
+                      setState(() {
+                        analysisOption=value;
+                      });
+                    },
+                  ));
+                },
                 bordered: true,
                 borderColor: const Color(0xFFF2F4F7),
                 padding:
@@ -53,7 +73,7 @@ class _MarketAnalysisState extends State<MarketAnalysis> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Stock',
+                      analysisOption??'',
                       style: context.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w500),
                     ),

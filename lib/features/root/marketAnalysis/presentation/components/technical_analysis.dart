@@ -50,14 +50,14 @@ class _MarketAnalysisTechnicalAnalysisComponentState
                     Icon(Icons.keyboard_arrow_down_sharp)
                   ],
                 ),
-                20.horizontalSpace,
-                WrapperContainer.rectangular(
-                    width: 36,
-                    height: 36,
-                    backgroundColor: AppColors.lightBlue,
-                    child: SvgPicture.asset(Assets.chart)),
-                20.horizontalSpace,
-                SvgPicture.asset(Assets.barChart)
+                // 20.horizontalSpace,
+                // WrapperContainer.rectangular(
+                //     width: 36,
+                //     height: 36,
+                //     backgroundColor: AppColors.lightBlue,
+                //     child: SvgPicture.asset(Assets.chart)),
+                // 20.horizontalSpace,
+                // SvgPicture.asset(Assets.barChart)
               ],
             ),
             20.verticalSpace,
