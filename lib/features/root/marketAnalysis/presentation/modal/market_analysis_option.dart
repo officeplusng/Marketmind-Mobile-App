@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:marketmind/core/components/base_modal_parent.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
 class MarketAnalysisOption extends StatefulWidget {

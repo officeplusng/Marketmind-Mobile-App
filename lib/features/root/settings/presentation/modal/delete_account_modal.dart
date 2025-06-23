@@ -1,8 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:marketmind/core/assets/assets.dart';
-import 'package:marketmind/core/components/base_modal_parent.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/root/settings/presentation/components/settings_input_field.dart';
 

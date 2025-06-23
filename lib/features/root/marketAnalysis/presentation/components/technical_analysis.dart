@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:marketmind/core/components/export.core.component.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
 class MarketAnalysisTechnicalAnalysisComponent extends StatefulWidget {
@@ -47,7 +45,7 @@ class _MarketAnalysisTechnicalAnalysisComponentState
                       style: bodyMedium2?.copyWith(fontWeight: FontWeight.w500),
                     ),
                     8.horizontalSpace,
-                    Icon(Icons.keyboard_arrow_down_sharp)
+                    const Icon(Icons.keyboard_arrow_down_sharp)
                   ],
                 ),
                 // 20.horizontalSpace,
