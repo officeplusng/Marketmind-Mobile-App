@@ -45,7 +45,7 @@ class NetworkInterceptor extends Interceptor {
     } else if (err.type == DioExceptionType.badResponse) {
       final json = err.response?.data as Map<String, dynamic>;
       final message = json['message'] as String?;
-      debugPrint('🔴 🔴  API ERROR \n-> ${err.response?.data}');
+      debugPrint('🔴 🔴  API ERROR ${err.response?.realUri.path}\n-> ${err.response?.data}');
       //What does the  mean?
       switch (statusCode) {
         case 400:

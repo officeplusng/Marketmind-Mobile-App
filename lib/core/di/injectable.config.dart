@@ -33,6 +33,8 @@ import 'package:marketmind/features/root/home/data/source/referral_source.dart'
     as _i484;
 import 'package:marketmind/features/root/home/data/source/trading_insight_source.dart'
     as _i496;
+import 'package:marketmind/features/root/home/data/source/watch_list_source.dart'
+    as _i998;
 import 'package:marketmind/features/root/home/domain/repository/referral_repository.dart'
     as _i329;
 import 'package:marketmind/features/root/home/domain/repository/trading_insight_repository.dart'
@@ -54,8 +56,6 @@ extension GetItInjectableX on _i174.GetIt {
     final networkModule = _$NetworkModule();
     gh.lazySingleton<_i497.SecureStorageService>(
         () => _i497.SecureStorageService());
-    gh.lazySingleton<_i956.WatchListRepository>(
-        () => _i956.WatchListRepository());
     gh.lazySingleton<_i1042.NewsRepository>(() => _i1042.NewsRepository());
     gh.lazySingleton<_i1025.NetworkInterceptor>(
         () => _i1025.NetworkInterceptor(gh<_i497.SecureStorageService>()));
@@ -71,12 +71,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkModule.uploadSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i484.ReferralSource>(
         () => networkModule.referralSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i998.WatchListSource>(
+        () => networkModule.watchListSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i936.AuthRepository>(
         () => _i936.AuthRepository(gh<_i2.AuthSource>()));
     gh.lazySingleton<_i847.UserRepository>(() => _i847.UserRepository(
           gh<_i156.UserSource>(),
           gh<_i56.SecureStorageService>(),
         ));
+    gh.lazySingleton<_i956.WatchListRepository>(
+        () => _i956.WatchListRepository(gh<_i998.WatchListSource>()));
     gh.lazySingleton<_i500.UploadRepository>(
         () => _i500.UploadRepository(gh<_i258.UploadSource>()));
     gh.lazySingleton<_i131.TradingInsightRepository>(

@@ -6,6 +6,7 @@ import 'package:marketmind/features/_shared/data/source/user_source.dart';
 import 'package:marketmind/features/authentication/data/source/auth_source.dart';
 import 'package:marketmind/features/root/home/data/source/referral_source.dart';
 import 'package:marketmind/features/root/home/data/source/trading_insight_source.dart';
+import 'package:marketmind/features/root/home/data/source/watch_list_source.dart';
 import 'interceptor.dart';
 
 @module
@@ -49,4 +50,7 @@ abstract class NetworkModule {
   @lazySingleton
   ReferralSource referralSource(Dio dio) =>
       ReferralSource(dio, baseUrl: apiBaseUrl);
+  @lazySingleton
+  WatchListSource watchListSource(Dio dio) =>
+      WatchListSource(dio, baseUrl: apiBaseUrl);
 }
