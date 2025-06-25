@@ -8,6 +8,7 @@ class InputField2 extends StatelessWidget {
       this.inputType,
       this.onChange,
         this.focusBorderColor,
+        this.onSubmit,
       this.prefix});
 
   final TextEditingController controller;
@@ -15,6 +16,7 @@ class InputField2 extends StatelessWidget {
   final TextInputType? inputType;
   final Widget? prefix;
   final void Function(String)? onChange;
+  final void Function(String)? onSubmit;
   final Color? focusBorderColor;
 
   @override
@@ -22,10 +24,13 @@ class InputField2 extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChange,
+      textInputAction: TextInputAction.search,
+      onFieldSubmitted: onSubmit,
       keyboardType: inputType,
       decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.white,
+
           hintText: hint,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 14, vertical: 8),

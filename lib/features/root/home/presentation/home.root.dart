@@ -13,6 +13,8 @@ import 'package:marketmind/features/root/home/presentation/referral/referral_hom
 import 'package:marketmind/features/root/settings/presentation/settings.root.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
+import '../../../_shared/controllers/cubit/candle_chart_cubit.dart';
+import '../../../_shared/data/enum/time_frame.dart';
 import 'ai_trading_insight_screen.dart';
 import 'components/complete_profile_component.dart';
 import 'components/home_app_bar_action_icon.dart';
@@ -63,6 +65,9 @@ class _HomeRootState extends State<HomeRoot> {
                     children: [
                       GestureDetector(
                         onTap: () {
+
+                          context.read<CandleChartCubit>().fetchChartData(fromSymbol: 'EUR',toSymbol: 'USD',timeframe: TimeFrame.monthly);
+                          return;
                           context.push(SettingsRoot());
                         },
                         child: CircleAvatar(

@@ -7,6 +7,9 @@ import 'package:marketmind/features/_shared/presentation/dialog/search_asset_dia
 import 'package:marketmind/features/root/settings/presentation/screens/personal_information_screen.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
+import '../../../../_shared/controllers/cubit/candle_chart_cubit.dart';
+import '../../../../_shared/data/enum/time_frame.dart';
+
 class CompleteProfileComponent extends StatelessWidget {
   const CompleteProfileComponent({super.key});
 

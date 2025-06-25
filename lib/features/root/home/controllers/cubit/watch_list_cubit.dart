@@ -22,10 +22,12 @@ class WatchListCubit extends BaseCubit<List<WatchListModel>> {
     final localResult = await _secureStorageService.get(StorageKeys.watchlist);
     if (localResult != null) {
       final json = jsonDecode(localResult) as Map<String, dynamic>;
-      final data = json['data'] as List<dynamic>;
-      final items =
-          data.map((e) => WatchListModel.fromJson(jsonDecode(e))).toList();
-      emitSuccess(data: items);
+      if (json['data'] is List) {
+        final data = json['data'] as List<dynamic>;
+        final items =
+            data.map((e) => WatchListModel.fromJson(jsonDecode(e))).toList();
+        emitSuccess(data: items);
+      }
     }
     await getWatchList();
   }

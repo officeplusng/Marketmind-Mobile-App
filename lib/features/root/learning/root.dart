@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/components/scaffold/gradient_scaffold.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/candle_chart_cubit.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/news_cubit.dart';
 import 'package:marketmind/features/root/_ai_chat/presentation/screens/ai_chat.root.dart';
 import 'package:marketmind/features/root/component/app_bottom_nav.dart';
@@ -11,6 +12,7 @@ import 'package:marketmind/features/root/learning/presentation/learning.root.dar
 import 'package:marketmind/features/root/marketAnalysis/presentation/market_analysis.root.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
+import '../../_shared/data/enum/time_frame.dart';
 import '../home/data/dto/watch_list_model.dart';
 import '../home/presentation/home.root.dart';
 

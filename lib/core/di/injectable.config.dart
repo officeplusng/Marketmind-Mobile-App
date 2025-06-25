@@ -15,6 +15,8 @@ import 'package:marketmind/core/export/export.core.dart' as _i56;
 import 'package:marketmind/core/local/secured_storage_service.dart' as _i497;
 import 'package:marketmind/core/network/interceptor.dart' as _i1025;
 import 'package:marketmind/core/network/network_service.dart' as _i1056;
+import 'package:marketmind/features/_shared/data/source/chart_source.dart'
+    as _i712;
 import 'package:marketmind/features/_shared/data/source/search_asset_source.dart'
     as _i1070;
 import 'package:marketmind/features/_shared/data/source/upload_source.dart'
@@ -23,6 +25,8 @@ import 'package:marketmind/features/_shared/data/source/user_source.dart'
     as _i156;
 import 'package:marketmind/features/_shared/domain/new_repository.dart'
     as _i1042;
+import 'package:marketmind/features/_shared/domain/repo/chart_repository.dart'
+    as _i682;
 import 'package:marketmind/features/_shared/domain/repo/search_asset_repository.dart'
     as _i1054;
 import 'package:marketmind/features/_shared/domain/repo/upload_repository.dart'
@@ -71,6 +75,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkModule.userSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i1070.SearchAssetSource>(
         () => networkModule.searchAssetSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i712.ChartSource>(
+        () => networkModule.chartSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i496.TradingInsightSource>(
         () => networkModule.tradingInsightSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i258.UploadSource>(
@@ -87,6 +93,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i956.WatchListRepository>(
         () => _i956.WatchListRepository(gh<_i998.WatchListSource>()));
+    gh.lazySingleton<_i682.ChartRepository>(
+        () => _i682.ChartRepository(gh<_i712.ChartSource>()));
     gh.lazySingleton<_i500.UploadRepository>(
         () => _i500.UploadRepository(gh<_i258.UploadSource>()));
     gh.lazySingleton<_i1054.SearchAssetRepository>(
