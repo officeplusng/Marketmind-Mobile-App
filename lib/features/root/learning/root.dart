@@ -9,7 +9,9 @@ import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_
 import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit.dart';
 import 'package:marketmind/features/root/learning/presentation/learning.root.dart';
 import 'package:marketmind/features/root/marketAnalysis/presentation/market_analysis.root.dart';
+import 'package:marketmind/src/state_management/cubit_state.dart';
 
+import '../home/data/dto/watch_list_model.dart';
 import '../home/presentation/home.root.dart';
 
 class RootScreen extends StatefulWidget {
@@ -25,6 +27,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   void initState() {
     context.read<AccountCubit>().refresh();
+    context.read<WatchListCubit>().init();
     context.read<TradingInsightCubit>().fetchTradingInsight();
     context.read<AiInsightCubit>().generateAISpotLight();
     context.read<NewsCubit>().fetchNews();
@@ -33,29 +36,44 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-        bottomWidget: AppBottomNav(
-            items: [
-              'home_unselected'.svg,
-              'page2'.svg,
-              'page3'.svg,
-              'page5'.svg,
-              'page4'.svg,
+    return BlocListener<WatchListCubit, BaseState<List<WatchListModel>>>(
+      listener: (_, state) {
+        if (state.isSuccess) {
+          final watchListSymbols = state.data
+                  ?.map((e) => e.symbols?.toUpperCase() ?? 'EURUSD')
+                  .toList() ??
+              [];
+          if (watchListSymbols.isNotEmpty) {
+            context
+                .read<AiInsightCubit>()
+                .generateAISpotLight(symbols: watchListSymbols);
+          }
+        }
+      },
+      child: BaseScaffold(
+          bottomWidget: AppBottomNav(
+              items: [
+                'home_unselected'.svg,
+                'page2'.svg,
+                'page3'.svg,
+                'page5'.svg,
+                'page4'.svg,
+              ],
+              currentIndex: _currentIndex,
+              onItemChange: (value) => setState(() {
+                    _currentIndex = value;
+                  })),
+          horizontalPadding: 0,
+          child: IndexedStack(
+            index: _currentIndex,
+            children: [
+              HomeRoot(),
+              MarketAnalysis(),
+              LearningRoot(),
+              AiChatScreen(),
+              SizedBox()
             ],
-            currentIndex: _currentIndex,
-            onItemChange: (value) => setState(() {
-                  _currentIndex = value;
-                })),
-        horizontalPadding: 0,
-        child: IndexedStack(
-          index: _currentIndex,
-          children: [
-            HomeRoot(),
-            MarketAnalysis(),
-            LearningRoot(),
-            AiChatScreen(),
-            SizedBox()
-          ],
-        ));
+          )),
+    );
   }
 }

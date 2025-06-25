@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/core/util/dialog_helper.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
 import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
+import 'package:marketmind/features/_shared/presentation/dialog/search_asset_dialog.dart';
 import 'package:marketmind/features/root/settings/presentation/screens/personal_information_screen.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
@@ -88,7 +90,8 @@ class CompleteProfileComponent extends StatelessWidget {
 
   Widget button(BuildContext context) => GestureDetector(
     onTap: (){
-      context.push(PersonalInformationScreen());
+      DialogHelper.show(context, child: SearchAssetDialog(),transparent: true,insetPadding: EdgeInsets.zero);
+      //context.push(PersonalInformationScreen());
     },
     child: Container(
       height: 36,

@@ -22,6 +22,7 @@ class InputField extends StatelessWidget {
   final Color? textColor;
   final Widget? surfixIcon;
   final OutlineInputBorder? border;
+  final OutlineInputBorder? focusBorder;
   final bool useErrorBorder;
   final double? borderRadius;
   final bool readOnly;
@@ -51,6 +52,7 @@ class InputField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.useErrorBorder = false,
+    this.focusBorder,
     this.letterSpacing,
     this.borderRadius,
     this.useFocusBorder = false,
@@ -66,6 +68,7 @@ class InputField extends StatelessWidget {
     Key? key,
     String? hint,
     OutlineInputBorder? border,
+    OutlineInputBorder? focusBorder,
     String? label,
     TextEditingController? controller,
     Widget? prefixIcon,
@@ -97,6 +100,7 @@ class InputField extends StatelessWidget {
       controller: controller,
       border: border,
       prefixIcon: prefixIcon,
+      focusBorder: focusBorder,
       surfixIcon: surfixIcon,
       validator: validator,
       readOnly: readOnly,
@@ -190,11 +194,17 @@ class InputField extends StatelessWidget {
       key: key,
       hint: hint,
       controller: controller,
+
+
+      focusBorder:border ??
+          OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: AppColors.gray)) ,
       border: border ??
           OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: AppColors.gray)),
-      prefixIcon: Icon(
+      prefixIcon: const Icon(
         Iconsax.search_normal_1_copy,
         color: AppColors.textGray1,
       ),
@@ -260,7 +270,7 @@ class InputField extends StatelessWidget {
                         : (useFocusBorder ? Colors.blue : Colors.grey),
                   ),
                 ),
-            focusedBorder: border?.copyWith(
+            focusedBorder:focusBorder?? border?.copyWith(
                     borderSide:
                         BorderSide(width: 1.5, color: AppColors.gray)) ??
                 OutlineInputBorder(

@@ -86,6 +86,8 @@ class Assets {
   static final homeBackground2 = 'data_list2'.png;
   static final infoAsset = 'info-asset'.png;
   static final bgGradient = 'bg_Gradient'.png;
+  static final closeIcon = 'close-icon'.svg;
+  static final searchEmptyState = 'search-empty-state'.svg;
   static final loadingState = 'loading_state'.png;
   static final aiChatIcon = 'ai_icon'.png;
   static final homeGradient = 'home_gradient'.png;

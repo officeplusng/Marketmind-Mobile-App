@@ -77,13 +77,13 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   ),
                   20.verticalSpace,
                   Text(
-                    'EKENE SMART',
+                   "${data?.fullname}",
                     style: context.textTheme.headlineSmall
                         ?.copyWith(color: AppColors.textBlack),
                   ),
                   10.verticalSpace,
                   Text(
-                    'kariaki.ebilate@gmail.com',
+                    data?.email??'',
                     style: context.textTheme.titleSmall
                         ?.copyWith(color: AppColors.textGray1),
                   )

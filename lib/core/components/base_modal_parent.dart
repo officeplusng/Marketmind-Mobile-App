@@ -8,11 +8,13 @@ class BaseModalParent extends StatelessWidget {
       this.verticalPadding,
       this.horizontalPadding,
       this.header,
-        this.scrollable=true,
+      this.scrollable = true,
+      this.transparent = false,
       this.verticalMargin});
 
   final Widget child;
   final double? height;
+  final bool transparent;
   final double? horizontalPadding;
   final bool scrollable;
   final double? verticalMargin;
@@ -56,7 +58,7 @@ class BaseModalParent extends StatelessWidget {
     return Container(
       height: height,
       decoration: ShapeDecoration(
-        color: AppColors.white,
+        color: transparent ? AppColors.transparent : AppColors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Dimens.defaultBorderRadius)),
       ),
@@ -68,44 +70,46 @@ class BaseModalParent extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(
           horizontal: horizontalPadding ?? 15, vertical: verticalPadding ?? 10),
-      child:scrollable? SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (header != null) ...[
-              10.verticalSpace,
-              header!,
-              20.verticalSpace,
-            ],
-            child
-          ],
-        ),
-      ):Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (header != null) ...[
-            10.verticalSpace,
-            header!,
-            20.verticalSpace,
-          ],
-          child
-        ],
-      ),
+      child: scrollable
+          ? SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (header != null) ...[
+                    10.verticalSpace,
+                    header!,
+                    20.verticalSpace,
+                  ],
+                  child
+                ],
+              ),
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (header != null) ...[
+                  10.verticalSpace,
+                  header!,
+                  20.verticalSpace,
+                ],
+                child
+              ],
+            ),
     );
   }
 
   static Widget modalPin({double? margin}) {
     return Center(
       child: Container(
-        margin: EdgeInsets.only(bottom: margin??20),
+        margin: EdgeInsets.only(bottom: margin ?? 20),
         height: 4,
         width: 75,
         decoration: ShapeDecoration(
             color: Color(0XFFD0D5DD),
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
       ),
     );
   }

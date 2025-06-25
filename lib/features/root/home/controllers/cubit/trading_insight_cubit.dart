@@ -10,7 +10,7 @@ import '../../data/dto/trading_insight_data_dto.dart';
 class TradingInsightCubit extends BaseCubit<List<TradingInsightDto>> {
   late TradingInsightRepository _repository;
 
-  TradingInsightCubit() : super(InitialState()) {
+  TradingInsightCubit() : super(const InitialState()) {
     _repository = getIt<TradingInsightRepository>();
   }
 
@@ -22,12 +22,6 @@ class TradingInsightCubit extends BaseCubit<List<TradingInsightDto>> {
     }, onError: (error) {
       emitError(error);
     });
-    // if (result is Success<List<TradingInsightDto>>) {
-    //   emitSuccess(data: result.data);
-    // }
-    // if(result is Failure<List<TradingInsightDto>>){
-    //   emitError(result.error);
-    // }
   }
 }
 
@@ -38,8 +32,8 @@ class AiInsightCubit extends BaseCubit<MarketAnalysisData> {
     _repository = getIt<TradingInsightRepository>();
   }
 
-  void generateAISpotLight() async {
-    final assets = ['BTCUSD','ETHUSD', 'EURUSD', 'GBPUSD', 'USDJPY', 'CADJPY', 'USDCAD', 'USDCHF'];
+  void generateAISpotLight({List<String>?symbols }) async {
+    final assets =symbols?? ['BTCUSD','ETHUSD', 'EURUSD', 'GBPUSD', 'USDJPY', 'CADJPY', 'USDCAD', 'USDCHF'];
     emitLoading();
     final result = await _repository.fetchInsightData(assets);
     result.when(onSuccess: (data) {
