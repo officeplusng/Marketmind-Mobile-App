@@ -9,6 +9,7 @@ import 'package:marketmind/features/authentication/data/source/auth_source.dart'
 import 'package:marketmind/features/root/home/data/source/referral_source.dart';
 import 'package:marketmind/features/root/home/data/source/trading_insight_source.dart';
 import 'package:marketmind/features/root/home/data/source/watch_list_source.dart';
+import '../../features/_shared/data/source/news_source.dart';
 import 'interceptor.dart';
 
 @module
@@ -42,14 +43,17 @@ abstract class NetworkModule {
       UserSource(dio, baseUrl: '$apiBaseUrl/users');
   @lazySingleton
   SearchAssetSource searchAssetSource(Dio dio) =>
-      SearchAssetSource(dio, baseUrl: 'https://api.fastapi.getmarketmind.com/');
+      SearchAssetSource(dio, baseUrl: aiBaseUrl);
+  @lazySingleton
+  NewsSource newsSource(Dio dio) =>
+      NewsSource(dio, baseUrl: '$aiBaseUrl/news');
   @lazySingleton
   ChartSource chartSource(Dio dio) =>
-      ChartSource(dio, baseUrl: 'https://api.fastapi.getmarketmind.com/');
+      ChartSource(dio, baseUrl: aiBaseUrl);
 
   @lazySingleton
   TradingInsightSource tradingInsightSource(Dio dio) =>
-      TradingInsightSource(dio, baseUrl: aiBaseUrl);
+      TradingInsightSource(dio, baseUrl: '$aiBaseUrl/api');
 
   @lazySingleton
   UploadSource uploadSource(Dio dio) =>

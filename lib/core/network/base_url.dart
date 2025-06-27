@@ -1,2 +1,2 @@
 const apiBaseUrl = 'https://marketmind-ezjx.onrender.com/';
-const aiBaseUrl = 'https://api.fastapi.getmarketmind.com/api';
+const aiBaseUrl = 'https://api.fastapi.getmarketmind.com';

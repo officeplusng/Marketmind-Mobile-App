@@ -14,7 +14,7 @@ class _SearchAssetSource implements SearchAssetSource {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://api.fastapi.getmarketmind.com/api';
+    baseUrl ??= 'https://api.fastapi.getmarketmind.com';
   }
 
   final Dio _dio;
@@ -26,7 +26,7 @@ class _SearchAssetSource implements SearchAssetSource {
   @override
   Future<SearchResponse> searchStock(String keyword) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'keyword': keyword};
+    final queryParameters = <String, dynamic>{r'keywords': keyword};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<SearchResponse>(Options(
@@ -59,7 +59,7 @@ class _SearchAssetSource implements SearchAssetSource {
   @override
   Future<SearchResponse> searchCrypto(String keyword) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'keyword': keyword};
+    final queryParameters = <String, dynamic>{r'keywords': keyword};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<SearchResponse>(Options(
@@ -92,7 +92,7 @@ class _SearchAssetSource implements SearchAssetSource {
   @override
   Future<SearchResponse> searchForex(String keyword) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'keyword': keyword};
+    final queryParameters = <String, dynamic>{r'keywords': keyword};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<SearchResponse>(Options(

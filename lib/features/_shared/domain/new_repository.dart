@@ -4,7 +4,7 @@ import 'package:marketmind/core/network/api_result.dart';
 import 'package:marketmind/core/network/api_result_wrapper.dart';
 
 @lazySingleton
-class NewsRepository {
+class FakeNewsRepository {
   Future<ApiResult<List<NewsDto>>> fetchTradingInsight() async {
     return ApiResultWrapper.wrap(() async {
       await Future.delayed(const Duration(seconds: 3));

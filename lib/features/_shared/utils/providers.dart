@@ -22,5 +22,4 @@ List<BlocProvider> providers = [
   BlocProvider<AiInsightCubit>(create: (context) => AiInsightCubit()),
   BlocProvider<SearchAssetCubit>(create: (context) => SearchAssetCubit()),
   BlocProvider<CandleChartCubit>(create: (context) => CandleChartCubit()),
-
 ];

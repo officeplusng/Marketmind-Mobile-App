@@ -3,8 +3,11 @@ import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/core/extension/date_time_extension.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/news_cubit.dart';
 import 'package:marketmind/features/_shared/data/dto/new_dto.dart';
+import 'package:marketmind/features/_shared/presentation/app_webview.dart';
 import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
+import 'package:marketmind/src/presentation/snack_bar_helper.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NewsComponents extends StatefulWidget {
   const NewsComponents({super.key});
@@ -114,19 +117,20 @@ class _NewsComponentsState extends State<NewsComponents>
               ),
             ),
             10.verticalSpace,
-            BlocBuilder<NewsCubit, BaseState<List<NewsDto>>>(builder: (context, state) {
-              if (state is LoadingState<List<NewsDto>>) {
-                print('data-result -> ${state.data}');
+            BlocBuilder<NewsCubit, BaseState<List<Article>>>(
+                builder: (context, state) {
+              if (state.isLoading) {
                 return const BaseShimmer(
                   height: 60,
                   itemCount: 6,
                 );
               }
-              if (state is SuccessState<List<NewsDto>>) {
-                final data = (state.data ?? []).where((e) {
-                  String value = _currentTab == 0 ? '' : _category;
-                  return e.category?.toLowerCase().contains(value.toLowerCase()) ?? false;
-                }).toList();
+              if (state.isSuccess) {
+                final data = (state.data ?? []);
+                //     .where((e) {
+                //   String value = _currentTab == 0 ? '' : _category;
+                //   return e.category?.toLowerCase().contains(value.toLowerCase()) ?? false;
+                // }).toList();
                 return ListView.separated(
                   itemCount: data.length,
                   padding: const EdgeInsets.all(0),
@@ -150,7 +154,7 @@ class _NewsComponentsState extends State<NewsComponents>
 class NewsItemComponent extends StatelessWidget {
   const NewsItemComponent({super.key, required this.data});
 
-  final NewsDto data;
+  final Article data;
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +172,7 @@ class NewsItemComponent extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  data.source?.toString() ?? '',
+                  data.source.name,
                   style: context.textTheme.bodySmall?.copyWith(
                       color: AppColors.textGray1, fontWeight: FontWeight.w500),
                 ),
@@ -180,7 +184,8 @@ class NewsItemComponent extends StatelessWidget {
                 ),
                 2.5.horizontalSpace,
                 Text(
-                  data.time?.timeAgo() ?? '',
+                  (DateTime.tryParse(data.publishedAt) ?? DateTime.now())
+                      .timeAgo(),
                   style: context.textTheme.bodySmall?.copyWith(
                       color: AppColors.textGray1, fontWeight: FontWeight.w500),
                 ),
@@ -197,7 +202,7 @@ class NewsItemComponent extends StatelessWidget {
             ),
             5.verticalSpace,
             Text(
-              data.content,
+              data.content ?? '',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: context.textTheme.bodyMedium
@@ -206,38 +211,57 @@ class NewsItemComponent extends StatelessWidget {
             20.verticalSpace,
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.bookmark_outline,
                   color: AppColors.textGray1,
                   size: 18,
                 ),
                 15.horizontalSpace,
-                Icon(
-                  Icons.share_outlined,
-                  color: AppColors.textGray1,
-                  size: 18,
+                InkWell(
+                  onTap: () async {
+                    final result = await SharePlus.instance.share(ShareParams(
+                      title: data.title,
+                      text: data.content,
+                      subject: data.source.name,
+                      uri: Uri.parse(data.url),
+                    ));
+
+                    if (result.status == ShareResultStatus.success) {
+                      AppSnackBarHelper.showToast('News shared');
+                    }
+                  },
+                  child: const Icon(
+                    Icons.share_outlined,
+                    color: AppColors.textGray1,
+                    size: 18,
+                  ),
                 )
               ],
             ),
             16.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Read more',
-                  style: context.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primary,
-                      fontSize: 12),
-                ),
-                5.horizontalSpace,
-                Icon(
-                  Icons.keyboard_arrow_right,
-                  color: AppColors.primary,
-                  size: 18,
-                )
-              ],
+            InkWell(
+              onTap: () {
+                context.push(AppWebView(url: data.url));
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Read more',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.primary,
+                        fontSize: 12),
+                  ),
+                  5.horizontalSpace,
+                  Icon(
+                    Icons.keyboard_arrow_right,
+                    color: AppColors.primary,
+                    size: 18,
+                  )
+                ],
+              ),
             )
           ],
         ));

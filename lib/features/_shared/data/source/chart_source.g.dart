@@ -14,7 +14,7 @@ class _ChartSource implements ChartSource {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://api.fastapi.getmarketmind.com/api';
+    baseUrl ??= 'https://api.fastapi.getmarketmind.com';
   }
 
   final Dio _dio;
