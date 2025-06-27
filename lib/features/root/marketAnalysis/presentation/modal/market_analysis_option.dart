@@ -3,9 +3,9 @@ import 'package:marketmind/core/export/export.core.dart';
 class MarketAnalysisOption extends StatefulWidget {
   const MarketAnalysisOption(
       {super.key,
-      this.initialSelected,
-      this.options = const [],
-      this.onSelected});
+        this.initialSelected,
+        this.options = const [],
+        this.onSelected});
 
   final String? initialSelected;
   final List<String> options;
@@ -31,13 +31,13 @@ class _MarketAnalysisOptionState extends State<MarketAnalysisOption> {
         verticalPadding: 0,
         verticalMargin: 0,
         child: Column(
-      children: [
-        10.verticalSpace,
-        Center(
-          child: BaseModalParent.modalPin(margin: 5),
-        ),
-        20.verticalSpace,
-        ...widget.options.map((e) => Padding(
+          children: [
+            10.verticalSpace,
+            Center(
+              child: BaseModalParent.modalPin(margin: 5),
+            ),
+            20.verticalSpace,
+            ...widget.options.map((e) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: InkWell(
                 onTap: (){
@@ -47,26 +47,26 @@ class _MarketAnalysisOptionState extends State<MarketAnalysisOption> {
                   widget.onSelected?.call(e);
                 },
                 child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    e,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      fontSize: 18,
-                        color: selected == e
-                            ? AppColors.primary
-                            : AppColors.textBlack1),
-                  ),
-                  if (selected == e)
-                    Icon(
-                      Icons.check,
-                      color: AppColors.primary,
-                    )
-                ],
-              ),),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      e,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                          fontSize: 18,
+                          color: selected == e
+                              ? AppColors.primary
+                              : AppColors.textBlack1),
+                    ),
+                    if (selected == e)
+                      Icon(
+                        Icons.check,
+                        color: AppColors.primary,
+                      )
+                  ],
+                ),),
             )),
-        30.verticalSpace
-      ],
-    ));
+            30.verticalSpace
+          ],
+        ));
   }
 }

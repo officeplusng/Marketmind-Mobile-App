@@ -13,8 +13,9 @@ class NewsCubit extends BaseCubit<List<Article>> {
     _repository = getIt<NewsRepository>();
   }
 
-  void fetchNews() async {
-    final response = await _repository.getFinancialNews();
+  void fetchNews({String sources = 'bloomberg,reuters,cnbc,financial-times,the-wall-street-journal'}) async {
+    emitLoading();
+    final response = await _repository.getFinancialNews(sources: sources);
     response.when(onSuccess: (result) {
       emitSuccess(data: result);
     }, onError: (error) {

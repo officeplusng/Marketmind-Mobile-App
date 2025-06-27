@@ -5,6 +5,8 @@ import 'package:marketmind/features/_shared/controllers/cubit/news_cubit.dart';
 import 'package:marketmind/features/_shared/data/dto/new_dto.dart';
 import 'package:marketmind/features/_shared/presentation/app_webview.dart';
 import 'package:marketmind/features/_shared/presentation/base_shimmer.dart';
+import 'package:marketmind/features/_shared/presentation/generic_empty_state.dart';
+import 'package:marketmind/features/root/marketAnalysis/presentation/modal/news_source_modal.dart';
 import 'package:marketmind/src/presentation/snack_bar_helper.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 import 'package:share_plus/share_plus.dart';
@@ -30,7 +32,9 @@ class _NewsComponentsState extends State<NewsComponents>
 
   int _currentTab = 0;
   String _category = '';
+  String source = 'All';
 
+//bloomberg,reuters,cnbc,financial-times,the-wall-street-journal
   @override
   Widget build(BuildContext context) {
     var bodyMedium = context.textTheme.bodyMedium;
@@ -60,19 +64,38 @@ class _NewsComponentsState extends State<NewsComponents>
                     )
                   ],
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(Assets.globe),
-                    8.horizontalSpace,
-                    Text(
-                      'US Markets',
-                      style: bodyMedium?.copyWith(color: AppColors.primary),
-                    ),
-                    8.horizontalSpace,
-                    SvgPicture.asset(Assets.vector)
-                  ],
+                InkWell(
+                  onTap: () {
+                    ModalHelper.showModalMax(
+                        context,
+                        NewsOptionModal(
+                          initialSelected: source,
+                          onSelected: (value) {
+                            setState(() {
+                              source = value;
+                            });
+                            if(value=='All'){
+                              context.read<NewsCubit>().fetchNews();
+                              return;
+                            }
+                            context.read<NewsCubit>().fetchNews(sources: value);
+                          },
+                        ));
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(Assets.globe),
+                      8.horizontalSpace,
+                      Text(
+                        source.replaceAll('-', ' ').capitalizeFirstWord(),
+                        style: bodyMedium?.copyWith(color: AppColors.primary),
+                      ),
+                      8.horizontalSpace,
+                      SvgPicture.asset(Assets.vector)
+                    ],
+                  ),
                 )
               ],
             ),
@@ -125,14 +148,28 @@ class _NewsComponentsState extends State<NewsComponents>
                   itemCount: 6,
                 );
               }
+              if(state.isError){
+                return GenericEmptyState(
+                  title: 'No news result',
+                  asset: Assets.searchEmptyState,
+                  description:source=='All'?null: 'No news available from $source news source',
+                );
+              }
               if (state.isSuccess) {
                 final data = (state.data ?? []);
                 //     .where((e) {
                 //   String value = _currentTab == 0 ? '' : _category;
                 //   return e.category?.toLowerCase().contains(value.toLowerCase()) ?? false;
                 // }).toList();
+                if (data.isEmpty) {
+                  return GenericEmptyState(
+                    title: 'No news result',
+                    asset: Assets.searchEmptyState,
+                    description:source=='All'?null: 'No news available from $source news source',
+                  );
+                }
                 return ListView.separated(
-                  itemCount: data.length,
+                  itemCount:data.length>6?6: data.length,
                   padding: const EdgeInsets.all(0),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -221,7 +258,6 @@ class NewsItemComponent extends StatelessWidget {
                   onTap: () async {
                     final result = await SharePlus.instance.share(ShareParams(
                       title: data.title,
-                      text: data.content,
                       subject: data.source.name,
                       uri: Uri.parse(data.url),
                     ));

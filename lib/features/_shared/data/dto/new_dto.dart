@@ -75,7 +75,7 @@ class GenericNewsResponse {
   factory GenericNewsResponse.fromJson(Map<String, dynamic> json) {
     return GenericNewsResponse(
       success: json['success'] ?? false,
-      data: json['data'],
+      data:(json['data']==null)?{}: json['data'],
     );
   }
 }

@@ -18,7 +18,11 @@ class NewsRepository {
     return ApiResultWrapper.wrap(() async {
       final response =
           await _source.financialNews(page: page, sources: sources);
+      if(response.data.keys.isEmpty){
+        return [];
+      }
       final data = FinancialNewsData.fromJson(response.data);
+
       return data.combinedArticles;
     });
   }
@@ -27,6 +31,9 @@ class NewsRepository {
       {required String symbol}) async {
     return ApiResultWrapper.wrap(() async {
       final response = await _source.combinedNews(symbol: symbol);
+      if(response.data.keys.isEmpty){
+        return [];
+      }
       final data = NewsData.fromJson(response.data);
       return data.combinedArticles;
     });
