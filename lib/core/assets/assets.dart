@@ -108,6 +108,7 @@ class Assets {
   static final splashGraphics = 'background-graphics'.png;
   static final onboardingBackground1 = 'onboarding_background1'.png;
   static final splashGraphics1 = 'background-graphics1'.png;
+  static final referralIcon  = 'referral-icon'.svg;
 }
 class SettingsAssets{
   static final aiConfiguration = 'ai-configuration'.svg;

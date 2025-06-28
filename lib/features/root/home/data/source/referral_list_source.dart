@@ -17,7 +17,7 @@ class ReferralListSource {
 
   Future<ApiResult<List<ReferralDto>>> getReferrals() async {
     if (dio == null) {
-      return Success(data: []);
+      return const Success(data: []);
     }
     try {
       final dio = Dio();

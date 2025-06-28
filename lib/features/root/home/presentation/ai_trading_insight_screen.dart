@@ -8,6 +8,7 @@ import '../../../../core/export/export.core.dart';
 import '../data/dto/trading_insight_data_dto.dart';
 import 'components/home_app_bar_action_icon.dart';
 import 'components/trading_insight_component.dart';
+import 'notification/notification_screen.dart';
 
 typedef TradingInsight = List<TradingInsightDto>;
 
@@ -58,7 +59,9 @@ class _AiTradingInsightScreenState extends State<AiTradingInsightScreen>
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  HomeAppBarActionIcon(asset: Assets.bellIcon),
+                  HomeAppBarActionIcon(asset: Assets.bellIcon,onClick: (){
+                    context.push(const NotificationScreen());
+                  },),
                 ],
               )
             ],

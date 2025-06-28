@@ -10,6 +10,7 @@ import '../../../../_shared/presentation/base_shimmer.dart';
 import '../components/faq_component.dart';
 import '../components/home_app_bar_action_icon.dart';
 import '../components/referral_component.dart';
+import '../modal/referral_info_modal.dart';
 
 class ReferralDashboard extends StatefulWidget {
   const ReferralDashboard({super.key});
@@ -72,12 +73,14 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                           action: [
                             HomeAppBarActionIcon(
                               onClick: () {
-                                //todo show referral info page
+                                ModalHelper.showModalMax(context, ReferralInfoModal());
                               },
                               color: const Color(0xFF2D53DD),
-                              child: const Icon(
-                                Icons.info_outline,
-                                color: AppColors.white,
+                              child:const Center(
+                                child:  Icon(
+                                  Icons.info_outline,
+                                  color: AppColors.white,
+                                ),
                               ),
                             )
                           ],

@@ -14,8 +14,8 @@ class HomeAppBarActionIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onClick,
       child: Container(
-        padding: const EdgeInsets.all(12),
         width: 40,
+        alignment: Alignment.center,
         height: 40,
         decoration:
           ShapeDecoration(shape: CircleBorder(), color:color?? Color(0xFFF2F4F7)),
