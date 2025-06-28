@@ -1,4 +1,9 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/core/util/dialog_helper.dart';
+import 'package:marketmind/features/_shared/data/dto/search_dto.dart';
+import 'package:marketmind/features/_shared/data/enum/time_frame.dart';
+import 'package:marketmind/features/_shared/presentation/dialog/search_asset_dialog.dart';
+import 'package:marketmind/features/root/marketAnalysis/presentation/modal/market_analysis_option.dart';
 
 class MarketAnalysisTechnicalAnalysisComponent extends StatefulWidget {
   const MarketAnalysisTechnicalAnalysisComponent({super.key});
@@ -10,6 +15,10 @@ class MarketAnalysisTechnicalAnalysisComponent extends StatefulWidget {
 
 class _MarketAnalysisTechnicalAnalysisComponentState
     extends State<MarketAnalysisTechnicalAnalysisComponent> {
+  String category = 'All time';
+
+  BestMatch? _asset;
+
   @override
   Widget build(BuildContext context) {
     var bodyMedium2 = context.textTheme.bodyMedium;
@@ -35,18 +44,40 @@ class _MarketAnalysisTechnicalAnalysisComponentState
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(Assets.calendar),
-                    8.horizontalSpace,
-                    Text(
-                      'All time',
-                      style: bodyMedium2?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    8.horizontalSpace,
-                    const Icon(Icons.keyboard_arrow_down_sharp)
-                  ],
+                InkWell(
+                  onTap: () {
+                    ModalHelper.showModalMax(
+                        context,
+                        MarketAnalysisOption(
+                          onSelected: (value) {
+                            setState(() {
+                              category = value;
+                            });
+                            if (value == 'All time') {
+                              //todo show for all time
+                            } else {}
+                          },
+                          initialSelected: category,
+                          options: [
+                            'All time',
+                            ...TimeFrame.values.map((e) => e.name)
+                          ],
+                        ));
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(Assets.calendar),
+                      8.horizontalSpace,
+                      Text(
+                        category.replaceAll('a_', '').capitalizeFirstWord(),
+                        style:
+                            bodyMedium2?.copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      8.horizontalSpace,
+                      const Icon(Icons.keyboard_arrow_down_sharp)
+                    ],
+                  ),
                 ),
                 // 20.horizontalSpace,
                 // WrapperContainer.rectangular(
@@ -59,47 +90,64 @@ class _MarketAnalysisTechnicalAnalysisComponentState
               ],
             ),
             20.verticalSpace,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                    child: Text(
-                  'Apple Inc. (AAPL)',
-                  style: bodyMedium2,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                )),
-                15.horizontalSpace,
-                Text(
-                  '182.52',
-                  style: bodyMediumTextGreenLight,
-                ),
-                10.horizontalSpace,
-                Text(
-                  '+1.25%',
-                  style: bodyMediumTextGreenLight,
-                ),
-                15.horizontalSpace,
-                Icon(Icons.keyboard_arrow_down)
-              ],
+            InkWell(
+              onTap: () {
+                DialogHelper.show(context, transparent: true,
+                    child: SearchAssetDialog(
+                  onSelected: (value) {
+                    setState(() {
+                      _asset = value;
+                    });
+                  },
+                ));
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                      child: Text(
+                    '${_asset?.name??''}. (${_asset?.symbol??''})',
+                    style: bodyMedium2,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  )),
+                  15.horizontalSpace,
+                  Text(
+                    _asset?.currency??'',
+                    style: bodyMediumTextGreenLight,
+                  ),
+                  10.horizontalSpace,
+                  Text(
+                    '+1.25%',
+                    style: bodyMediumTextGreenLight,
+                  ),
+                  15.horizontalSpace,
+                  Icon(Icons.keyboard_arrow_down)
+                ],
+              ),
             ),
             20.verticalSpace,
             GridView(
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 5,
-                childAspectRatio: 1.7,
-                crossAxisSpacing: 5),
-            shrinkWrap: true,
-            children: [
-
-              _infoComponent(title: 'RSI', value: '65.42'),
-              _infoComponent(title: 'MACD', value: 'Bullish',textColor: AppColors.textGreenLight),
-              _infoComponent(title: 'Volume', value: '2.5M'),
-              _infoComponent(title: 'Volatility', value: 'Medium'),
-            ],)
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 5,
+                  childAspectRatio: 1.7,
+                  crossAxisSpacing: 5),
+              shrinkWrap: true,
+              children: [
+                _infoComponent(title: 'RSI', value: '65.42'),
+                _infoComponent(
+                    title: 'MACD',
+                    value: 'Bullish',
+                    textColor: AppColors.textGreenLight),
+                _infoComponent(title: 'Volume', value: '2.5M'),
+                _infoComponent(title: 'Volatility', value: 'Medium'),
+              ],
+            )
           ],
         ));
   }

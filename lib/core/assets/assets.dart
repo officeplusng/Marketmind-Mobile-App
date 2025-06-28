@@ -11,9 +11,15 @@ class Assets {
   static final receipt = 'receipt'.svg;
   static final eye = 'eye'.svg;
   static final idea = 'idea'.svg;
+  static final notificationEmptyState = 'notification-empty-state'.svg;
+  static final notificationBookIcon = 'book-icon'.svg;
+  static final notificationMoneyIcon = 'coins-line'.svg;
+  static final notificationBellIcon = 'notification-bell-icon'.svg;
+  static final notificationTrendIcon = 'trend-icon'.svg;
   static final rotate = 'rotate'.svg;
   static final yellowInfoIcon = 'info_icon'.svg;
   static final search = 'search_icon'.svg;
+  static final settings = 'settings-01'.svg;
   static final search1 = 'search'.svg;
   static final filterList = 'filter_list'.svg;
   static final google = 'google'.svg;

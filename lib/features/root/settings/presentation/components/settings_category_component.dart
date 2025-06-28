@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/core/util/dialog_helper.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
 import 'package:marketmind/features/authentication/presentation/screens/login_screen.dart';
 import 'package:marketmind/features/root/settings/domain/entity/settings_entity.dart';
 import 'package:marketmind/features/root/settings/presentation/components/settings_item_component.dart';
+import 'package:marketmind/features/root/settings/presentation/dialog.dart';
 import 'package:marketmind/features/root/settings/presentation/modal/delete_account_modal.dart';
 import 'package:marketmind/features/root/settings/presentation/modal/reset_ai_assistant_modal.dart';
 import 'package:marketmind/features/root/settings/util/settings_route.dart';
@@ -42,8 +44,9 @@ class SettingsCategoryComponent extends StatelessWidget {
                         case SettingsAction.navigate:
                           break;
                         case SettingsAction.logout:
-                          context.read<AccountCubit>().logout();
-                          context.pushRemoveUntil(LoginScreen());
+                          DialogHelper.show(context, child: LogoutDialog());
+                          // context.read<AccountCubit>().logout();
+                          // context.pushRemoveUntil(LoginScreen());
                           break;
                         case SettingsAction.deleteAccount:
                           ModalHelper.showModalMax(

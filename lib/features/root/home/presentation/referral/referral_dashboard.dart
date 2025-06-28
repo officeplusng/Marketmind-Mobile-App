@@ -45,7 +45,6 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
     ];
     return BlocBuilder<ReferralDashboardCubit,
         BaseState<ReferralStatisticsDto>>(builder: (context, state) {
-      final data = state.data;
       return BaseScaffold(
           backgroundColor: AppColors.white,
           isLoading : state is LoadingState,
@@ -68,12 +67,12 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                   children: [
                     PagePadding(
                         child: CustomAppBar(
-                          backgroundColor: Color(0xFF2D53DD),
+                          backgroundColor: const Color(0xFF2D53DD),
                           iconColor: AppColors.white,
                           action: [
                             HomeAppBarActionIcon(
                               onClick: () {
-                                context.read<ReferralsCubit>().fetchReferrals();
+                                //todo show referral info page
                               },
                               color: const Color(0xFF2D53DD),
                               child: const Icon(
@@ -252,6 +251,7 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                                               ),
                                               InkWell(
                                                 onTap: () {
+                                                  context.read<ReferralsCubit>().fetchReferrals();
                                                   context.push(
                                                       ReferralListPage());
                                                 },
@@ -295,7 +295,7 @@ class _ReferralDashboardState extends State<ReferralDashboard> {
                                                 return ListView.separated(
                                                   shrinkWrap: true,
                                                     itemBuilder: (_, index) =>
-                                                    const ReferralComponent(),
+                                                     ReferralComponent(data: data[index],),
                                                     separatorBuilder: (_,
                                                         _a) => 10.verticalSpace,
                                                     itemCount: data.length>5?5:data.length);

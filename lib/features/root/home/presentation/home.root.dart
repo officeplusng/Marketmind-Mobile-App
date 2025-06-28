@@ -23,6 +23,7 @@ import 'components/home_trading_insight_component.dart';
 import 'components/market_data_component.dart';
 import 'components/market_summary_component.dart';
 import 'customize_market_data.dart';
+import 'notification/notification_screen.dart';
 
 class MarketDataDto {
   final String currencyPair;
@@ -66,8 +67,6 @@ class _HomeRootState extends State<HomeRoot> {
                       GestureDetector(
                         onTap: () {
 
-                          context.read<CandleChartCubit>().fetchChartData(fromSymbol: 'EUR',toSymbol: 'USD',timeframe: TimeFrame.monthly);
-                          return;
                           context.push(SettingsRoot());
                         },
                         child: CircleAvatar(
@@ -111,9 +110,11 @@ class _HomeRootState extends State<HomeRoot> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      HomeAppBarActionIcon(asset: Assets.bellIcon),
+                      HomeAppBarActionIcon(asset: Assets.bellIcon,onClick: (){
+                        context.push(NotificationScreen());
+                      },),
                       10.horizontalSpace,
-                      HomeAppBarActionIcon(asset: Assets.search),
+                      HomeAppBarActionIcon(asset: Assets.search,onClick: (){},),
                     ],
                   )
                 ],

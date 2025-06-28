@@ -6,6 +6,7 @@ import 'package:marketmind/features/_shared/data/source/search_asset_source.dart
 import 'package:marketmind/features/_shared/data/source/upload_source.dart';
 import 'package:marketmind/features/_shared/data/source/user_source.dart';
 import 'package:marketmind/features/authentication/data/source/auth_source.dart';
+import 'package:marketmind/features/root/home/data/source/referral_list_source.dart';
 import 'package:marketmind/features/root/home/data/source/referral_source.dart';
 import 'package:marketmind/features/root/home/data/source/trading_insight_source.dart';
 import 'package:marketmind/features/root/home/data/source/watch_list_source.dart';
@@ -50,6 +51,9 @@ abstract class NetworkModule {
   @lazySingleton
   ChartSource chartSource(Dio dio) =>
       ChartSource(dio, baseUrl: aiBaseUrl);
+  @lazySingleton
+  ReferralListSource referralListSource(Dio dio) =>
+      ReferralListSource(dio, baseUrl: aiBaseUrl);
 
   @lazySingleton
   TradingInsightSource tradingInsightSource(Dio dio) =>

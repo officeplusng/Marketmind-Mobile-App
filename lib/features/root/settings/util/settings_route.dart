@@ -1,4 +1,5 @@
 import 'package:marketmind/core/export/export.core.dart';
+import 'package:marketmind/features/root/home/presentation/referral/referral_dashboard.dart';
 import 'package:marketmind/features/root/settings/presentation/screens/notification_settings.dart';
 import 'package:marketmind/features/root/settings/presentation/settings.root.dart';
 import '../presentation/screens/personal_information_screen.dart';
@@ -9,7 +10,8 @@ class SettingsRoutes {
     'settings': SettingsRoot(),
     personalInformation: PersonalInformationScreen(),
     security: SecurityScreen(),
-    notification: NotificationSettings()
+    notification: NotificationSettings(),
+    referralDashboard: ReferralDashboard(),
   };
   static const personalInformation = 'profile';
   static const security = 'security';

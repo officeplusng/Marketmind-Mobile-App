@@ -15,8 +15,10 @@ class HomeAppBarActionIcon extends StatelessWidget {
       onTap: onClick,
       child: Container(
         padding: const EdgeInsets.all(12),
+        width: 40,
+        height: 40,
         decoration:
-          ShapeDecoration(shape: CircleBorder(), color:color?? AppColors.gray),
+          ShapeDecoration(shape: CircleBorder(), color:color?? Color(0xFFF2F4F7)),
         child: child??SvgPicture.asset(
           asset,
         ),

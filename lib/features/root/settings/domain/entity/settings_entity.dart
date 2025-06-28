@@ -83,6 +83,7 @@ final List<SettingsCategoryEntity> settingsCategories = [
       SettingsEntity(
         asset: SettingsAssets.settingsReferralDashboard,
         name: 'Referral Dashboard',
+        route: SettingsRoutes.referralDashboard
       ),
       SettingsEntity(
         asset: SettingsAssets.settingsPayout,

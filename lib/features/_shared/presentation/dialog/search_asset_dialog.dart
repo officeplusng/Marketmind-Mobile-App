@@ -8,7 +8,9 @@ import 'package:marketmind/features/_shared/data/dto/search_dto.dart';
 import '../generic_empty_state.dart';
 
 class SearchAssetDialog extends StatefulWidget {
-  const SearchAssetDialog({super.key});
+  const SearchAssetDialog({super.key, this.onSelected});
+
+  final void Function(BestMatch)? onSelected;
 
   @override
   State<SearchAssetDialog> createState() => _SearchAssetDialogState();
@@ -35,8 +37,8 @@ class _SearchAssetDialogState extends State<SearchAssetDialog>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchAssetCubit, BaseState<List<BestMatch>>>(builder: (context,state){
-
+    return BlocBuilder<SearchAssetCubit, BaseState<List<BestMatch>>>(
+        builder: (context, state) {
       return Container(
           width: double.infinity,
           height: double.infinity,
@@ -61,31 +63,30 @@ class _SearchAssetDialogState extends State<SearchAssetDialog>
                       children: [
                         Expanded(
                             child: Container(
-                              padding: EdgeInsets.all(_text.isNotEmpty ? 1.5 : 0),
-                              decoration: ShapeDecoration(
-                                  color: const Color(0XFFF2F4F7),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8))),
-                              child: InputField2(
-                                controller: _controller,
-                                inputType: TextInputType.text,
-                                onSubmit: (value) {
-
-                                  context.read<SearchAssetCubit>().search(value);
-                                },
-                                focusBorderColor: AppColors.primary,
-                                hint: "Search for assets...",
-                                prefix: const Icon(
-                                  Iconsax.search_normal_1_copy,
-                                  color: AppColors.textGray1,
-                                ),
-                                onChange: (value) {
-                                  setState(() {
-                                    _text = value;
-                                  });
-                                },
-                              ),
-                            )),
+                          padding: EdgeInsets.all(_text.isNotEmpty ? 1.5 : 0),
+                          decoration: ShapeDecoration(
+                              color: const Color(0XFFF2F4F7),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8))),
+                          child: InputField2(
+                            controller: _controller,
+                            inputType: TextInputType.text,
+                            onSubmit: (value) {
+                              context.read<SearchAssetCubit>().search(value);
+                            },
+                            focusBorderColor: AppColors.primary,
+                            hint: "Search for assets...",
+                            prefix: const Icon(
+                              Iconsax.search_normal_1_copy,
+                              color: AppColors.textGray1,
+                            ),
+                            onChange: (value) {
+                              setState(() {
+                                _text = value;
+                              });
+                            },
+                          ),
+                        )),
                         if (_text.isNotEmpty) ...[
                           10.horizontalSpace,
                           IconButton(
@@ -122,8 +123,8 @@ class _SearchAssetDialogState extends State<SearchAssetDialog>
                             decoration: ShapeDecoration(
                                 color: const Color(0xFFF9FAFB),
                                 shape: RoundedRectangleBorder(
-                                  side:
-                                  const BorderSide(color: Color(0XFFEAECF0)),
+                                  side: const BorderSide(
+                                      color: Color(0XFFEAECF0)),
                                   borderRadius: BorderRadius.circular(8),
                                 )),
                             child: TabBar(
@@ -138,7 +139,7 @@ class _SearchAssetDialogState extends State<SearchAssetDialog>
                                   ?.copyWith(fontWeight: FontWeight.bold),
                               indicatorSize: TabBarIndicatorSize.tab,
                               indicatorPadding:
-                              const EdgeInsets.symmetric(vertical: 5),
+                                  const EdgeInsets.symmetric(vertical: 5),
                               onTap: (value) {
                                 setState(() {
                                   _currentTab = value;
@@ -159,39 +160,50 @@ class _SearchAssetDialogState extends State<SearchAssetDialog>
                             ),
                           ),
                           20.verticalSpace,
-                                if(  (state.data?.isNotEmpty ?? true) && state.isLoading==false)
-                        ...[
-                          Text(
-                            'TOP MATCHES',
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.textGray1),
-                          ),
-                          20.verticalSpace,
-                          Expanded(child: ListView.separated(
-                              shrinkWrap: true,
-                              itemBuilder: (_, index) {
-                                final items = state.data??[];
-                                final item = items[index];
-                                return  _assetItem(item.name??'',
-                                    item.symbol??'', item.type??'', '', 1.5);
-                              },
-                              separatorBuilder: (_, a) => 10.verticalSpace,
-                              itemCount: state.data?.length??0))
-                        ],
-
-                          if((state.data?.isEmpty??true) && state.isLoading==false)
+                          if ((state.data?.isNotEmpty ?? true) &&
+                              state.isLoading == false) ...[
+                            Text(
+                              'TOP MATCHES',
+                              style: context.textTheme.bodyMedium
+                                  ?.copyWith(color: AppColors.textGray1),
+                            ),
+                            20.verticalSpace,
+                            Expanded(
+                                child: ListView.separated(
+                                    shrinkWrap: true,
+                                    itemBuilder: (_, index) {
+                                      final items = state.data ?? [];
+                                      final item = items[index];
+                                      return InkWell(
+                                        onTap: () {
+                                          context.popDialog();
+                                          widget.onSelected?.call(item);
+                                        },
+                                        child: _assetItem(
+                                            item.name ?? '',
+                                            item.symbol ?? '',
+                                            item.type ?? '',
+                                            '',
+                                            1.5),
+                                      );
+                                    },
+                                    separatorBuilder: (_, a) =>
+                                        10.verticalSpace,
+                                    itemCount: state.data?.length ?? 0))
+                          ],
+                          if ((state.data?.isEmpty ?? true) &&
+                              state.isLoading == false)
                             GenericEmptyState(
                               title: 'No Result Found',
                               asset: Assets.searchEmptyState,
                               description:
-                              "We couldn't find any matches for your search. Try using different keywords or check your spelling.",
+                                  "We couldn't find any matches for your search. Try using different keywords or check your spelling.",
                             )
                         ],
                       )),
                 ],
               ),
-              if(state.isLoading)
-                LoadingWidget(),
+              if (state.isLoading) LoadingWidget(),
               Positioned(
                 top: 20,
                 left: 0,

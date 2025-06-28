@@ -15,8 +15,8 @@ class CompleteProfileComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AccountCubit, BaseState<UserDto>>(builder: (context,state){
-
+    return BlocBuilder<AccountCubit, BaseState<UserDto>>(
+        builder: (context, state) {
       final data = state.data;
       final nameSplit = data?.fullname?.split(' ');
       return Container(
@@ -33,7 +33,8 @@ class CompleteProfileComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: Column(
+                Expanded(
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -68,15 +69,15 @@ class CompleteProfileComponent extends StatelessWidget {
                       backgroundImage: data?.avatar == null
                           ? null
                           : NetworkImage(
-                          data?.avatar?.url ?? AppConstants.placeHolder),
+                              data?.avatar?.url ?? AppConstants.placeHolder),
                       backgroundColor:
-                      data?.avatar != null ? AppColors.primary : null,
+                          data?.avatar != null ? AppColors.primary : null,
                       child: data?.avatar != null
                           ? Text(
-                        '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
-                        style: context.textTheme.titleMedium
-                            ?.copyWith(color: AppColors.white),
-                      )
+                              '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
+                              style: context.textTheme.titleMedium
+                                  ?.copyWith(color: AppColors.white),
+                            )
                           : null,
                     )
                   ],
@@ -92,27 +93,26 @@ class CompleteProfileComponent extends StatelessWidget {
   }
 
   Widget button(BuildContext context) => GestureDetector(
-    onTap: (){
-      DialogHelper.show(context, child: SearchAssetDialog(),transparent: true,insetPadding: EdgeInsets.zero);
-      //context.push(PersonalInformationScreen());
-    },
-    child: Container(
-      height: 36,
-      padding: const EdgeInsets.symmetric(horizontal: 14),
-      decoration: ShapeDecoration(
-          color: AppColors.primary,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(999))),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Complete now',
-            style: context.textTheme.bodyMedium
-                ?.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
-          )
-        ],
-      ),
-    ),
-  );
+        onTap: () {
+          context.push(PersonalInformationScreen());
+        },
+        child: Container(
+          height: 36,
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          decoration: ShapeDecoration(
+              color: AppColors.primary,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(999))),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Complete now',
+                style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600, color: AppColors.white),
+              )
+            ],
+          ),
+        ),
+      );
 }

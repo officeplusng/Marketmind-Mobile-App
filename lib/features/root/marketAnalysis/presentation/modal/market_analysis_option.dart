@@ -50,7 +50,7 @@ class _MarketAnalysisOptionState extends State<MarketAnalysisOption> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      e,
+                      e.replaceAll('a_', '').capitalizeFirstWord(),
                       style: context.textTheme.bodyMedium?.copyWith(
                           fontSize: 18,
                           color: selected == e

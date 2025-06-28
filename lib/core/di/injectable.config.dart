@@ -41,6 +41,8 @@ import 'package:marketmind/features/authentication/data/source/auth_source.dart'
     as _i2;
 import 'package:marketmind/features/authentication/domain/repositories/auth_repository.dart'
     as _i936;
+import 'package:marketmind/features/root/home/data/source/referral_list_source.dart'
+    as _i130;
 import 'package:marketmind/features/root/home/data/source/referral_source.dart'
     as _i484;
 import 'package:marketmind/features/root/home/data/source/trading_insight_source.dart'
@@ -68,7 +70,8 @@ extension GetItInjectableX on _i174.GetIt {
     final networkModule = _$NetworkModule();
     gh.lazySingleton<_i497.SecureStorageService>(
         () => _i497.SecureStorageService());
-    gh.lazySingleton<_i1042.FakeNewsRepository>(() => _i1042.FakeNewsRepository());
+    gh.lazySingleton<_i1042.FakeNewsRepository>(
+        () => _i1042.FakeNewsRepository());
     gh.lazySingleton<_i1025.NetworkInterceptor>(
         () => _i1025.NetworkInterceptor(gh<_i497.SecureStorageService>()));
     gh.lazySingleton<_i361.Dio>(
@@ -83,6 +86,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkModule.newsSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i712.ChartSource>(
         () => networkModule.chartSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i130.ReferralListSource>(
+        () => networkModule.referralListSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i496.TradingInsightSource>(
         () => networkModule.tradingInsightSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i258.UploadSource>(

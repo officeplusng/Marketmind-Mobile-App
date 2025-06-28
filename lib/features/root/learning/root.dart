@@ -10,6 +10,7 @@ import 'package:marketmind/features/root/home/controllers/cubit/trading_insight_
 import 'package:marketmind/features/root/home/controllers/cubit/watch_list_cubit.dart';
 import 'package:marketmind/features/root/learning/presentation/learning.root.dart';
 import 'package:marketmind/features/root/marketAnalysis/presentation/market_analysis.root.dart';
+import 'package:marketmind/features/root/settings/presentation/settings.root.dart';
 import 'package:marketmind/src/state_management/cubit_state.dart';
 
 import '../../_shared/data/enum/time_frame.dart';
@@ -73,7 +74,7 @@ class _RootScreenState extends State<RootScreen> {
               MarketAnalysis(),
               LearningRoot(),
               AiChatScreen(),
-              SizedBox()
+              SettingsRoot(isRoot: true,)
             ],
           )),
     );

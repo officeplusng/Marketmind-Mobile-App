@@ -4,7 +4,8 @@ import 'package:marketmind/features/root/settings/presentation/components/settin
 import '../../../../core/export/export.core.dart';
 
 class SettingsRoot extends StatefulWidget {
-  const SettingsRoot({super.key});
+  const SettingsRoot({super.key,this.isRoot=false});
+  final bool isRoot;
 
   @override
   State<SettingsRoot> createState() => _SettingsRootState();
@@ -20,8 +21,11 @@ class _SettingsRootState extends State<SettingsRoot> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             20.verticalSpace,
-            CustomAppBar(),
-            20.verticalSpace,
+          if(!widget.isRoot)
+            ...[
+              CustomAppBar(),
+              20.verticalSpace,
+            ],
             Text(
               'Settings',
               style: context.textTheme.headlineMedium

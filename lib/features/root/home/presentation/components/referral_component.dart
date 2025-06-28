@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:marketmind/core/assets/assets.dart';
 import 'package:marketmind/core/export/export.core.dart';
 
-class ReferralComponent extends StatelessWidget {
-  const ReferralComponent({super.key});
+import '../../data/dto/referral_dto.dart';
 
+class ReferralComponent extends StatelessWidget {
+  const ReferralComponent({super.key,required this.data});
+
+  final ReferralDto data;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,12 +25,12 @@ class ReferralComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Michael T',
+              data.name??'',
                   style: context.textTheme.titleSmall
                       ?.copyWith(color: AppColors.defaultButtonTextHomeColor),
                 ),
                 Text(
-                  '\$15.80',
+                  '${data.earnings??''}',
                   style: context.textTheme.titleSmall
                       ?.copyWith(color: AppColors.defaultButtonTextHomeColor),
                 )
@@ -43,18 +46,18 @@ class ReferralComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "10/02/2025",
+                 data.joinDate??'',
                   style: context.textTheme.bodyMedium,
                 ),
                 5.horizontalSpace,
                 _activeContainer(context, true),
                 Spacer(),
                 Text(
-                  "Level 1\t\t•",
+                  "Level ${data.levelNum??''}\t\t•",
                   style: context.textTheme.bodyMedium,
                 ),
                 Text(
-                  "\t\tAutopilot",
+                  "\t\t${data.level??''}",
                   style: context.textTheme.bodyMedium,
                 ),
               ],
