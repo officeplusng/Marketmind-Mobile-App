@@ -119,6 +119,9 @@ class _DeleteAccountModalState extends State<DeleteAccountModal> {
               children: [
                 Expanded(
                     child: PrimaryButton.outlined(
+                      onPressed: (){
+                        context.popDialog();
+                      },
                   text: 'Cancel',
                 )),
                 20.horizontalSpace,

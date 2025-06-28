@@ -32,10 +32,10 @@ class AiInsightCubit extends BaseCubit<MarketAnalysisData> {
     _repository = getIt<TradingInsightRepository>();
   }
 
-  void generateAISpotLight({List<String>?symbols }) async {
+  void generateAISpotLight({List<String>?symbols ,String? timeframe}) async {
     final assets =symbols?? ['BTCUSD','ETHUSD', 'EURUSD', 'GBPUSD', 'USDJPY', 'CADJPY', 'USDCAD', 'USDCHF'];
     emitLoading();
-    final result = await _repository.fetchInsightData(assets);
+    final result = await _repository.fetchInsightData(assets,timeframe: timeframe);
     result.when(onSuccess: (data) {
       emitSuccess(data: data);
     }, onError: (error) {

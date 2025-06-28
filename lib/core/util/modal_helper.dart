@@ -20,7 +20,11 @@ class ModalHelper {
         constraints: BoxConstraints(
           minWidth: mediaQueryData.width,
         ),
-        builder: (context) => modal);
+        builder: (context) => Padding(
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: modal,
+        ));
   }
 
   static Future<void> showReplaceModal(BuildContext context, Widget modal)async{
@@ -38,6 +42,10 @@ class ModalHelper {
         constraints: BoxConstraints(
             maxHeight: mediaQueryData.height,
             maxWidth: MediaQuery.of(context).size.width),
-        builder: (context) => modal);
+        builder: (context) => Padding(
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: modal,
+        ));
   }
 }

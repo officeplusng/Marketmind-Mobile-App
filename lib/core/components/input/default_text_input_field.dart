@@ -25,6 +25,7 @@ class InputField extends StatelessWidget {
   final OutlineInputBorder? focusBorder;
   final bool useErrorBorder;
   final double? borderRadius;
+  final VoidCallback? onClick;
   final bool readOnly;
   final VoidCallback? onTap;
   final Color? fillColor;
@@ -42,6 +43,7 @@ class InputField extends StatelessWidget {
     this.hint,
     this.maxLines,
     this.validator,
+    this.onClick,
     this.onTap,
     this.enabled = true,
     this.initialValue,
@@ -82,6 +84,7 @@ class InputField extends StatelessWidget {
     FontWeight? fontWeight,
     double? letterSpacing,
     Color? textColor,
+    VoidCallback? onClick,
     double? borderRadius,
     int? minLines,
     int? maxLines,
@@ -188,11 +191,13 @@ class InputField extends StatelessWidget {
     String? hint = "Search...",
     TextEditingController? controller,
     void Function(String)? onChange,
+    VoidCallback? onClick,
     OutlineInputBorder? border,
   }) {
     return InputField.filled(
       key: key,
       hint: hint,
+      onClick: onClick,
       controller: controller,
 
 

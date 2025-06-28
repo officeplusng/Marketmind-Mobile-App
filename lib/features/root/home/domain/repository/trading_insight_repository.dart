@@ -20,10 +20,10 @@ class TradingInsightRepository {
   }
 
   Future<ApiResult<MarketAnalysisData>> fetchInsightData(
-      List<String> watchlist) async {
+      List<String> watchlist,{String? timeframe}) async {
     return ApiResultWrapper.wrap(() => _source.getTradingInsight(
         symbols: watchlist.join(','),
-        timeframe: '60min',
+        timeframe: timeframe??'60min',
         signalMode: 'enhanced'));
   }
 }
