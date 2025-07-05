@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import '../exceptions/api_exception.dart';
 import '../local/secured_storage_service.dart';
+import '../local/storage_keys.dart';
 
 @lazySingleton
 class NetworkInterceptor extends Interceptor {
@@ -27,8 +28,10 @@ class NetworkInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     final data = response.data as Map<String, dynamic>;
     final token = data['accessToken'] as String?;
+    final refreshToken = data['refreshToken'] as String?;
     if (token != null) {
       _secureStorageService.saveToken(token);
+      _secureStorageService.write(StorageKeys.refreshToken,refreshToken??'');
     }
     debugPrint('🟢 🟢  API RESPONSE -> ${response.data}');
     super.onResponse(response, handler);

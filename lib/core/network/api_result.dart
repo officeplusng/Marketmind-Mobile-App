@@ -21,7 +21,8 @@ class Success<T> extends ApiResult<T> {
 }
 
 class Failure<T> extends ApiResult<T> {
+  final int? code;
   final String error;
 
-  const Failure({required this.error});
+  const Failure({required this.error,this.code});
 }

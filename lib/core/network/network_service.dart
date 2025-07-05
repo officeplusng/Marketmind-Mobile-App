@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:marketmind/core/network/base_url.dart';
+import 'package:marketmind/core/network/services/network_core_sevice.dart';
 import 'package:marketmind/features/_shared/data/source/chart_source.dart';
 import 'package:marketmind/features/_shared/data/source/search_asset_source.dart';
 import 'package:marketmind/features/_shared/data/source/upload_source.dart';
@@ -48,6 +49,9 @@ abstract class NetworkModule {
   @lazySingleton
   NewsSource newsSource(Dio dio) =>
       NewsSource(dio, baseUrl: '$aiBaseUrl/news');
+  @lazySingleton
+  NetworkCoreService networkCoreService(Dio dio) =>
+      NetworkCoreService(dio, baseUrl: '$apiBaseUrl/auth');
   @lazySingleton
   ChartSource chartSource(Dio dio) =>
       ChartSource(dio, baseUrl: aiBaseUrl);

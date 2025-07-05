@@ -188,7 +188,7 @@ class PrimaryButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if(loading)
-                    ...[Center(
+                    ...[const Center(
                       child: CupertinoActivityIndicator(
                         color: AppColors.white,
                         radius: 8,

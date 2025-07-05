@@ -15,6 +15,10 @@ import 'package:marketmind/core/export/export.core.dart' as _i56;
 import 'package:marketmind/core/local/secured_storage_service.dart' as _i497;
 import 'package:marketmind/core/network/interceptor.dart' as _i1025;
 import 'package:marketmind/core/network/network_service.dart' as _i1056;
+import 'package:marketmind/core/network/repository/network_core_repository.dart'
+    as _i511;
+import 'package:marketmind/core/network/services/network_core_sevice.dart'
+    as _i848;
 import 'package:marketmind/features/_shared/data/source/chart_source.dart'
     as _i712;
 import 'package:marketmind/features/_shared/data/source/news_source.dart'
@@ -84,6 +88,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkModule.searchAssetSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i905.NewsSource>(
         () => networkModule.newsSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i848.NetworkCoreService>(
+        () => networkModule.networkCoreService(gh<_i361.Dio>()));
     gh.lazySingleton<_i712.ChartSource>(
         () => networkModule.chartSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i130.ReferralListSource>(
@@ -112,6 +118,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i500.UploadRepository(gh<_i258.UploadSource>()));
     gh.lazySingleton<_i1054.SearchAssetRepository>(
         () => _i1054.SearchAssetRepository(gh<_i1070.SearchAssetSource>()));
+    gh.lazySingleton<_i511.NetworkCoreRepository>(
+        () => _i511.NetworkCoreRepository(gh<_i848.NetworkCoreService>()));
     gh.lazySingleton<_i131.TradingInsightRepository>(
         () => _i131.TradingInsightRepository(gh<_i496.TradingInsightSource>()));
     gh.lazySingleton<_i329.ReferralRepository>(
