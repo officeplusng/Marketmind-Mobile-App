@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketmind/core/export/export.core.dart';
 import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
@@ -10,12 +8,11 @@ import 'package:marketmind/features/authentication/data/dto/login_dto.dart';
 import 'package:marketmind/features/authentication/presentation/screens/create_account.dart';
 import 'package:marketmind/features/root/learning/root.dart';
 import 'package:marketmind/src/presentation/snack_bar_helper.dart';
-
-import '../../../onboarding/onboarding_screen1.dart';
-import '../components/auth_logo_component.dart';
-import '../components/continue_with.dart';
-import '../components/have_an_account_component.dart';
-import '../components/social_button.dart';
+import 'package:marketmind/features/onboarding/onboarding_screen1.dart';
+import 'package:marketmind/features/authentication/presentation/components/auth_logo_component.dart';
+import 'package:marketmind/features/authentication/presentation/components/continue_with.dart';
+import 'package:marketmind/features/authentication/presentation/components/have_an_account_component.dart';
+import 'package:marketmind/features/authentication/presentation/components/social_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  40.verticalSpace,
+                  60.verticalSpace,
                   AuthLogoComponent(),
                   40.verticalSpace,
                   Expanded(
@@ -201,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               actionText: "Sign up",
                               contentText: "Don't have an account",
                               onClick: () {
-                                context.push(CreateAccount());
+                                context.push(const CreateAccount());
                               },
                             ),
                             30.verticalSpace,

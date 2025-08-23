@@ -1,13 +1,19 @@
 import 'package:marketmind/core/export/export.core.dart';
 
 import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
+import '../../../../src/state_management/cubit_state.dart';
+import '../../../_shared/controllers/cubit/account_cubit.dart';
+import '../../../_shared/data/dto/user_dto.dart';
+import '../../settings/presentation/settings.root.dart';
 import '_components/ai_recommended_lession.dart';
 import '_components/course_item_component.dart';
 import '_components/learning_progress_component.dart';
 import '_components/upgrade_learning_component.dart';
 import 'pages/learning.mylearning.dart';
 import 'pages/learning.tradingsimulation.dart';
+
 part 'pages/learning.home.dart';
+
 class LearningRoot extends StatefulWidget {
   const LearningRoot({super.key});
 
@@ -30,20 +36,6 @@ class _LearningRootState extends State<LearningRoot>
 
   @override
   Widget build(BuildContext context) {
-    final faqContent = [
-      (
-        "How does the multi-level commission structure work?",
-        "Commissions are automatically calculated daily and paid out on the 1st of every month, provided you've reached the minimum threshold of \$20. Payments are processed through your selected payment method in your account settings."
-      ),
-      (
-        "When do I receive my commission payouts?",
-        "Commissions are automatically calculated daily and paid out on the 1st of every month, provided you've reached the minimum threshold of \$20. Payments are processed through your selected payment method in your account settings."
-      ),
-      (
-        "What happens if my referral cancels their subscription?",
-        "If a referral cancels their subscription, you'll no longer receive commissions from their monthly payments. However, any commissions already earned from their previous payments remain in your account."
-      )
-    ];
     return BaseScaffold(
         backgroundColor: AppColors.white,
         horizontalPadding: 0,
@@ -60,24 +52,43 @@ class _LearningRootState extends State<LearningRoot>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  PagePadding(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Good morning, Ekene 👋',
-                        style: context.textTheme.headlineMedium
-                            ?.copyWith(fontSize: 20, color: AppColors.white),
-                      ),
-                      HomeAppBarActionIcon(
-                        onClick: () {},
-                        color: const Color(0xFF2D53DD),
-                        child: SvgPicture.asset(
-                          Assets.menuIcon,
+                  PagePadding(child:
+                      BlocBuilder<AccountCubit, BaseState<UserDto>>(
+                          builder: (_, state) {
+                    final data = state.data;
+                    final nameSplit = data?.fullname?.split(' ');
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Good morning, ${nameSplit?.firstOrNull ?? ''} 👋',
+                          style: context.textTheme.headlineMedium
+                              ?.copyWith(fontSize: 20, color: AppColors.white),
                         ),
-                      )
-                    ],
-                  )),
+                        GestureDetector(
+                          onTap: () {
+                            context.push(SettingsRoot());
+                          },
+                          child: CircleAvatar(
+                            radius: 24,
+                            backgroundImage: data?.avatar == null
+                                ? null
+                                : NetworkImage(data?.avatar?.url ??
+                                    AppConstants.placeHolder),
+                            backgroundColor:
+                                data?.avatar != null ? AppColors.primary : null,
+                            child: data?.avatar != null
+                                ? Text(
+                                    '${nameSplit?.firstOrNull?.characters.firstOrNull ?? ''}${nameSplit?.lastOrNull?.characters.firstOrNull ?? ''}',
+                                    style: context.textTheme.titleMedium
+                                        ?.copyWith(color: AppColors.white),
+                                  )
+                                : null,
+                          ),
+                        ),
+                      ],
+                    );
+                  })),
                   20.verticalSpace,
                   PagePadding(
                       child: Container(
@@ -121,12 +132,12 @@ class _LearningRootState extends State<LearningRoot>
                     ),
                   )),
                   20.verticalSpace,
-                  Expanded(
-                      child: SingleChildScrollView(
-                    child: Builder(builder: (context){
-                      if(_currentTab==1){
+                  Expanded(child: SingleChildScrollView(
+                    child: Builder(builder: (context) {
+                      if (_currentTab == 1) {
                         return MyLearningScreen();
-                      }if(_currentTab==2){
+                      }
+                      if (_currentTab == 2) {
                         return LearningTradingSimulation();
                       }
                       return LearningHome();

@@ -4,6 +4,8 @@ import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart
 import 'package:marketmind/features/onboarding/landing_page1.dart';
 import 'package:marketmind/features/root/learning/root.dart';
 
+import 'features/root/learning/presentation/learning.root.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
     final isLoggedIn = await context.read<AccountCubit>().userAvailable();
     if (isLoggedIn) {
-      context.pushRemoveUntil(RootScreen());
+      context.pushRemoveUntil(LearningRoot());
     } else {
       context.pushReplace(LandingPage1());
     }
