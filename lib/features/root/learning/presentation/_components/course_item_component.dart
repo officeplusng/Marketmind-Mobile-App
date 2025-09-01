@@ -33,42 +33,42 @@ class CourseItemComponent extends StatelessWidget {
                           image: AssetImage(Assets.learningThumbNail))),
                 ),
                 20.horizontalSpace,
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8,vertical: 2),
-                      decoration: ShapeDecoration(
-                          color: AppColors.purpleTransparent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100))),
-                      child: Center(
-                        child: Text(
-                          'TRADING MASTERY',
-                          style: context.textTheme.bodySmall
-                              ?.copyWith(color: AppColors.purpleDark),
-                        ),
-                      ),
-                    ),
-                    10.verticalSpace,
-                    Text(
-                      'Intermediate Forex Trading',
-                      maxLines: 1,
-                      style: context.textTheme.titleMedium,
-                    ),
-                    20.verticalSpace,
-                    Text.rich(TextSpan(
-                        text: '13/',
-                        style: context.textTheme.bodySmall
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                        children: [
-                          TextSpan(
-                              text: '20 Lessons',
-                              style: context.textTheme.bodySmall)
-                        ]))
-                  ],
-                )
+               Expanded(child:  Column(
+                 mainAxisSize: MainAxisSize.min,
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Container(
+                     padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 2),
+                     decoration: ShapeDecoration(
+                         color: AppColors.purpleTransparent,
+                         shape: RoundedRectangleBorder(
+                             borderRadius: BorderRadius.circular(100))),
+                     child: Center(
+                       child: Text(
+                         'TRADING MASTERY',
+                         style: context.textTheme.bodySmall
+                             ?.copyWith(color: AppColors.purpleDark),
+                       ),
+                     ),
+                   ),
+                   10.verticalSpace,
+                   Text(
+                     'Intermediate Forex Trading',
+                     maxLines: 1,
+                     style: context.textTheme.titleMedium,
+                   ),
+                   20.verticalSpace,
+                   Text.rich(TextSpan(
+                       text: '13/',
+                       style: context.textTheme.bodySmall
+                           ?.copyWith(fontWeight: FontWeight.bold),
+                       children: [
+                         TextSpan(
+                             text: '20 Lessons',
+                             style: context.textTheme.bodySmall)
+                       ]))
+                 ],
+               ))
               ],
             ),
             20.verticalSpace,

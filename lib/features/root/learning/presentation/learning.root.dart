@@ -1,9 +1,8 @@
 import 'package:marketmind/core/export/export.core.dart';
 
-import 'package:marketmind/features/root/home/presentation/components/home_app_bar_action_icon.dart';
-import '../../../../src/state_management/cubit_state.dart';
-import '../../../_shared/controllers/cubit/account_cubit.dart';
-import '../../../_shared/data/dto/user_dto.dart';
+import 'package:marketmind/src/state_management/cubit_state.dart';
+import 'package:marketmind/features/_shared/controllers/cubit/account_cubit.dart';
+import 'package:marketmind/features/_shared/data/dto/user_dto.dart';
 import '../../settings/presentation/settings.root.dart';
 import '_components/ai_recommended_lession.dart';
 import '_components/course_item_component.dart';
@@ -202,8 +201,14 @@ class _LearningRootState extends State<LearningRoot>
   }
 }
 
-Widget rectangleContainer({required Widget child}) {
-  return WrapperContainer.rectangular(
+class RectangleContainer extends StatelessWidget {
+  final Widget child;
+
+  const RectangleContainer({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return WrapperContainer.rectangular(
       width: double.infinity,
       useHeight: false,
       backgroundColor: AppColors.white,
@@ -211,5 +216,7 @@ Widget rectangleContainer({required Widget child}) {
       borderRadius: 20,
       padding: const EdgeInsets.all(16),
       bordered: true,
-      child: child);
+      child: child,
+    );
+  }
 }

@@ -148,14 +148,14 @@ class _SelectableOptionComponentState extends State<SelectableOptionComponent> {
               title: option.title,
               radio: widget.radio,
               subtitle: option.subtitle,
-              selected: selected.contains(option),
+              selected: selected.map((e)=>e.title).contains(option.title),
               onSelect: (value) {
                 if (value == null) {
                   return;
                 }
                 setState(() {
-                  if (selected.contains(option)) {
-                    selected.remove(option);
+                  if (selected.map((e)=>e.title).contains(option.title)) {
+                    selected = selected.where((e)=>e.title!=option.title).toSet();
                     widget.onSelect?.call(selected.toList());
                     return;
                   }

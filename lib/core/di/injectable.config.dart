@@ -43,8 +43,12 @@ import 'package:marketmind/features/_shared/domain/repo/user_repository.dart'
     as _i847;
 import 'package:marketmind/features/authentication/data/source/auth_source.dart'
     as _i2;
+import 'package:marketmind/features/authentication/data/source/onboarding_source.dart'
+    as _i632;
 import 'package:marketmind/features/authentication/domain/repositories/auth_repository.dart'
     as _i936;
+import 'package:marketmind/features/authentication/domain/repositories/onboarding_repository.dart'
+    as _i1030;
 import 'package:marketmind/features/root/home/data/source/referral_list_source.dart'
     as _i130;
 import 'package:marketmind/features/root/home/data/source/referral_source.dart'
@@ -59,6 +63,22 @@ import 'package:marketmind/features/root/home/domain/repository/trading_insight_
     as _i131;
 import 'package:marketmind/features/root/home/domain/repository/watch_list_repository.dart'
     as _i956;
+import 'package:marketmind/features/root/learning/data/source/achievements_data_source.dart'
+    as _i78;
+import 'package:marketmind/features/root/learning/data/source/course_data_source.dart'
+    as _i962;
+import 'package:marketmind/features/root/learning/data/source/lesson_data_source.dart'
+    as _i540;
+import 'package:marketmind/features/root/learning/data/source/quiz_data_source.dart'
+    as _i689;
+import 'package:marketmind/features/root/learning/domain/repository/achievements_repository.dart'
+    as _i783;
+import 'package:marketmind/features/root/learning/domain/repository/courses_repository.dart'
+    as _i756;
+import 'package:marketmind/features/root/learning/domain/repository/lesson_repository.dart'
+    as _i736;
+import 'package:marketmind/features/root/learning/domain/repository/quiz_repository.dart'
+    as _i119;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -84,6 +104,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkModule.apiService(gh<_i361.Dio>()));
     gh.lazySingleton<_i156.UserSource>(
         () => networkModule.userSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i632.OnboardingSource>(
+        () => networkModule.onboardingSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i962.CourseDataSource>(
+        () => networkModule.courseDatasource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i540.LessonsDataSource>(
+        () => networkModule.lessonDataSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i689.QuizDataSource>(
+        () => networkModule.quizDataSource(gh<_i361.Dio>()));
+    gh.lazySingleton<_i78.AchievementsDataSource>(
+        () => networkModule.achievementsDataSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i1070.SearchAssetSource>(
         () => networkModule.searchAssetSource(gh<_i361.Dio>()));
     gh.lazySingleton<_i905.NewsSource>(
@@ -112,14 +142,24 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i956.WatchListRepository(gh<_i998.WatchListSource>()));
     gh.lazySingleton<_i730.NewsRepository>(
         () => _i730.NewsRepository(gh<_i905.NewsSource>()));
+    gh.lazySingleton<_i119.QuizRepository>(
+        () => _i119.QuizRepository(gh<_i689.QuizDataSource>()));
     gh.lazySingleton<_i682.ChartRepository>(
         () => _i682.ChartRepository(gh<_i712.ChartSource>()));
+    gh.lazySingleton<_i756.CoursesRepository>(
+        () => _i756.CoursesRepository(gh<_i962.CourseDataSource>()));
+    gh.lazySingleton<_i736.LessonRepository>(
+        () => _i736.LessonRepository(gh<_i540.LessonsDataSource>()));
     gh.lazySingleton<_i500.UploadRepository>(
         () => _i500.UploadRepository(gh<_i258.UploadSource>()));
     gh.lazySingleton<_i1054.SearchAssetRepository>(
         () => _i1054.SearchAssetRepository(gh<_i1070.SearchAssetSource>()));
+    gh.lazySingleton<_i783.AchievementsRepository>(
+        () => _i783.AchievementsRepository(gh<_i78.AchievementsDataSource>()));
     gh.lazySingleton<_i511.NetworkCoreRepository>(
         () => _i511.NetworkCoreRepository(gh<_i848.NetworkCoreService>()));
+    gh.lazySingleton<_i1030.OnboardingRepository>(
+        () => _i1030.OnboardingRepository(gh<_i632.OnboardingSource>()));
     gh.lazySingleton<_i131.TradingInsightRepository>(
         () => _i131.TradingInsightRepository(gh<_i496.TradingInsightSource>()));
     gh.lazySingleton<_i329.ReferralRepository>(

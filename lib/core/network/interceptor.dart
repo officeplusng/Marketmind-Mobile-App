@@ -26,12 +26,17 @@ class NetworkInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    final data = response.data as Map<String, dynamic>;
+    dynamic data = response.data;
+    print('response -> $data');
+    if (data is List) {
+      super.onResponse(response, handler);
+      return;
+    }
     final token = data['accessToken'] as String?;
     final refreshToken = data['refreshToken'] as String?;
     if (token != null) {
       _secureStorageService.saveToken(token);
-      _secureStorageService.write(StorageKeys.refreshToken,refreshToken??'');
+      _secureStorageService.write(StorageKeys.refreshToken, refreshToken ?? '');
     }
     debugPrint('🟢 🟢  API RESPONSE -> ${response.data}');
     super.onResponse(response, handler);
@@ -48,7 +53,8 @@ class NetworkInterceptor extends Interceptor {
     } else if (err.type == DioExceptionType.badResponse) {
       final json = err.response?.data as Map<String, dynamic>;
       final message = json['message'] as String?;
-      debugPrint('🔴 🔴  API ERROR ${err.response?.realUri.path}\n-> ${err.response?.data}');
+      debugPrint(
+          '🔴 🔴  API ERROR ${err.response?.realUri.path}\n-> ${err.response?.data}');
       //What does the  mean?
       switch (statusCode) {
         case 400:

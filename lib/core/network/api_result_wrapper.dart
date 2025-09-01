@@ -38,4 +38,47 @@ class ApiResultWrapper {
         },
         milliseconds: 2000);
   }
+
+  static Future<ApiResult<T>> wrapValue<T>({
+    required Future<dynamic> Function() func,
+    T Function(dynamic)? mapper,
+  }) async {
+    try {
+      final result = await func.call();
+      if (mapper != null) {
+        final finalResult = mapper(result);
+        return Success(data: finalResult);
+      }
+
+      return Success(data: result);
+    } on DioException catch (dioException, trace) {
+      final error = dioException.error as ApiException;
+      debugPrintStack(stackTrace: trace);
+      return Failure(error: error.message, code: -1);
+    } catch (e, trace) {
+      debugPrintStack(stackTrace: trace);
+      return Failure(error: e.toString(), code: -1);
+    }
+  }
+
+  static Future<ApiResult<T>> wrapList<T>({
+    required Future<dynamic> Function() func,
+    required T Function(List<dynamic>) mapper,
+  }) async {
+    try {
+      final result = await func.call();
+      if (result is List<dynamic>) {
+        final list = result;
+        final finalResult = mapper(list);
+        return Success(data: finalResult);
+      }
+      final finalResult = mapper(result.data);
+      return Success(data: finalResult);
+    } on DioException catch (dioException) {
+      final error = dioException.error as ApiException;
+      return Failure(error: error.message, code: -1);
+    } catch (e, trace) {
+      return Failure(error: e.toString(), code: -1);
+    }
+  }
 }

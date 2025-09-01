@@ -1,5 +1,5 @@
 class AppConstants {
-  static const baseUrl = '';
+  static const baseUrl = 'https://marketmind-staging.onrender.com';
 
   static const String appName = 'MarketMind';
   static const String privacyPolicyUrl = '';

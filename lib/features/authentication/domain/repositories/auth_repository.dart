@@ -19,8 +19,10 @@ class AuthRepository {
 
   Future<ApiResult<AuthResponse>> register(RegisterDto dto) =>
       ApiResultWrapper.wrap(() => _source.register(dto));
+
   Future<ApiResult<AuthResponse>> googleSignIn(OAuthTokenDto dto) =>
       ApiResultWrapper.wrap(() => _source.googleSignIn(dto));
+
   Future<ApiResult<AuthResponse>> appleSignIn(OAuthTokenDto dto) =>
       ApiResultWrapper.wrap(() => _source.appleSignIn(dto));
 
@@ -35,7 +37,7 @@ class AuthRepository {
 
   Future<ApiResult<dynamic>> contactUs(ContactUsDto dto) =>
       ApiResultWrapper.wrap(() => _source.contactUs(dto));
-   Future<ApiResult<dynamic>> resendEmail(EmailDto dto) =>
-      ApiResultWrapper.wrap(() => _source.resendEmail(dto));
 
+  Future<ApiResult<dynamic>> resendEmail(EmailDto dto) =>
+      ApiResultWrapper.wrap(() => _source.resendEmail(dto));
 }

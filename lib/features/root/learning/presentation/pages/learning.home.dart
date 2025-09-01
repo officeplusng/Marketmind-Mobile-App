@@ -37,7 +37,7 @@ class _LearningHomeState extends State<LearningHome> {
         15.verticalSpace,
         LearningProgressComponent(),
         20.verticalSpace,
-        rectangleContainer(
+        RectangleContainer(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -100,7 +100,7 @@ class _LearningHomeState extends State<LearningHome> {
               Icons.play_arrow,
               color: AppColors.white,
             ),
-            startIcon: Icon(
+            startIcon: const Icon(
               Icons.star_border,
               color: AppColors.white,
             )),
@@ -140,7 +140,7 @@ class _LearningHomeState extends State<LearningHome> {
   }
 
   Widget _infoComponent({Color? color, required String text}) => Padding(
-        padding: EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(
           children: [
             Icon(

@@ -5,7 +5,6 @@ extension ContextExtension on BuildContext{
 
   TextTheme get textTheme => Theme.of(this).textTheme;
 
-  InputDecorationTheme get inputTheme => Theme.of(this).inputDecorationTheme;
   void popDialog()=>Navigator.pop(this);
 
   void pushReplace(Widget route) {
@@ -17,11 +16,6 @@ extension ContextExtension on BuildContext{
 
 
   void popRoute({dynamic result}) {
-    // if(kIsWeb){
-    //
-    //   html.window.history.back();
-    //   return;
-    // }
     Navigator.pop(this, result);
   }
 
